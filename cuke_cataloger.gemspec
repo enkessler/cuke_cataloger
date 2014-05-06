@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = CukeCataloger::VERSION
   spec.authors       = ['Eric Kessler']
   spec.email         = ['morrow748@gmail.com']
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = 'A gem that adds id tags to tests.'
+  spec.description   = 'A gem that adds id tags to tests.'
   spec.homepage      = ''
   spec.license       = 'MIT'
 
@@ -18,6 +18,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
+  spec.add_runtime_dependency 'cucumber_analytics'
+
   spec.add_development_dependency 'bundler', '~> 1.5'
   spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'cucumber'
+  spec.add_development_dependency 'rspec'
 end

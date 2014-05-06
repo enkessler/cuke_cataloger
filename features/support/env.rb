@@ -1,4 +1,4 @@
-require_relative '../../unique_test_case_tagger'
+require 'cuke_cataloger'
 
 
 DEFAULT_FEATURE_FILE_NAME = 'test_feature'
