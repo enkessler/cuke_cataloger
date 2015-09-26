@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = CukeCataloger::VERSION
   spec.authors       = ['Eric Kessler']
   spec.email         = ['morrow748@gmail.com']
-  spec.summary       = 'A gem that adds id tags to tests.'
-  spec.description   = 'A gem that adds id tags to tests.'
-  spec.homepage      = ''
+  spec.summary       = 'A tool to give every Cucumber test a unique id'
+  spec.description   = 'Scans existing Cucumber tests and updates them to include an id tag that is unique for the test suite.'
+  spec.homepage      = 'https://github.com/enkessler/cuke_cataloger'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
