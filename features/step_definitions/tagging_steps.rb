@@ -28,5 +28,5 @@ Then(/^the resulting file(?: "([^"]*)")? is:$/) do |file_index, expected_text|
 
   actual_text = File.open(@feature_files[file_index - 1], 'r') { |file| actual_text = file.read }
 
-  actual_text.should == expected_text
+  expect(actual_text).to eq(expected_text)
 end
