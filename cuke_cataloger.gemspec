@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'cucumber'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'racatt'
+  spec.add_development_dependency 'simplecov'
 end
