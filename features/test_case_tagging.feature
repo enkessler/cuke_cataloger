@@ -129,18 +129,18 @@ Feature: Tagging test cases for uniqueness
         Examples: without rows
           | param 1 | test_case_id |
 
-      @test_case_2
-      Scenario Outline: No tag
-        * a step
-      Examples: Missing row ids (recall that existing tags are not modified)
-        | param 1 | test_case_id |
-        | value 2 | 2-1          |
-        | value 1 | some_id      |
-      Examples: Already has id column
-        | param 1 | test_case_id |
-      Examples: Doesn't have id column
-        | param 1 | test_case_id |
-        | value 3 | 2-2          |
+        @test_case_2
+        Scenario Outline: Sub-ids present but no top level tag
+          * a step
+        Examples: Missing row ids
+          | param 1 | test_case_id |
+          | value 2 | 2-1          |
+          | value 1 | some_id      |
+        Examples: Already has id column
+          | param 1 | test_case_id |
+        Examples: Doesn't have id column
+          | param 1 | test_case_id |
+          | value 3 | 2-2          |
       """
 
   Scenario: Tagging a multi-file test suite

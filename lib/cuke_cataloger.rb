@@ -1,3 +1,4 @@
+require 'cucumber_analytics'
 require 'cuke_cataloger/version'
 require 'cuke_cataloger/unique_test_case_tagger'
 

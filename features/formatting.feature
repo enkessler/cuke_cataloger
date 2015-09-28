@@ -81,7 +81,7 @@ Feature: Tagging formatting
   Scenario: The column for sub-ids is last
     Given a feature file
     When the file is processed
-    Then The column for sub-ids is placed after all other columns
+    Then the column for sub-ids is placed after all other columns
 
   Scenario: Test tags can be added above existing tags
     Given the following feature file:
