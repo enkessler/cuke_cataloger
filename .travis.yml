@@ -6,4 +6,4 @@ rvm:
   - 2.1.6
   - 2.2.2
 
-script: bundle exec rake cql:ci_build
+script: bundle exec rake cuke_cataloger:ci_build
