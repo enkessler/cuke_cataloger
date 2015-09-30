@@ -1,7 +1,8 @@
 Then(/^the resulting file(?: "([^"]*)")? is:$/) do |file_index, expected_text|
   file_index ||= 1
+  file_name = @feature_files[file_index - 1]
 
-  actual_text = File.read(@feature_files[file_index - 1])
+  actual_text = File.read(file_name)
 
   expect(actual_text).to eq(expected_text)
 end

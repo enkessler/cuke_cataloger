@@ -1,7 +1,6 @@
 When(/^the files? (?:is|are) processed$/) do
   @start_index ||= {}
   @directory = CucumberAnalytics::Directory.new(@test_directory)
-  @feature_files = @directory.feature_files.collect { |file| file.path }
 
   tagger = CukeCataloger::UniqueTestCaseTagger.new
   tagger.tag_location = @above_or_below if @above_or_below

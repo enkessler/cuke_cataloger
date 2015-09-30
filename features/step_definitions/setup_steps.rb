@@ -1,9 +1,13 @@
 Given /^the following feature file(?: "([^"]*)")?:$/ do |file_name, file_text|
   @test_directory = @default_file_directory
   @files_created ||= 0
-  file_name ||= "#{@default_feature_file_name}_#{@files_created + 1}.feature"
+  @feature_files ||= []
 
-  File.write("#{@test_directory}/#{file_name}", file_text)
+  file_name ||= "#{@default_feature_file_name}_#{@files_created + 1}.feature"
+  file_path = "#{@test_directory}/#{file_name}"
+  @feature_files << file_path
+
+  File.write(file_path, file_text)
 
   @files_created += 1
 end
@@ -25,9 +29,13 @@ end
 Given(/^a feature file$/) do
   @test_directory = @default_file_directory
   @files_created ||= 0
-  file_name ||= "#{@default_feature_file_name}_#{@files_created + 1}.feature"
+  @feature_files ||= []
 
-  File.write("#{@test_directory}/#{file_name}", "Feature:\nScenario Outline:\n* a step\nExamples:\n| param 1 |\n| value 1 |")
+  file_name ||= "#{@default_feature_file_name}_#{@files_created + 1}.feature"
+  file_path = "#{@test_directory}/#{file_name}"
+  @feature_files << file_path
+
+  File.write(file_path, "Feature:\nScenario Outline:\n* a step\nExamples:\n| param 1 |\n| value 1 |")
 
   @files_created += 1
 end
