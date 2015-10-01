@@ -121,3 +121,31 @@ def process_results(results)
   results = results.raw.flatten
   results.collect { |test_path| test_path.sub('path/to', @default_file_directory) }
 end
+
+Then(/^the resulting first file is:$/) do |expected_text|
+  file_name = @feature_files[0]
+
+  # File order is different on Linux so the tagging will occur in a different order
+  if RUBY_PLATFORM =~ /linux/
+    expected_text.sub!('test_case_1', 'test_case_2')
+  end
+
+  actual_text = File.read(file_name)
+
+  expect(actual_text).to eq(expected_text)
+end
+
+And(/^the resulting second file is:$/) do |expected_text|
+  file_name = @feature_files[1]
+
+  # File order is different on Linux so the tagging will occur in a different order
+  if RUBY_PLATFORM =~ /linux/
+    expected_text.sub!('test_case_2', 'test_case_1')
+    expected_text.sub!('2-1', '1-1')
+    expected_text.sub!('2-2', '1-2')
+  end
+
+  actual_text = File.read(file_name)
+
+  expect(actual_text).to eq(expected_text)
+end

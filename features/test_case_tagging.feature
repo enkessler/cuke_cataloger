@@ -167,7 +167,7 @@ Feature: Tagging test cases for uniqueness
           | value 1 |
       """
     When the files are processed
-    Then the resulting file "1" is:
+    Then the resulting first file is:
       """
       Feature:
 
@@ -175,7 +175,7 @@ Feature: Tagging test cases for uniqueness
         Scenario:
           * a step
       """
-    And the resulting file "2" is:
+    And the resulting second file is:
       """
       Feature:
 
