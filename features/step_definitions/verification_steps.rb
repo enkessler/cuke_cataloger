@@ -126,7 +126,7 @@ Then(/^the resulting first file is:$/) do |expected_text|
   file_name = @feature_files[0]
 
   # The order in which Ruby returns files various across verion and operating system. This, in turn. will affect the order in which files are tagged.
-  if (RUBY_PLATFORM =~ /linux/) && (!['2.1.6'].include?(RUBY_PLATFORM))
+  if (RUBY_PLATFORM =~ /linux/) && (!['2.1.6'].include?(RUBY_VERSION))
     expected_text.sub!('test_case_1', 'test_case_2')
   end
 
@@ -139,7 +139,7 @@ And(/^the resulting second file is:$/) do |expected_text|
   file_name = @feature_files[1]
 
   # The order in which Ruby returns files various across verion and operating system. This, in turn. will affect the order in which files are tagged.
-  if (RUBY_PLATFORM =~ /linux/) && (!['2.1.6'].include?(RUBY_PLATFORM))
+  if (RUBY_PLATFORM =~ /linux/) && (!['2.1.6'].include?(RUBY_VERSION))
     expected_text.sub!('test_case_2', 'test_case_1')
     expected_text.sub!('2-1', '1-1')
     expected_text.sub!('2-2', '1-2')
