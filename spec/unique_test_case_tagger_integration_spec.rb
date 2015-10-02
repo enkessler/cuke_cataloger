@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'UniqueTestCaseTagger, Integration', unit: true do
+describe 'UniqueTestCaseTagger, Integration' do
 
   clazz = CukeCataloger::UniqueTestCaseTagger
 
