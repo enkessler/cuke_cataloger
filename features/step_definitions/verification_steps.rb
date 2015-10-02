@@ -125,27 +125,38 @@ end
 Then(/^the resulting first file is:$/) do |expected_text|
   file_name = @feature_files[0]
 
-  # The order in which Ruby returns files various across verion and operating system. This, in turn. will affect the order in which files are tagged.
-  if (RUBY_PLATFORM =~ /linux/) && (!['2.1.6'].include?(RUBY_VERSION))
-    expected_text.sub!('test_case_1', 'test_case_2')
-  end
-
   actual_text = File.read(file_name)
 
-  expect(actual_text).to eq(expected_text)
+  # The order in which Ruby returns files various across version and operating system. This, in turn, will
+  # affect the order in which files are tagged. Either order is acceptable as long as the tagging is
+  # consistent for any given ordering.
+  begin
+    expect(actual_text).to eq(expected_text)
+  rescue RSpec::Expectations::ExpectationNotMetError => e
+    if RUBY_PLATFORM =~ /linux/
+      expected_text.sub!('test_case_1', 'test_case_2')
+      expect(actual_text).to eq(expected_text)
+      @switched = true
+    else
+      raise e
+    end
+  end
+
 end
 
 And(/^the resulting second file is:$/) do |expected_text|
   file_name = @feature_files[1]
 
-  # The order in which Ruby returns files various across verion and operating system. This, in turn. will affect the order in which files are tagged.
-  if (RUBY_PLATFORM =~ /linux/) && (!['2.1.6'].include?(RUBY_VERSION))
+  actual_text = File.read(file_name)
+
+  # The order in which Ruby returns files various across version and operating system. This, in turn, will
+  # affect the order in which files are tagged. Either order is acceptable as long as the tagging is
+  # consistent for any given ordering.
+  if @switched
     expected_text.sub!('test_case_2', 'test_case_1')
     expected_text.sub!('2-1', '1-1')
     expected_text.sub!('2-2', '1-2')
   end
-
-  actual_text = File.read(file_name)
 
   expect(actual_text).to eq(expected_text)
 end
