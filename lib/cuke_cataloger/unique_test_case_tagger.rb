@@ -445,8 +445,8 @@ module CukeCataloger
     end
 
     def add_to_results(item, issue = nil)
-      result = {test: "#{item.get_ancestor(:feature_file).path}:#{item.source_line}", object: item}
-      result.merge!({problem: issue}) if issue
+      result = {:test => "#{item.get_ancestor(:feature_file).path}:#{item.source_line}", :object => item}
+      result.merge!({:problem => issue}) if issue
 
       @results << result
     end
@@ -456,8 +456,8 @@ module CukeCataloger
       sub_ids = known_ids.select { |id| id =~ /^\d+-\d+$/ }
 
       max_primary_id = primary_ids.collect { |id| id.to_i }.max || 0
-      default_indexes = {primary: max_primary_id + 1,
-                         sub: {}}
+      default_indexes = {:primary => max_primary_id + 1,
+                         :sub => {}}
 
       sub_primaries = sub_ids.collect { |sub_id| sub_id[/^\d+/] }
 

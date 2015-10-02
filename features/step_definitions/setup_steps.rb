@@ -7,7 +7,7 @@ Given /^the following feature file(?: "([^"]*)")?:$/ do |file_name, file_text|
   file_path = "#{@test_directory}/#{file_name}"
   @feature_files << file_path
 
-  File.write(file_path, file_text)
+  File.open(file_path, 'w') { |file| file.write file_text }
 
   @files_created += 1
 end
@@ -17,12 +17,12 @@ When(/^a tag prefix of "([^"]*)"$/) do |prefix|
 end
 
 And(/^a start index of "([^"]*)"$/) do |index|
-  @start_index ||= {sub: {}}
+  @start_index ||= {:sub => {}}
   @start_index[:primary] = index
 end
 
 And(/^a start index of "([^"]*)" for testcase "([^"]*)"$/) do |sub_index, parent_index|
-  @start_index ||= {sub: {}}
+  @start_index ||= {:sub => {}}
   @start_index[:sub][parent_index.to_s] = sub_index
 end
 
@@ -35,7 +35,7 @@ Given(/^a feature file$/) do
   file_path = "#{@test_directory}/#{file_name}"
   @feature_files << file_path
 
-  File.write(file_path, "Feature:\nScenario Outline:\n* a step\nExamples:\n| param 1 |\n| value 1 |")
+  File.open(file_path, 'w') { |file| file.write "Feature:\nScenario Outline:\n* a step\nExamples:\n| param 1 |\n| value 1 |" }
 
   @files_created += 1
 end
