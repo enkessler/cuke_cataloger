@@ -30,7 +30,7 @@ The simplest way to use this gem is to include the Rake tasks that it provides i
 
     require 'cuke_cataloger'
 
-and then call its task creation method to generate the Rake tasks.
+and then call its task creation method in your Rakefile (or wherever you like to keep your Rake tasks) in order to generate the tasks.
 
     CukeCataloger.create_tasks
 
