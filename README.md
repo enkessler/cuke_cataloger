@@ -52,7 +52,7 @@ The above example would result in the tags @test_case_1, @test_case_2, @test_cas
 
 ### Validating test ids
 
-The validate_tests task scan a given directory for any problems related to id tags and generate a report detailing its results. To do this, it needs to be provided a directory in which the tests are located and a prefix upon which to base the tagging scheme. It can optionally take a file location to which it should output its report instead of printing it to the console.
+The validate_tests task scans a given directory for any problems related to id tags and generates a report detailing its results. To do this, it needs to be provided a directory in which the tests are located and a prefix upon which to base the tagging scheme. It can optionally take a file location to which it should output its report instead of printing it to the console.
 
     rake validate_tests['path/to/your/tests','@test_case_','validation_results.txt']
 
