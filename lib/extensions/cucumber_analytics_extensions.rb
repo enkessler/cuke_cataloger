@@ -1,4 +1,4 @@
-module CucumberAnalytics
+module CukeModeler
   module Parsing
 
     class << self
@@ -27,7 +27,7 @@ module CucumberAnalytics
 end
 
 
-module CucumberAnalytics
+module CukeModeler
   class FeatureFile
 
 

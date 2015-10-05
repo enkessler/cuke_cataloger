@@ -27,9 +27,9 @@ module CukeCataloger
       # Analysis and output
       @tests.each do |test|
         case
-          when test.is_a?(CucumberAnalytics::Scenario)
+          when test.is_a?(CukeModeler::Scenario)
             process_scenario(test)
-          when test.is_a?(CucumberAnalytics::Outline)
+          when test.is_a?(CukeModeler::Outline)
             process_outline(test)
           else
             raise("Unknown test type: #{test.class.to_s}")
@@ -47,7 +47,7 @@ module CukeCataloger
       @tests.each do |test|
         add_to_results(test) if has_id_tag?(test)
 
-        if test.is_a?(CucumberAnalytics::Outline)
+        if test.is_a?(CukeModeler::Outline)
           test.examples.each do |example|
             if has_id_parameter?(example)
               example_rows_for(example).each do |row|
@@ -80,7 +80,7 @@ module CukeCataloger
       found_tagged_objects = scan_for_tagged_tests(feature_directory, tag_prefix).collect { |result| result[:object] }
 
       found_tagged_objects.each do |element|
-        if element.is_a?(CucumberAnalytics::Row)
+        if element.is_a?(CukeModeler::Row)
           row_id = row_id_for(element)
           known_ids << row_id if well_formed_sub_id?(row_id)
         else
@@ -102,10 +102,18 @@ module CukeCataloger
     end
 
     def set_test_suite_model(feature_directory)
-      @world = CucumberAnalytics::World
-      @directory = CucumberAnalytics::Directory.new(feature_directory)
-      @tests = @world.tests_in(@directory)
-      @features = @world.features_in(@directory)
+      @directory = CukeModeler::Directory.new(feature_directory)
+      @model_repo = CQL::Repository.new(@directory)
+
+      @tests = @model_repo.query do
+        select :self
+        from scenarios, outlines
+      end.collect { |result| result[:self] }
+
+      @features = @model_repo.query do
+        select :self
+        from features
+      end.collect { |result| result[:self] }
     end
 
     def validate_feature(feature)
@@ -117,7 +125,7 @@ module CukeCataloger
       check_for_multiple_test_id_tags(test)
       check_for_duplicated_test_id_tags(test)
 
-      if test.is_a?(CucumberAnalytics::Outline)
+      if test.is_a?(CukeModeler::Outline)
         check_for_missing_id_columns(test)
         check_for_missing_row_tags(test)
         check_for_duplicated_row_tags(test)
@@ -131,7 +139,10 @@ module CukeCataloger
     end
 
     def check_for_duplicated_test_id_tags(test)
-      @existing_tags ||= @world.tags_in(@directory)
+      @existing_tags ||= @model_repo.query do
+        select tags
+        from features, scenarios, outlines, examples
+      end.collect { |result| result['tags'] }.flatten
 
       test_id_tag = static_id_tag_for(test)
 

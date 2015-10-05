@@ -76,12 +76,12 @@ Then(/^the following tagged test objects are found:$/) do |expected_results|
 end
 
 Then(/^the payload is a test object$/) do
-  expect(@test_results.first[:object]).to be_a_kind_of(CucumberAnalytics::TestElement)
+  expect(@test_results.first[:object]).to be_a_kind_of(CukeModeler::TestElement)
 end
 
 Then(/^the payload has a test and a test row$/) do
-  expect(@test_results[0][:object]).to be_a_kind_of(CucumberAnalytics::Outline)
-  expect(@test_results[1][:object]).to be_a_kind_of(CucumberAnalytics::Row)
+  expect(@test_results[0][:object]).to be_a_kind_of(CukeModeler::Outline)
+  expect(@test_results[1][:object]).to be_a_kind_of(CukeModeler::Row)
 end
 
 Then(/^the following ids are found:$/) do |expected_ids|
@@ -97,7 +97,7 @@ Then(/^no feature is found to have a test case tag$/) do
 end
 
 Then(/^the column for sub-ids is placed after all other columns$/) do
-  file_model = CucumberAnalytics::FeatureFile.new(@feature_files.first)
+  file_model = CukeModeler::FeatureFile.new(@feature_files.first)
   outline_model = file_model.feature.outlines.first
 
   expect(outline_model.examples.first.parameters.last).to eq('test_case_id')
