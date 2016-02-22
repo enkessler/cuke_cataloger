@@ -2,7 +2,6 @@ require 'rake'
 require 'cuke_modeler'
 require 'cql'
 
-require 'extensions/cucumber_analytics_extensions'
 require 'cuke_cataloger/version'
 require 'cuke_cataloger/unique_test_case_tagger'
 
