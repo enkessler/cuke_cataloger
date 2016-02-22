@@ -13,5 +13,10 @@ elsif RUBY_VERSION =~ /^1\./
   gem 'cucumber', '<2.0.0'
 end
 
+if RUBY_VERSION !~ /^1\.8/
+  # This version of the gem breaks several use cases being tested. The functionality being tested works
+  # with any version of gherkin but the tests themselves won't.
+  gem 'gherkin', '< 3.0.0'
+end
 
 gem 'coveralls', :require => false, :group => :development
