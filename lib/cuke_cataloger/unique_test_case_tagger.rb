@@ -312,7 +312,7 @@ module CukeCataloger
       file_lines = File.readlines(file_path)
       file_lines.insert(tag_index, "#{padding_string}#{tag}\n")
 
-      File.open(file_path, 'w') { |file| file.print file_lines.join }
+      File.open(file_path, 'wb') { |file| file.print file_lines.join }
       @file_line_increases[file_path] += 1
       test.tags << tag
     end
@@ -330,7 +330,7 @@ module CukeCataloger
 
           new_parameter = 'test_case_id'.ljust(parameter_spacing(example))
           update_parameter_row(file_lines, parameter_line_index, new_parameter)
-          File.open(file_path, 'w') { |file| file.print file_lines.join }
+          File.open(file_path, 'wb') { |file| file.print file_lines.join }
         end
       end
     end
@@ -356,7 +356,7 @@ module CukeCataloger
           end
         end
 
-        File.open(file_path, 'w') { |file| file.print file_lines.join }
+        File.open(file_path, 'wb') { |file| file.print file_lines.join }
       end
     end
 
