@@ -4,19 +4,17 @@ source 'https://rubygems.org'
 gemspec
 
 
+# cuke_cataloger can play with pretty much any version of these but they all play differently with Ruby
 if RUBY_VERSION =~ /^1\.8/
-  gem 'cucumber', '<1.3.0'
-  gem 'gherkin', '<2.12.0'
-  gem 'mime-types', '<2.0.0'
-  gem 'rest-client', '<1.7.0'
+  gem 'cucumber', '< 1.3.0'
+  gem 'gherkin', '< 2.12.0'
+  gem 'rake', '< 11.0' # Rake dropped 1.8.x support after this version
 elsif RUBY_VERSION =~ /^1\./
-  gem 'cucumber', '<2.0.0'
+  gem 'cucumber', '< 2.0.0'
 end
 
-if RUBY_VERSION !~ /^1\.8/
-  # This version of the gem breaks several use cases being tested. The functionality being tested works
-  # with any version of gherkin but the tests themselves won't.
-  gem 'gherkin', '< 3.0.0'
+if RUBY_VERSION =~ /^1\./
+  gem 'term-ansicolor', '< 1.4' # The 'term-ansicolor' gem requires Ruby 2.x on/after this version
 end
 
 gem 'coveralls', :require => false, :group => :development
