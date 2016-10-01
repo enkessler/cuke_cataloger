@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in cuke_cataloger.gemspec
-gemspec
+gemspec :path => "../../"
 
 
 # cuke_cataloger can play with pretty much any version of these but they all play differently with Ruby
