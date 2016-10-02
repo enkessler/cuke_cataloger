@@ -1,7 +1,6 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-# Specify your gem's dependencies in cuke_cataloger.gemspec
-gemspec
+gemspec :path => "../../"
 
 
 # cuke_cataloger can play with pretty much any version of these but they all play differently with Ruby
@@ -19,4 +18,4 @@ if RUBY_VERSION =~ /^1\./
   gem 'term-ansicolor', '< 1.4' # The 'term-ansicolor' gem requires Ruby 2.x on/after this version
 end
 
-gem 'cuke_modeler', '~> 1.0'
+gem 'cuke_modeler', '~> 0.0'
