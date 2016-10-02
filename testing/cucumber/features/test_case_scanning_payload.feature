@@ -1,6 +1,6 @@
 Feature: Scan results return useful information
 
-  Test objects are returned in the results of a scan.
+  Model objects are returned in the results of a scan.
 
   Scenario: Scanned scenario
     Given the following feature file "file1.feature":
@@ -13,7 +13,7 @@ Feature: Scan results return useful information
     """
     And a tag prefix of "@test_case_"
     When the files are scanned
-    Then the payload is a test object
+    Then the payload is a model object
 
   Scenario: Scanned outline
     Given the following feature file "test_file.feature":

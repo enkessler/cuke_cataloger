@@ -75,8 +75,10 @@ Then(/^the following tagged test objects are found:$/) do |expected_results|
   verify_results(expected_results)
 end
 
-Then(/^the payload is a test object$/) do
-  expect(@test_results.first[:object]).to be_a_kind_of(CukeModeler::TestElement)
+Then(/^the payload is a model object$/) do
+  class_name = @test_results.first[:object].class.name.split('::').last
+
+  expect(CukeModeler.const_defined?(class_name)).to be true
 end
 
 Then(/^the payload has a test and a test row$/) do
