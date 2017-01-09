@@ -9,22 +9,29 @@ module CukeCataloger
 
   extend Rake::DSL
 
+  # todo - test these better
 
   def self.create_tasks
 
     desc 'Add unique id tags to tests in the given directory'
     task 'tag_tests', [:directory, :prefix] do |t, args|
-      puts "Tagging tests in '#{args[:directory]}' with tag '#{args[:prefix]}'\n"
+      location = args[:directory] || '.'
+      prefix = args[:prefix] || '@test_case_'
+
+      puts "Tagging tests in '#{location}' with tag '#{prefix}'\n"
 
       tagger = CukeCataloger::UniqueTestCaseTagger.new
-      tagger.tag_tests(args[:directory], args[:prefix])
+      tagger.tag_tests(location, prefix)
     end
 
     desc 'Scan tests in the given directory for id problems'
     task 'validate_tests', [:directory, :prefix, :out_file] do |t, args|
-      puts "Validating tests in '#{args[:directory]}' with tag '#{args[:prefix]}'\n"
+      location = args[:directory] || '.'
+      prefix = args[:prefix] || '@test_case_'
 
-      results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(args[:directory], args[:prefix])
+      puts "Validating tests in '#{location}' with tag '#{prefix}'\n"
+
+      results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(location, prefix)
       report_text = "Validation Results\nProblems found: #{results.count}\n\n"
 
 
@@ -48,7 +55,7 @@ module CukeCataloger
 
       if args[:out_file]
         puts "Problems found: #{results.count}"
-        File.write(args[:out_file], report_text)
+        File.open(args[:out_file], 'w') { |file| file.write(report_text) }
       else
         puts report_text
       end
