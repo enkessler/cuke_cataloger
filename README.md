@@ -8,7 +8,7 @@
 [![Project License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/enkessler/cuke_cataloger/blob/master/LICENSE.txt)
 
 
-The cuke_cataloger gem is a convenient way to provide a unique id to every test case in your Cucumber test suite. 
+The cuke_cataloger gem is a convenient way to provide a unique id to every test case in your Cucumber test suite.
 
 ## Installation
 
@@ -26,7 +26,19 @@ Or install it yourself as:
 
 ## Usage
 
-The simplest way to use this gem is to include the Rake tasks that it provides in your project. Just require the gem
+In addition to using the provided classes in any regular Ruby script, the gem's functionality can be accessed through the command line or through the provided Rake tasks.
+
+### Command Line
+
+    cuke_cataloger catalog_test_cases [--location=LOCATION] [--prefix=PREFIX]
+
+and
+
+    cuke_cataloger validate_test_cases [--location=LOCATION] [--prefix=PREFIX] [--file=FILE]
+
+### Rake Task
+
+Require the gem
 
     require 'cuke_cataloger'
 
@@ -40,28 +52,34 @@ If you want the tasks to be created in a certain namespace, simply call the crea
       CukeCataloger.create_tasks
     end
 
-The classes used to tag and validate tests could also be used directly in other scripts if you want to do something more complex than the functionality provided by the two predefined Rake tasks.
-  
-### Adding ids to tests
-
-The tag_tests task will add an id tag to every scenario (and an id column to every outline) in a test suite. To do this, it needs to be provided a directory in which the tests are located and a prefix upon which to base the tagging scheme.
+This will create tasks that can then be invoked in the usual manner:
 
     rake tag_tests['path/to/your/tests','@test_case_']
 
-The above example would result in the tags @test_case_1, @test_case_2, @test_case_3, etc. being added to every test in the given directory.
+and
+
+    rake validate_tests['path/to/your/tests','@test_case_','validation_results.txt']
+  
+### Adding ids to tests
+
+The the tagging functionality will add an id tag to every scenario (and an id column to every outline) in a test suite. It can be given a directory in which the tests are located and a prefix upon which to base the tagging scheme but, if not given that information, it will use the current directory and a prefix of `@test_case_`.
+
+    rake tag_tests['path/to/your/tests','@my_prefix_']
+
+The above example would result in the tags `@my_prefix_1`, `@my_prefix_2`, `@my_prefix_3`, etc. being added to every test in the `tests` directory.
 
 ### Validating test ids
 
-The validate_tests task scans a given directory for any problems related to id tags and generates a report detailing its results. To do this, it needs to be provided a directory in which the tests are located and a prefix upon which to base the tagging scheme. It can optionally take a file location to which it should output its report instead of printing it to the console.
+The the validating functionality scans a given directory for any problems related to id tags and generates a report detailing its results. It can be given a directory in which the tests are located and a prefix upon which to base the tagging scheme, as well as a file location to which it should output its report but, if not given that information, it will use the current directory and a prefix of `@test_case_` and it will output the report to the console. 
 
-    rake validate_tests['path/to/your/tests','@test_case_','validation_results.txt']
+    rake validate_tests['path/to/your/tests','@my_prefix_','validation_results.txt']
 
-The above example would result in a report called 'validation_results.txt' being generated for any test had problems related to their id (e.g. did not have an id tag, had the same id tag as another test, etc.).
+The above example would result in a report called `validation_results.txt` being generated for any test in the `tests` directory that had problems related to their id (e.g. did not have an id tag, had the same id tag as another test, etc.), based up the id prefix `@my_prefix_`.
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/cuke_cataloger/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
+1. Fork it `http://github.com/<my-github-username>/cuke_cataloger/fork`
+2. Create your feature branch (off of the development branch) `git checkout -b my-new-feature`
+3. Commit your changes `git commit -am 'Add some feature'`
+4. Push to the branch `git push origin my-new-feature`
 5. Create new Pull Request
