@@ -1,5 +1,14 @@
 # Release history
 
+### Version 1.3.0 / 2017-01-09
+
+- Bug fix: Replaced non-Ruby 1.8.x compatible code so that the gem now correctly works with older versions of Ruby.
+
+- Added an executable file for the gem so that it can be used without having to use Rake tasks.
+
+- A basic cataloging location and prefix is used by default so that specifying these values will not be necessary in many cases.
+
+
 ### Version 1.2.0 / 2016-10-02
 
 - The gem now declares version limits on all of its dependencies.
