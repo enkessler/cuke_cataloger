@@ -5,8 +5,8 @@ require 'cuke_cataloger'
 class CLI < Thor
 
   desc 'catalog_test_cases', 'Catalog the test cases in LOCATION with an id based on PREFIX'
-  option :location, default: '.'
-  option :prefix, default: '@test_case_'
+  option :location, :default => '.'
+  option :prefix, :default => '@test_case_'
 
   def catalog_test_cases
     puts "Tagging tests in '#{options[:location]}' with tag '#{options[:prefix]}'\n"
@@ -16,8 +16,8 @@ class CLI < Thor
   end
 
   desc 'validate_test_cases', 'Validate the test cases in LOCATION with an id based on PREFIX. Will output the report to FILE, if provided.'
-  option :location, default: '.'
-  option :prefix, default: '@test_case_'
+  option :location, :default => '.'
+  option :prefix, :default => '@test_case_'
   option :file
 
   def validate_test_cases
@@ -47,7 +47,7 @@ class CLI < Thor
 
     if options[:file]
       puts "Problems found: #{results.count}"
-      File.write(options[:file], report_text)
+      File.open(options[:file], 'w') { |file| file.write(report_text) }
     else
       puts report_text
     end

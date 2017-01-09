@@ -48,7 +48,7 @@ module CukeCataloger
 
       if args[:out_file]
         puts "Problems found: #{results.count}"
-        File.write(args[:out_file], report_text)
+        File.open(args[:out_file], 'w') { |file| file.write(report_text) }
       else
         puts report_text
       end
