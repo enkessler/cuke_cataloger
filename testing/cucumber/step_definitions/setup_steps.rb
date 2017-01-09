@@ -54,3 +54,16 @@ end
 And(/^the tag location is unspecified$/) do
   @above_or_below = nil
 end
+
+Given(/^the cuke_cataloger executable is available$/) do
+  @executable_directory = "#{PROJECT_ROOT}/bin"
+end
+
+And(/^there are test cases in the "([^"]*)" directory that have not been cataloged with "([^"]*)"$/) do |target_directory, prefix|
+  target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
+
+  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, prefix)
+
+  # Making sure that there is work to be done, thus avoiding false positives
+  expect(@test_results.select { |test_result| test_result[:problem] == :missing_tag }).to_not be_empty
+end

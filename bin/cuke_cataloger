@@ -1,0 +1,59 @@
+require 'thor'
+require 'cuke_cataloger'
+
+
+class CLI < Thor
+
+  desc 'catalog_test_cases', 'Catalog the test cases in LOCATION with an id based on PREFIX'
+  option :location, default: '.'
+  option :prefix, default: '@test_case_'
+
+  def catalog_test_cases
+    puts "Tagging tests in '#{options[:location]}' with tag '#{options[:prefix]}'\n"
+
+    tagger = CukeCataloger::UniqueTestCaseTagger.new
+    tagger.tag_tests(options[:location], options[:prefix])
+  end
+
+  desc 'validate_test_cases', 'Validate the test cases in LOCATION with an id based on PREFIX. Will output the report to FILE, if provided.'
+  option :location, default: '.'
+  option :prefix, default: '@test_case_'
+  option :file
+
+  def validate_test_cases
+    puts "Validating tests in '#{options[:location]}' with tag '#{options[:prefix]}'\n"
+
+    results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(options[:location], options[:prefix])
+    report_text = "Validation Results\nProblems found: #{results.count}\n\n"
+
+
+    results_by_category = Hash.new { |hash, key| hash[key] = [] }
+
+    results.each do |result|
+      results_by_category[result[:problem]] << result
+    end
+
+    results_by_category.keys.each do |problem_category|
+      report_text << "#{problem_category} problems: #{results_by_category[problem_category].count}\n"
+    end
+
+    results_by_category.keys.each do |problem_category|
+      report_text << "\n\n#{problem_category} problems (#{results_by_category[problem_category].count}):\n"
+
+      results_by_category[problem_category].each do |result|
+        report_text << "#{result[:test]}\n"
+      end
+    end
+
+    if options[:file]
+      puts "Problems found: #{results.count}"
+      File.write(options[:file], report_text)
+    else
+      puts report_text
+    end
+  end
+
+end
+
+
+CLI.start(ARGV)

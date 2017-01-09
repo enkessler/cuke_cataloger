@@ -162,3 +162,27 @@ And(/^the resulting second file is:$/) do |expected_text|
 
   expect(actual_text).to eq(expected_text)
 end
+
+Then(/^all of the test cases in the "([^"]*)" directory will be cataloged with "([^"]*)"$/) do |target_directory, prefix|
+  target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
+
+  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, prefix)
+
+  verify_no_results
+end
+
+Then(/^a validation report for the "([^"]*)" directory with prefix "([^"]*)" is output to the console$/) do |target_directory, prefix|
+  expect(@output).to include("Validating tests in '#{target_directory}' with tag '#{prefix}'")
+  expect(@output).to include("Validation Results")
+end
+
+Then(/^a validation report for the "([^"]*)" directory with prefix "([^"]*)" is output to "([^"]*)"$/) do |target_directory, prefix, filename|
+  target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
+  filename = "#{DEFAULT_FILE_DIRECTORY}/#{filename}"
+
+  expect(@output).to include("Validating tests in '#{target_directory}' with tag '#{prefix}'")
+  expect(@output).to include("Problems found:")
+
+  expect(File.exists?(filename)).to be true
+  expect(File.read(filename)).to include('Validation Results')
+end
