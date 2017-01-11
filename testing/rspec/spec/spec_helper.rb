@@ -12,6 +12,7 @@ RSpec.configure do |config|
     here = File.dirname(__FILE__)
     @default_file_directory = "#{here}/temp_files"
     @default_test_file_directory = "#{here}/test_files"
+    @lib_directory = "#{here}/../../../lib"
   end
 
   config.before(:each) do
