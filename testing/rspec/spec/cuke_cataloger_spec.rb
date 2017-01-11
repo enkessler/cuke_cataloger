@@ -1,4 +1,5 @@
 require "#{File.dirname(__FILE__)}/spec_helper"
+require 'rubygems/mock_gem_ui'
 
 
 describe 'the gem' do
@@ -12,40 +13,10 @@ describe 'the gem' do
   end
 
   it 'validates cleanly' do
+    mock_ui = Gem::MockGemUi.new
+    Gem::DefaultUserInteraction.use_ui(mock_ui) { gemspec.validate }
 
-# gemspec.validate
-    validation_output = with_captured_stderr { gemspec.validate }
-
-    puts "validation result 1: #{validation_output}"
-
-    validation_output = with_captured_stdout { gemspec.validate }
-
-    puts "validation result 2: #{validation_output}"
-
-    # old_gemfile = ENV['BUNDLE_GEMFILE']
-    #
-    # begin
-    #   puts "overwriting file: #{"#{@lib_directory}/cuke_cataloger/version.rb"}"
-    #   File.write("#{@lib_directory}/cuke_cataloger/version.rb", "module CukeCataloger\nVERSION = '0.0.0-test'\nend")
-    #
-    #
-    #   output = `gem build cuke_cataloger.gemspec`
-    #   puts "executable test output: #{output}"
-    #   output = `gem install cuke_cataloger-0.0.0.pre.test.gem`
-    #   puts "executable test output: #{output}"
-    #
-    #
-    #   ENV['BUNDLE_GEMFILE'] = 'testing/gemfiles/executable.gemfile'
-    #   output = `bundle exec cuke_cataloger`
-    #   puts "executable test output: #{output}"
-    #
-    # ensure
-    #   ENV['BUNDLE_GEMFILE'] = old_gemfile
-    #   # `gem uninstall cuke_cataloger -v 0.0.0-test`
-    #   `git checkout HEAD -- #{@lib_directory}/cuke_cataloger/version.rb`
-    # end
-
-    pending
+    expect(mock_ui.error).to_not match(/warn/i)
   end
 
 end
