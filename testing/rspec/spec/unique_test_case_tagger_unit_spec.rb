@@ -24,8 +24,8 @@ describe 'UniqueTestCaseTagger, Unit' do
       expect(@tagger).to respond_to(:validate_test_ids)
     end
 
-    it 'requires a directory and tag prefix when validating' do
-      expect(@tagger.method(:validate_test_ids).arity).to eq(2)
+    it 'validates based on a directory, tag prefix, and optional row tagging flag' do
+      expect(@tagger.method(:validate_test_ids).arity).to eq(-3)
     end
 
     it 'returns validation results' do

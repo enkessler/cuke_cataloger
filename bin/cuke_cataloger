@@ -10,12 +10,14 @@ class CLI < Thor
   desc 'catalog_test_cases', 'Catalog the test cases in LOCATION with an id based on PREFIX'
   option :location, :default => '.'
   option :prefix, :default => '@test_case_'
+  option :row_id, :type => :boolean, :default => true
 
   def catalog_test_cases
     puts "Tagging tests in '#{options[:location]}' with tag '#{options[:prefix]}'\n"
+    puts "Including outline rows\n" if options[:row_id]
 
     tagger = CukeCataloger::UniqueTestCaseTagger.new
-    tagger.tag_tests(options[:location], options[:prefix])
+    tagger.tag_tests(options[:location], options[:prefix], {}, options[:row_id])
   end
 
   desc 'validate_test_cases', 'Validate the test cases in LOCATION with an id based on PREFIX. Will output the report to FILE, if provided.'

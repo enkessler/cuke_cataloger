@@ -13,7 +13,7 @@ module CukeCataloger
       @tag_location = :adjacent
     end
 
-    def tag_tests(feature_directory, tag_prefix, explicit_indexes = {})
+    def tag_tests(feature_directory, tag_prefix, explicit_indexes = {}, tag_rows = true)
       warn("This script will potentially rewrite all of your feature files. Please be patient and remember to tip your source control system.")
 
       @known_id_tags = {}
@@ -30,7 +30,7 @@ module CukeCataloger
           when test.is_a?(CukeModeler::Scenario)
             process_scenario(test)
           when test.is_a?(CukeModeler::Outline)
-            process_outline(test)
+            process_outline(test, tag_rows)
           else
             raise("Unknown test type: #{test.class.to_s}")
         end
@@ -61,7 +61,7 @@ module CukeCataloger
       @results
     end
 
-    def validate_test_ids(feature_directory, tag_prefix)
+    def validate_test_ids(feature_directory, tag_prefix, tag_rows = true)
       @results = []
       @known_id_tags = {}
 
@@ -69,7 +69,7 @@ module CukeCataloger
       set_test_suite_model(feature_directory)
 
       @features.each { |feature| validate_feature(feature) }
-      @tests.each { |test| validate_test(test) }
+      @tests.each { |test| validate_test(test, tag_rows) }
 
       @results
     end
@@ -121,17 +121,17 @@ module CukeCataloger
       check_for_feature_level_test_tag(feature)
     end
 
-    def validate_test(test)
+    def validate_test(test, tag_rows)
       check_for_missing_test_tag(test)
       check_for_multiple_test_id_tags(test)
       check_for_duplicated_test_id_tags(test)
 
       if test.is_a?(CukeModeler::Outline)
-        check_for_missing_id_columns(test)
-        check_for_missing_row_tags(test)
-        check_for_duplicated_row_tags(test)
-        check_for_mismatched_row_tags(test)
-        check_for_malformed_row_tags(test)
+        check_for_missing_id_columns(test) if tag_rows
+        check_for_missing_row_tags(test) if tag_rows
+        check_for_duplicated_row_tags(test) if tag_rows
+        check_for_mismatched_row_tags(test) if tag_rows
+        check_for_malformed_row_tags(test) if tag_rows
       end
     end
 
@@ -216,10 +216,12 @@ module CukeCataloger
       apply_tag_if_needed(test)
     end
 
-    def process_outline(test)
+    def process_outline(test, tag_rows)
       apply_tag_if_needed(test)
-      update_parameters_if_needed(test)
-      update_rows_if_needed(test, determine_next_sub_id(test))
+      if tag_rows
+        update_parameters_if_needed(test)
+        update_rows_if_needed(test, determine_next_sub_id(test))
+      end
     end
 
     def apply_tag_if_needed(test)

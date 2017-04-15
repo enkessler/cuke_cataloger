@@ -171,6 +171,25 @@ Then(/^all of the test cases in the "([^"]*)" directory will be cataloged with "
   verify_no_results
 end
 
+Then(/^all of the scenarios and outlines in the "([^"]*)" directory will be cataloged with "([^"]*)"$/) do |target_directory, prefix|
+  target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
+  @expected_prefix = prefix
+  tag_rows = false
+
+  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, @expected_prefix, tag_rows)
+
+  verify_no_results
+end
+
+But(/^outline rows in the "([^"]*)" directory are not cataloged$/) do |target_directory|
+  target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
+  tag_rows = true
+
+  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, @expected_prefix, tag_rows)
+
+  expect(@test_results.collect { |result| result[:problem] }).to include(:missing_id_column)
+end
+
 Then(/^a validation report for the "([^"]*)" directory with prefix "([^"]*)" is output to the console$/) do |target_directory, prefix|
   expect(@output).to include("Validating tests in '#{target_directory}' with tag '#{prefix}'")
   expect(@output).to include("Validation Results")
