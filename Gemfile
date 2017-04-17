@@ -19,4 +19,4 @@ if RUBY_VERSION =~ /^1\./
   gem 'term-ansicolor', '< 1.4' # The 'term-ansicolor' gem requires Ruby 2.x on/after this version
 end
 
-gem 'cuke_modeler', '~> 1.0'
+gem 'cuke_modeler', '< 2.0'
