@@ -20,6 +20,7 @@ module CukeCataloger
       tag_rows = args[:row_id].nil? ? true : args[:row_id]
 
       puts "Tagging tests in '#{location}' with tag '#{prefix}'\n"
+      puts "Including outline rows\n" if tag_rows
 
       tagger = CukeCataloger::UniqueTestCaseTagger.new
       tagger.tag_tests(location, prefix, {}, tag_rows)
@@ -32,6 +33,7 @@ module CukeCataloger
       tag_rows = args[:row_id].nil? ? true : args[:row_id]
 
       puts "Validating tests in '#{location}' with tag '#{prefix}'\n"
+      puts "Including outline rows\n" if tag_rows
 
       results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(location, prefix, tag_rows)
       report_text = "Validation Results\nProblems found: #{results.count}\n\n"
