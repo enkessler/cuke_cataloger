@@ -31,11 +31,12 @@ In addition to using the provided classes in any regular Ruby script, the gem's 
 
 ### Command Line
 
-    cuke_cataloger catalog_test_cases [--location=LOCATION] [--prefix=PREFIX]
+    cuke_cataloger catalog_test_cases [--location=LOCATION] [--prefix=PREFIX][--[no-]row-id] [--id-column-name=ID_COLUMN_NAME]
 
 and
 
-    cuke_cataloger validate_test_cases [--location=LOCATION] [--prefix=PREFIX] [--file=FILE]
+    cuke_cataloger validate_test_cases [--location=LOCATION] [--prefix=PREFIX] [--[no-]row-id] [--id-column-name=ID_COLUMN_NAME] [--file=FILE]
+
 
 ### Rake Task
 
@@ -76,6 +77,33 @@ The the validating functionality scans a given directory for any problems relate
     rake validate_tests['path/to/your/tests','@my_prefix_','validation_results.txt']
 
 The above example would result in a report called `validation_results.txt` being generated for any test in the `tests` directory that had problems related to their id (e.g. did not have an id tag, had the same id tag as another test, etc.), based up the id prefix `@my_prefix_`.
+
+
+### Shallow cataloging
+
+The cataloging and validation process can be limited to the test level instead of also checking individual rows in outlines.
+
+`cuke_cataloger catalog_test_cases --no-row-id`
+
+`cuke_cataloger validate_test_cases --no-row-id`
+
+`Rake::Task['tag_tests'].invoke('./features','@test_case_', false)  # 3rd argument is the row flag`
+
+`Rake::Task['validate_tests'].invoke('./features','@test_case_',nil, false)  # 4th argument is the row flag`
+
+
+### Custom id column name
+
+By default, the cataloging and validation process uses `test_case_id` as the column name for outline rows but an alternative name can be provided.
+
+`cuke_cataloger catalog_test_cases --id-column-name my_special_column_id`
+
+`cuke_cataloger validate_test_cases --id-column-name my_special_column_id`
+
+`Rake::Task['tag_tests'].invoke('./features','@test_case_', true, 'my_special_column_id')  # 4th argument is the id column name`
+
+`Rake::Task['validate_tests'].invoke('./features','@test_case_',nil, true, 'my_special_column_id')  # 5th argument is the id column name`
+
 
 ## Contributing
 
