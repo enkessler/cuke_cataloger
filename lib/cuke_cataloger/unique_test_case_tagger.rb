@@ -13,7 +13,7 @@ module CukeCataloger
       @tag_location = :adjacent
     end
 
-    def tag_tests(feature_directory, tag_prefix, explicit_indexes = {})
+    def tag_tests(feature_directory, tag_prefix, explicit_indexes = {}, tag_rows = true, id_column_name = 'test_case_id')
       warn("This script will potentially rewrite all of your feature files. Please be patient and remember to tip your source control system.")
 
       @known_id_tags = {}
@@ -21,7 +21,7 @@ module CukeCataloger
       set_id_tag(tag_prefix)
       set_test_suite_model(feature_directory)
 
-      @start_indexes = merge_indexes(default_start_indexes(determine_known_ids(feature_directory, tag_prefix)), explicit_indexes)
+      @start_indexes = merge_indexes(default_start_indexes(determine_known_ids(feature_directory, tag_prefix, id_column_name)), explicit_indexes)
       @next_index = @start_indexes[:primary]
 
       # Analysis and output
@@ -30,14 +30,14 @@ module CukeCataloger
           when test.is_a?(CukeModeler::Scenario)
             process_scenario(test)
           when test.is_a?(CukeModeler::Outline)
-            process_outline(test)
+            process_outline(test, tag_rows, id_column_name)
           else
             raise("Unknown test type: #{test.class.to_s}")
         end
       end
     end
 
-    def scan_for_tagged_tests(feature_directory, tag_prefix)
+    def scan_for_tagged_tests(feature_directory, tag_prefix, id_column_name = 'test_case_id')
       @results = []
       @known_id_tags = {}
 
@@ -49,9 +49,9 @@ module CukeCataloger
 
         if test.is_a?(CukeModeler::Outline)
           test.examples.each do |example|
-            if has_id_parameter?(example)
+            if has_id_parameter?(example, id_column_name)
               example_rows_for(example).each do |row|
-                add_to_results(row) if has_row_id?(row)
+                add_to_results(row) if has_row_id?(row, id_column_name)
               end
             end
           end
@@ -61,7 +61,7 @@ module CukeCataloger
       @results
     end
 
-    def validate_test_ids(feature_directory, tag_prefix)
+    def validate_test_ids(feature_directory, tag_prefix, tag_rows = true, id_column_name = 'test_case_id')
       @results = []
       @known_id_tags = {}
 
@@ -69,19 +69,19 @@ module CukeCataloger
       set_test_suite_model(feature_directory)
 
       @features.each { |feature| validate_feature(feature) }
-      @tests.each { |test| validate_test(test) }
+      @tests.each { |test| validate_test(test, tag_rows, id_column_name) }
 
       @results
     end
 
-    def determine_known_ids(feature_directory, tag_prefix)
+    def determine_known_ids(feature_directory, tag_prefix, id_column_name = 'test_case_id')
       known_ids = []
 
-      found_tagged_objects = scan_for_tagged_tests(feature_directory, tag_prefix).collect { |result| result[:object] }
+      found_tagged_objects = scan_for_tagged_tests(feature_directory, tag_prefix, id_column_name).collect { |result| result[:object] }
 
       found_tagged_objects.each do |element|
         if element.is_a?(CukeModeler::Row)
-          row_id = row_id_for(element)
+          row_id = row_id_for(element, id_column_name)
           known_ids << row_id if well_formed_sub_id?(row_id)
         else
           known_ids << test_id_for(element)
@@ -121,17 +121,17 @@ module CukeCataloger
       check_for_feature_level_test_tag(feature)
     end
 
-    def validate_test(test)
+    def validate_test(test, tag_rows, id_column_name)
       check_for_missing_test_tag(test)
       check_for_multiple_test_id_tags(test)
       check_for_duplicated_test_id_tags(test)
 
       if test.is_a?(CukeModeler::Outline)
-        check_for_missing_id_columns(test)
-        check_for_missing_row_tags(test)
-        check_for_duplicated_row_tags(test)
-        check_for_mismatched_row_tags(test)
-        check_for_malformed_row_tags(test)
+        check_for_missing_id_columns(test, id_column_name) if tag_rows
+        check_for_missing_row_tags(test, id_column_name) if tag_rows
+        check_for_duplicated_row_tags(test, id_column_name) if tag_rows
+        check_for_mismatched_row_tags(test, id_column_name) if tag_rows
+        check_for_malformed_row_tags(test, id_column_name) if tag_rows
       end
     end
 
@@ -170,42 +170,42 @@ module CukeCataloger
       add_to_results(test, :missing_tag) unless has_id_tag?(test)
     end
 
-    def check_for_missing_id_columns(test)
+    def check_for_missing_id_columns(test, id_column_name)
       test.examples.each do |example|
-        add_to_results(example, :missing_id_column) unless has_id_column?(example)
+        add_to_results(example, :missing_id_column) unless has_id_column?(example, id_column_name)
       end
     end
 
-    def check_for_duplicated_row_tags(test)
-      validate_rows(test, :duplicate_row_id, false, :has_duplicate_row_id?)
+    def check_for_duplicated_row_tags(test, id_column_name)
+      validate_rows(test, :duplicate_row_id, false, :has_duplicate_row_id?, id_column_name)
     end
 
-    def check_for_missing_row_tags(test)
-      validate_rows(test, :missing_row_id, true, :has_row_id?)
+    def check_for_missing_row_tags(test, id_column_name)
+      validate_rows(test, :missing_row_id, true, :has_row_id?, id_column_name)
     end
 
-    def check_for_mismatched_row_tags(test)
-      validate_rows(test, :mismatched_row_id, true, :has_matching_id?)
+    def check_for_mismatched_row_tags(test, id_column_name)
+      validate_rows(test, :mismatched_row_id, true, :has_matching_id?, id_column_name)
     end
 
-    def check_for_malformed_row_tags(test)
+    def check_for_malformed_row_tags(test, id_column_name)
       test.examples.each do |example|
-        if has_id_column?(example)
+        if has_id_column?(example, id_column_name)
           example_rows_for(example).each do |row|
-            add_to_results(row, :malformed_sub_id) if (has_row_id?(row) && !well_formed_sub_id?(row_id_for(row)))
+            add_to_results(row, :malformed_sub_id) if (has_row_id?(row, id_column_name) && !well_formed_sub_id?(row_id_for(row, id_column_name)))
           end
         end
       end
     end
 
-    def validate_rows(test, rule, desired, row_check)
+    def validate_rows(test, rule, desired, row_check, id_column_name)
       test.examples.each do |example|
-        if has_id_column?(example)
+        if has_id_column?(example, id_column_name)
           example_rows_for(example).each do |row|
             if desired
-              add_to_results(row, rule) unless self.send(row_check, row)
+              add_to_results(row, rule) unless self.send(row_check, row, id_column_name)
             else
-              add_to_results(row, rule) if self.send(row_check, row)
+              add_to_results(row, rule) if self.send(row_check, row, id_column_name)
             end
           end
         end
@@ -216,10 +216,12 @@ module CukeCataloger
       apply_tag_if_needed(test)
     end
 
-    def process_outline(test)
+    def process_outline(test, tag_rows, id_column_name)
       apply_tag_if_needed(test)
-      update_parameters_if_needed(test)
-      update_rows_if_needed(test, determine_next_sub_id(test))
+      if tag_rows
+        update_parameters_if_needed(test, id_column_name)
+        update_rows_if_needed(test, determine_next_sub_id(test), id_column_name)
+      end
     end
 
     def apply_tag_if_needed(test)
@@ -235,12 +237,12 @@ module CukeCataloger
       !!fast_id_tag_for(test)
     end
 
-    def has_id_column?(example)
-      example.parameters.any? { |param| param =~ /test_case_id/ }
+    def has_id_column?(example, id_column_name)
+      example.parameters.any? { |param| param == id_column_name }
     end
 
-    def row_id_for(row)
-      id_index = determine_row_id_cell_index(row)
+    def row_id_for(row, id_column_name)
+      id_index = determine_row_id_cell_index(row, id_column_name)
 
       if id_index
         cell_value = row.cells[id_index]
@@ -250,16 +252,16 @@ module CukeCataloger
       end
     end
 
-    def has_row_id?(row)
-      !!row_id_for(row)
+    def has_row_id?(row, id_column_name)
+      !!row_id_for(row, id_column_name)
     end
 
     def well_formed_sub_id?(id)
       !!(id =~ SUB_ID_PATTERN)
     end
 
-    def has_matching_id?(row)
-      row_id = row_id_for(row)
+    def has_matching_id?(row, id_column_name)
+      row_id = row_id_for(row, id_column_name)
 
       # A lack of id counts as 'matching'
       return true if row_id.nil?
@@ -275,12 +277,12 @@ module CukeCataloger
       end
     end
 
-    def has_duplicate_row_id?(row)
-      row_id = row_id_for(row)
+    def has_duplicate_row_id?(row, id_column_name)
+      row_id = row_id_for(row, id_column_name)
 
       return false unless row_id && well_formed_sub_id?(row_id)
 
-      existing_ids = determine_used_sub_ids(row.get_ancestor(:test))
+      existing_ids = determine_used_sub_ids(row.get_ancestor(:test), id_column_name)
       matching_ids = existing_ids.select { |id| id == row_id[/\d+$/] }
 
       matching_ids.count > 1
@@ -293,11 +295,11 @@ module CukeCataloger
       explicit_index ? explicit_index : 1
     end
 
-    def determine_used_sub_ids(test)
+    def determine_used_sub_ids(test, id_column_name)
       ids = test.examples.collect do |example|
-        if has_id_parameter?(example)
+        if has_id_parameter?(example, id_column_name)
           example_rows_for(example).collect do |row|
-            row_id_for(row)
+            row_id_for(row, id_column_name)
           end
         else
           []
@@ -312,8 +314,8 @@ module CukeCataloger
       ids
     end
 
-    def determine_row_id_cell_index(row)
-      row.get_ancestor(:example).parameters.index { |param| param =~ /test_case_id/ }
+    def determine_row_id_cell_index(row, id_column_name)
+      row.get_ancestor(:example).parameters.index { |param| param =~ /#{id_column_name}/ }
     end
 
     def tag_test(test, tag, padding_string = '  ')
@@ -338,26 +340,26 @@ module CukeCataloger
       end
     end
 
-    def update_parameters_if_needed(test)
+    def update_parameters_if_needed(test, id_column_name)
       feature_file = test.get_ancestor(:feature_file)
       file_path = feature_file.path
       index_adjustment = @file_line_increases[file_path]
       method_for_rows = Gem.loaded_specs['cuke_modeler'].version.version[/^0/] ? :row_elements : :rows
 
       test.examples.each do |example|
-        unless has_id_parameter?(example)
+        unless has_id_parameter?(example, id_column_name)
           parameter_line_index = (example.send(method_for_rows).first.source_line - 1) + index_adjustment
 
           file_lines = File.readlines(file_path)
 
-          new_parameter = 'test_case_id'.ljust(parameter_spacing(example))
+          new_parameter = id_column_name.ljust(parameter_spacing(example, id_column_name))
           update_parameter_row(file_lines, parameter_line_index, new_parameter)
           File.open(file_path, 'w') { |file| file.print file_lines.join }
         end
       end
     end
 
-    def update_rows_if_needed(test, sub_id)
+    def update_rows_if_needed(test, sub_id, id_column_name)
       feature_file = test.get_ancestor(:feature_file)
       file_path = feature_file.path
       index_adjustment = @file_line_increases[file_path]
@@ -369,12 +371,12 @@ module CukeCataloger
 
       test.examples.each do |example|
         example.send(method_for_rows)[1..(example.send(method_for_rows).count - 1)].each do |row|
-          unless has_row_id?(row)
-            row_id = "#{tag_index}-#{sub_id}".ljust(parameter_spacing(example))
+          unless has_row_id?(row, id_column_name)
+            row_id = "#{tag_index}-#{sub_id}".ljust(parameter_spacing(example, id_column_name))
 
             row_line_index = (row.source_line - 1) + index_adjustment
 
-            update_value_row(file_lines, row_line_index, row, row_id)
+            update_value_row(file_lines, row_line_index, row, row_id, id_column_name)
             sub_id += 1
           end
         end
@@ -429,32 +431,31 @@ module CukeCataloger
       fast_id_tag_for(test).match(/#{@tag_prefix}(.*)/)[1]
     end
 
-    def has_id_parameter?(example)
-      #todo - make the id column name configurable
-      example.parameters.any? { |parameter| parameter == 'test_case_id' }
+    def has_id_parameter?(example, id_column_name)
+      example.parameters.any? { |parameter| parameter == id_column_name }
     end
 
     def update_parameter_row(file_lines, line_index, parameter)
       append_row!(file_lines, line_index, " #{parameter} |")
     end
 
-    def update_value_row(file_lines, line_index, row, row_id)
+    def update_value_row(file_lines, line_index, row, row_id, id_column_name)
       case
-        when needs_adding?(row)
+        when needs_adding?(row, id_column_name)
           append_row!(file_lines, line_index, " #{row_id} |")
-        when needs_filled_in?(row)
-          fill_in_row(file_lines, line_index, row, row_id)
+        when needs_filled_in?(row, id_column_name)
+          fill_in_row(file_lines, line_index, row, row_id, id_column_name)
         else
           raise("Don't know how to update row")
       end
     end
 
-    def needs_adding?(row)
-      !has_id_parameter?(row.get_ancestor(:example))
+    def needs_adding?(row, id_column_name)
+      !has_id_parameter?(row.get_ancestor(:example), id_column_name)
     end
 
-    def needs_filled_in?(row)
-      has_id_parameter?(row.get_ancestor(:example))
+    def needs_filled_in?(row, id_column_name)
+      has_id_parameter?(row.get_ancestor(:example), id_column_name)
     end
 
     def replace_row!(file_lines, line_index, new_line)
@@ -514,13 +515,13 @@ module CukeCataloger
       }
     end
 
-    def parameter_spacing(example)
+    def parameter_spacing(example, id_column_name)
       test = example.get_ancestor(:test)
       test_id = fast_id_tag_for(test)[/\d+$/]
       row_count = test.examples.reduce(0) { |sum, example| sum += example.rows.count }
 
       max_id_length = test_id.length + 1 + row_count.to_s.length
-      param_length = 'test_case_id'.length
+      param_length = id_column_name.length
 
       [param_length, max_id_length].max
     end
@@ -539,11 +540,11 @@ module CukeCataloger
       indentation
     end
 
-    def fill_in_row(file_lines, line_index, row, row_id)
+    def fill_in_row(file_lines, line_index, row, row_id, id_column_name)
       old_row = file_lines[line_index]
       sections = file_lines[line_index].split('|', -1)
 
-      replacement_index = determine_row_id_cell_index(row)
+      replacement_index = determine_row_id_cell_index(row, id_column_name)
       sections[replacement_index + 1] = " #{row_id} "
 
       new_row = sections.join('|')

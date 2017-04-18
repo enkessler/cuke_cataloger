@@ -81,6 +81,42 @@ describe 'UniqueTestCaseTagger, Integration' do
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(0)
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(1)
     end
+
+    it 'does not count id like values that are not in the specified id column' do
+      input_file = Tempfile.new(['foo', '.feature'])
+
+      text = "Feature:
+
+                @test_case_1
+                Scenario:
+                  * a step
+
+                @test_case_2
+                Scenario Outline:
+                  * a step with a <param>
+                  Examples: with rows
+                    | param   | test_case_id | foobar |
+                    | value 1 | 2-1          | 2-4    |
+                  Examples: without rows
+                    | param   | test_case_id | foobar |
+                    | value 1 | 2-2          | 2-5    |
+                    | value 2 | 2-3          | 2-6    |
+
+                @test_case_3
+                Scenario:
+                  * a step"
+
+      input_file.write(text)
+      input_file.close
+      temp_directory = input_file.path.match(/(.*)\/foo.*\.feature/)[1]
+
+
+      result = @tagger.determine_known_ids(temp_directory, '@test_case_', 'foobar')
+
+
+      expect(result).to_not include('2-1', '2-2', '2-3')
+    end
+
   end
 
 end

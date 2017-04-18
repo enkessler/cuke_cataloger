@@ -5,7 +5,7 @@ Feature: Cataloging executable
 
   Scenario: Cataloging test cases
 
-  Note: By default, cataloging will be done in the current directory using the '@test_case_' prefix
+  Note: By default, cataloging will be done in the current directory using the '@test_case_' prefix and outline rows will also be cataloged.
 
     Given the cuke_cataloger executable is available
     And there are test cases in the "." directory that have not been cataloged with "@test_case_"
@@ -20,9 +20,10 @@ Feature: Cataloging executable
     And there are test cases in the "tests" directory that have not been cataloged with "@foo"
     When the following command is executed:
     """
-    cuke_cataloger catalog_test_cases --location <path_to>/tests --prefix @foo
+    cuke_cataloger catalog_test_cases --location <path_to>/tests --prefix @foo --no-row-id
     """
-    Then all of the test cases in the "tests" directory will be cataloged with "@foo"
+    Then all of the scenarios and outlines in the "tests" directory will be cataloged with "@foo"
+    But outline rows in the "tests" directory are not cataloged
 
   Scenario: Validating test cases
 

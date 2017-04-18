@@ -1,5 +1,12 @@
 # Release history
 
+### Version 1.4.0 / 2017-04-18
+
+- Both cataloging and validation can now be used without including outline rows, if desired.
+
+- The column header used for outline row ids is now configurable.
+
+
 ### Version 1.3.1 / 2017-01-11
 
 - Bug fix: Added missing shebang line to the gem's executable file.
