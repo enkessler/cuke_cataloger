@@ -14,28 +14,30 @@ module CukeCataloger
   def self.create_tasks
 
     desc 'Add unique id tags to tests in the given directory'
-    task 'tag_tests', [:directory, :prefix, :row_id] do |t, args|
+    task 'tag_tests', [:directory, :prefix, :row_id, :id_column_name] do |t, args|
       location = args[:directory] || '.'
       prefix = args[:prefix] || '@test_case_'
       tag_rows = args[:row_id].nil? ? true : args[:row_id]
+      id_column_name = args[:id_column_name] || 'test_case_id'
 
       puts "Tagging tests in '#{location}' with tag '#{prefix}'\n"
       puts "Including outline rows\n" if tag_rows
 
       tagger = CukeCataloger::UniqueTestCaseTagger.new
-      tagger.tag_tests(location, prefix, {}, tag_rows)
+      tagger.tag_tests(location, prefix, {}, tag_rows, id_column_name)
     end
 
     desc 'Scan tests in the given directory for id problems'
-    task 'validate_tests', [:directory, :prefix, :out_file, :row_id] do |t, args|
+    task 'validate_tests', [:directory, :prefix, :out_file, :row_id, :id_column_name] do |t, args|
       location = args[:directory] || '.'
       prefix = args[:prefix] || '@test_case_'
       tag_rows = args[:row_id].nil? ? true : args[:row_id]
+      id_column_name = args[:id_column_name] || 'test_case_id'
 
       puts "Validating tests in '#{location}' with tag '#{prefix}'\n"
       puts "Including outline rows\n" if tag_rows
 
-      results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(location, prefix, tag_rows)
+      results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(location, prefix, tag_rows, id_column_name)
       report_text = "Validation Results\nProblems found: #{results.count}\n\n"
 
 

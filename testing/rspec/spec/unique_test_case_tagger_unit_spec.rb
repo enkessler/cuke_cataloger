@@ -38,8 +38,8 @@ describe 'UniqueTestCaseTagger, Unit' do
       expect(@tagger).to respond_to(:scan_for_tagged_tests)
     end
 
-    it 'requires a directory and tag prefix when validating' do
-      expect(@tagger.method(:scan_for_tagged_tests).arity).to eq(2)
+    it 'validates based on a directory, tag prefix, and optional column name' do
+      expect(@tagger.method(:scan_for_tagged_tests).arity).to eq(-3)
     end
 
     it 'returns scanning results' do
@@ -52,8 +52,8 @@ describe 'UniqueTestCaseTagger, Unit' do
       expect(@tagger).to respond_to(:determine_known_ids)
     end
 
-    it 'requires a directory and tag prefix when determining used indexes' do
-      expect(@tagger.method(:determine_known_ids).arity).to eq(2)
+    it 'determines used indexes based on a directory, tag prefix, and optional column name' do
+      expect(@tagger.method(:determine_known_ids).arity).to eq(-3)
     end
   end
 
