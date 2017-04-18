@@ -8,6 +8,7 @@ here = File.dirname(__FILE__)
 
 require 'cuke_cataloger'
 
+require 'tempfile'
 
 RSpec.configure do |config|
   config.before(:all) do
