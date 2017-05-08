@@ -2,8 +2,6 @@ version: '1.0.{build}'
 
 environment:
   matrix:
-    - RUBY_VERSION: 187-x64
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
     - RUBY_VERSION: 193-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
     - RUBY_VERSION: 200-x64
@@ -13,8 +11,6 @@ environment:
     - RUBY_VERSION: 22-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
 
-    - RUBY_VERSION: 187-x64
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
     - RUBY_VERSION: 193-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
     - RUBY_VERSION: 200-x64
@@ -24,8 +20,6 @@ environment:
     - RUBY_VERSION: 22-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
 
-    - RUBY_VERSION: 187-x64
-      BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
     - RUBY_VERSION: 193-x64
       BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
     - RUBY_VERSION: 200-x64
