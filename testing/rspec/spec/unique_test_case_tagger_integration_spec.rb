@@ -83,7 +83,8 @@ describe 'UniqueTestCaseTagger, Integration' do
     end
 
     it 'does not count id like values that are not in the specified id column' do
-      input_file = Tempfile.new(['foo', '.feature'])
+      test_directory = Dir.mktmpdir
+      input_file = Tempfile.new(['foo', '.feature'], test_directory)
 
       text = "Feature:
 
