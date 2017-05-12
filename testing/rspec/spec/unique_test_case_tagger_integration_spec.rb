@@ -84,7 +84,6 @@ describe 'UniqueTestCaseTagger, Integration' do
 
     it 'does not count id like values that are not in the specified id column' do
       test_directory = Dir.mktmpdir
-      input_file = Tempfile.new(['foo', '.feature'], test_directory)
 
       text = "Feature:
 
@@ -107,12 +106,10 @@ describe 'UniqueTestCaseTagger, Integration' do
                 Scenario:
                   * a step"
 
-      input_file.write(text)
-      input_file.close
-      temp_directory = input_file.path.match(/(.*)\/foo.*\.feature/)[1]
+      CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => text)
 
 
-      result = @tagger.determine_known_ids(temp_directory, '@test_case_', 'foobar')
+      result = @tagger.determine_known_ids(test_directory, '@test_case_', 'foobar')
 
 
       expect(result).to_not include('2-1', '2-2', '2-3')

@@ -2,4 +2,3 @@
 # todo - Add better test coverage (rake tasks, cli, etc.)
 # todo - Use features as documentation
 # todo - Use the cuketagger gem for tagging
-# todo - use temporary file system instead of creating my own
