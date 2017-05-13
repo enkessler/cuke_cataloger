@@ -116,7 +116,7 @@ def verify_category_results(category, results)
 end
 
 def verify_results(results)
-  actual = process_actual_results(@test_results.collect { |test_result| test_result[:test] })
+  actual = @test_results.collect { |test_result| test_result[:test] }
   expected = process_expected_results(results)
 
   expect(actual).to match_array(expected)
@@ -127,14 +127,6 @@ def process_expected_results(results)
   results.collect { |test_path| test_path.sub('path/to', @root_test_directory) }
 end
 
-def process_actual_results(results)
-  test_file_names = ['has_untagged_tests', 'has_even_more_untagged_tests', 'has_untagged_rows', 'has_missing_id_param', 'has_duplicated_tag', 'has_duplicated_id', 'has_mismatched_id', 'has_multiple_test_ids', 'has_a_feature_level_test_tag', 'file\d']
-
-  results.collect do |result|
-    result.match(/(.*\/)(#{test_file_names.join('|')}).*.feature:(\d+)/)
-    $1 + $2 + '.feature:' + $3
-  end
-end
 
 Then(/^the resulting first file is:$/) do |expected_text|
   file_name = @feature_files[0]

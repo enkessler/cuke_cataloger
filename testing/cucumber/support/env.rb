@@ -14,7 +14,7 @@ FIXTURE_DIRECTORY = "#{here}/../../fixtures"
 
 Before do
   begin
-    @root_test_directory = Dir.mktmpdir
+    @root_test_directory = CukeCataloger::FileHelper.create_directory
   rescue => e
     puts "Error caught in before hook!"
     puts "Type: #{e.class}"
@@ -31,3 +31,10 @@ After do
     puts "Message: #{e.message}"
   end
 end
+
+
+at_exit {
+  CukeCataloger::FileHelper.created_directories.each do |dir_path|
+    FileUtils.remove_entry(dir_path, true)
+  end
+}

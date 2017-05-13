@@ -83,7 +83,7 @@ describe 'UniqueTestCaseTagger, Integration' do
     end
 
     it 'does not count id like values that are not in the specified id column' do
-      test_directory = Dir.mktmpdir
+      test_directory = CukeCataloger::FileHelper.create_directory
 
       text = "Feature:
 

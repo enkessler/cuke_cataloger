@@ -1,26 +1,38 @@
-require 'tempfile'
-
-
 module CukeCataloger
   module FileHelper
 
-    def self.create_feature_file(options = {})
-      options[:text] ||= 'Feature:'
-      options[:name] ||= 'test_file'
+    class << self
 
-      create_file(:text => options[:text], :name => options[:name], :extension => '.feature', :directory => options[:directory])
-    end
+      def create_feature_file(options = {})
+        options[:text] ||= 'Feature:'
+        options[:name] ||= 'test_file'
 
-    def self.create_file(options = {})
-      options[:text] ||= ''
-      options[:name] ||= 'test_file'
-      options[:extension] ||= '.txt'
-      options[:directory] ||= Dir::tmpdir
+        create_file(:text => options[:text], :name => options[:name], :extension => '.feature', :directory => options[:directory])
+      end
 
-      temp_file = Tempfile.new([options[:name], options[:extension]], options[:directory])
-      File.open(temp_file.path, 'w') { |file| file.write(options[:text]) }
+      def create_file(options = {})
+        options[:text] ||= ''
+        options[:name] ||= 'test_file'
+        options[:extension] ||= '.txt'
+        options[:directory] ||= create_directory
 
-      temp_file
+        file_path = "#{options[:directory]}/#{options[:name]}#{options[:extension]}"
+        File.open(file_path, 'w') { |file| file.write(options[:text]) }
+
+        file_path
+      end
+
+      def created_directories
+        @created_directories ||= []
+      end
+
+      def create_directory
+        new_dir = Dir::mktmpdir
+        created_directories << new_dir
+
+        new_dir
+      end
+
     end
 
   end

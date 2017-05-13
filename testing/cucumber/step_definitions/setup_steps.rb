@@ -6,10 +6,8 @@ Given /^the following feature file(?: "([^"]*)")?:$/ do |file_name, file_text|
   file_name ||= "test_feature_#{@files_created + 1}"
   file_name = File.basename(file_name, '.feature')
 
-  file = CukeCataloger::FileHelper.create_feature_file(:directory => @test_directory, :name => file_name, :text => file_text)
-
-
-  @feature_files << file.path
+  file_path = CukeCataloger::FileHelper.create_feature_file(:directory => @test_directory, :name => file_name, :text => file_text)
+  @feature_files << file_path
 
   @files_created += 1
 end
@@ -38,8 +36,8 @@ Given(/^a feature file$/) do
 
   file_text = "Feature:\nScenario Outline:\n* a step\nExamples:\n| param 1 |\n| value 1 |"
 
-  file = CukeCataloger::FileHelper.create_feature_file(:directory => @test_directory, :name => file_name, :text => file_text)
-  @feature_files << file.path
+  file_path = CukeCataloger::FileHelper.create_feature_file(:directory => @test_directory, :name => file_name, :text => file_text)
+  @feature_files << file_path
 
   @files_created += 1
 end
