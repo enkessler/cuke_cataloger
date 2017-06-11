@@ -4,6 +4,8 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/9a7gw3r5ddfugtf0/branch/dev?svg=true)](https://ci.appveyor.com/project/enkessler/cuke-cataloger/branch/dev)
 [![Coverage Status](https://coveralls.io/repos/github/enkessler/cuke_cataloger/badge.svg?branch=dev)](https://coveralls.io/github/enkessler/cuke_cataloger?branch=dev)
 [![Code Climate](https://codeclimate.com/github/enkessler/cuke_cataloger/badges/gpa.svg)](https://codeclimate.com/github/enkessler/cuke_cataloger)
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/gems/cuke_cataloger)
+[![Inline docs](http://inch-ci.org/github/enkessler/cuke_cataloger.svg?branch=dev)](https://inch-ci.org/github/enkessler/cuke_cataloger?branch=dev)
 [![Project License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/enkessler/cuke_cataloger/blob/master/LICENSE.txt)
 
 
