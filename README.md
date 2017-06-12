@@ -14,6 +14,54 @@
 
 The cuke_cataloger gem is a convenient way to provide a unique id to every test case in your Cucumber test suite.
 
+Turn your features from this
+
+````
+Feature:
+
+  Scenario:
+    * a step
+    
+  Scenario Outline:
+    * a step
+  Examples:
+    | param 1 |
+    | value 1 |
+  Examples: 
+    | param 1 |
+    | value 1 |
+    | value 2 |
+
+  Scenario:
+    * a step
+````
+
+into this!
+
+````
+Feature:
+
+  @test_case_1
+  Scenario:
+    * a step
+    
+  @test_case_2
+  Scenario Outline:
+    * a step
+  Examples:
+    | param 1 | test_case_id |
+    | value 1 | 2-1          |
+  Examples: 
+    | param 1 | test_case_id |
+    | value 1 | 2-2          |
+    | value 2 | 2-3          |
+
+  @test_case_3
+  Scenario:
+    * a step
+````
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
