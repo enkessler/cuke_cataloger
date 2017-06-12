@@ -1,10 +1,17 @@
 module CukeCataloger
+
+  # A tagger that handles test case cataloging.
+
   class UniqueTestCaseTagger
 
-    SUB_ID_PATTERN = /^\d+\-\d+$/
-    SUB_ID_MATCH_PATTERN = /^\d+\-(\d+)$/
+    # The pattern of a sub id
+    SUB_ID_PATTERN = /^\d+\-\d+$/  # Not a part of the public API. Subject to change at any time.
+
+    # The pattern of a sub id, with id capture
+    SUB_ID_MATCH_PATTERN = /^\d+\-(\d+)$/   # Not a part of the public API. Subject to change at any time.
 
 
+    # Where the id tag should be placed, relative to the other tags on the test
     attr_accessor :tag_location
 
 
@@ -13,6 +20,7 @@ module CukeCataloger
       @tag_location = :adjacent
     end
 
+    # Adds id tags based on *tag_prefix* to the tests found in *feature_directory*
     def tag_tests(feature_directory, tag_prefix, explicit_indexes = {}, tag_rows = true, id_column_name = 'test_case_id')
       warn("This script will potentially rewrite all of your feature files. Please be patient and remember to tip your source control system.")
 
@@ -37,6 +45,7 @@ module CukeCataloger
       end
     end
 
+    # Finds existing id tags and their associated tests in *feature_directory* based on *tag_prefix*
     def scan_for_tagged_tests(feature_directory, tag_prefix, id_column_name = 'test_case_id')
       @results = []
       @known_id_tags = {}
@@ -61,6 +70,7 @@ module CukeCataloger
       @results
     end
 
+    # Checks for cataloging problems in *feature_directory* based on *tag_prefix*
     def validate_test_ids(feature_directory, tag_prefix, tag_rows = true, id_column_name = 'test_case_id')
       @results = []
       @known_id_tags = {}
@@ -74,6 +84,7 @@ module CukeCataloger
       @results
     end
 
+    # Finds existing id tags in *feature_directory* based on *tag_prefix*
     def determine_known_ids(feature_directory, tag_prefix, id_column_name = 'test_case_id')
       known_ids = []
 
