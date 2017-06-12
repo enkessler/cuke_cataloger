@@ -209,6 +209,7 @@ module CukeCataloger
       end
     end
 
+    # Checks the rows of the given test for the given problem
     def validate_rows(test, rule, desired, row_check, id_column_name)
       test.examples.each do |example|
         if has_id_column?(example, id_column_name)
@@ -446,10 +447,12 @@ module CukeCataloger
       example.parameters.any? { |parameter| parameter == id_column_name }
     end
 
+    # Adds an id column to the given parameter row
     def update_parameter_row(file_lines, line_index, parameter)
       append_row!(file_lines, line_index, " #{parameter} |")
     end
 
+    # Adds an id to the given value row
     def update_value_row(file_lines, line_index, row, row_id, id_column_name)
       case
         when needs_adding?(row, id_column_name)
@@ -469,16 +472,19 @@ module CukeCataloger
       has_id_parameter?(row.get_ancestor(:example), id_column_name)
     end
 
+    # Replaces the indicated line of text with the provided line of tet
     def replace_row!(file_lines, line_index, new_line)
       file_lines[line_index] = new_line
     end
 
+    # Adds text to the beginning of the given line (with whitespace loss)
     def prepend_row!(file_lines, line_index, string)
       old_row = file_lines[line_index]
       new_row = string + old_row.lstrip
       file_lines[line_index] = new_row
     end
 
+    # Adds text to the end of the given line (with whitespace loss)
     def append_row!(file_lines, line_index, string)
       old_row = file_lines[line_index]
       trailing_bits = old_row[/\s*$/]
@@ -520,6 +526,7 @@ module CukeCataloger
       default_indexes
     end
 
+    # Merges the given index sets (of the shape {:primary => Integer, :sub => Hash}) into a new one
     def merge_indexes(set1, set2)
       set1.merge(set2) { |key, set1_value, set2_value|
         key == :sub ? set1_value.merge(set2_value) : set2_value
@@ -551,8 +558,9 @@ module CukeCataloger
       indentation
     end
 
+    # Adds an id to the given value row (which has a column for an id but no value for it)
     def fill_in_row(file_lines, line_index, row, row_id, id_column_name)
-      old_row = file_lines[line_index]
+      old_row = file_lines[line_index] # todo - Dead line of code?
       sections = file_lines[line_index].split('|', -1)
 
       replacement_index = determine_row_id_cell_index(row, id_column_name)
