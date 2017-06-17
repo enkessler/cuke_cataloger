@@ -1,6 +1,17 @@
 unless RUBY_VERSION.to_s < '1.9.0'
   require 'simplecov'
-  SimpleCov.command_name('cuke_cataloger-fixtures')
+
+  SimpleCov.start do
+    root File.dirname(__FILE__) + '/../..'
+
+    # Every test process will need its own unique name or else they will override each others' coverage data
+    command_name("cuke_cataloger-fixtures-#{SecureRandom.uuid}")
+
+    add_filter '/testing/'
+
+    merge_timeout 300
+  end
+
 end
 
 
