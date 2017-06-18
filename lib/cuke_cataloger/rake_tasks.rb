@@ -3,6 +3,7 @@ module CukeCataloger
   extend Rake::DSL
 
 
+  # Adds the gem's provided Rake tasks to the namespace from which the method is called
   def self.create_tasks
 
     desc 'Add unique id tags to tests in the given directory'
