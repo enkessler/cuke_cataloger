@@ -1,5 +1,6 @@
 unless RUBY_VERSION.to_s < '1.9.0'
   require 'simplecov'
+  require 'securerandom'
 
   SimpleCov.start do
     root File.dirname(__FILE__) + '/../..'
