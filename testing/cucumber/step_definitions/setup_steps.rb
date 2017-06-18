@@ -69,3 +69,8 @@ And(/^there are test cases in the "([^"]*)" directory that have not been catalog
   # Making sure that there is work to be done, thus avoiding false positives
   expect(@test_results.select { |test_result| test_result[:problem] == :missing_tag }).to_not be_empty
 end
+
+Given(/^the Rake tasks provided by the gem have been loaded$/) do
+  File.open("#{FIXTURE_DIRECTORY}/Rakefile", 'a') { |file| file.puts 'CukeCataloger.create_tasks' }
+  CukeCataloger.create_tasks
+end

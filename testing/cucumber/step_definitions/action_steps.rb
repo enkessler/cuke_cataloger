@@ -40,3 +40,19 @@ When(/^the following command is executed:$/) do |command|
     @output = `#{command}`
   end
 end
+
+When(/^the following task is invoked:$/) do |command|
+  command.sub!('<path_to>/tests', "#{FIXTURE_DIRECTORY}/tests")
+  command.sub!('<path_to>/foo', "#{@root_test_directory}/foo")
+  command = "bundle exec rake #{command}"
+
+  Dir.chdir(FIXTURE_DIRECTORY) do
+    @output = `#{command}`
+  end
+end
+
+When(/^the following code is run:$/) do |code_text|
+  code_text.sub!('<path_to>', FIXTURE_DIRECTORY)
+
+  eval(code_text)
+end

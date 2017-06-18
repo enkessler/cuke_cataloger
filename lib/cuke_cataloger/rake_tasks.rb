@@ -2,7 +2,6 @@ module CukeCataloger
 
   extend Rake::DSL
 
-  # todo - test these better
 
   def self.create_tasks
 
