@@ -20,7 +20,7 @@ describe 'UniqueTestCaseTagger, Integration' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
       @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
 
-      @tagger.tag_tests(@default_file_directory, '')
+      Dir.mktmpdir { |path| @tagger.tag_tests(path, '') }
 
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(0)
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(1)
@@ -39,7 +39,7 @@ describe 'UniqueTestCaseTagger, Integration' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
       @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
 
-      @tagger.validate_test_ids(@default_file_directory, '')
+      Dir.mktmpdir { |path| @tagger.validate_test_ids(path, '') }
 
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(0)
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(1)
@@ -58,7 +58,7 @@ describe 'UniqueTestCaseTagger, Integration' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
       @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
 
-      @tagger.scan_for_tagged_tests(@default_file_directory, '')
+      Dir.mktmpdir { |path| @tagger.scan_for_tagged_tests(path, '') }
 
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(0)
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(1)
@@ -76,14 +76,14 @@ describe 'UniqueTestCaseTagger, Integration' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
       @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
 
-      @tagger.determine_known_ids(@default_file_directory, '')
+      Dir.mktmpdir { |path| @tagger.determine_known_ids(path, '') }
 
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(0)
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(1)
     end
 
     it 'does not count id like values that are not in the specified id column' do
-      input_file = Tempfile.new(['foo', '.feature'])
+      test_directory = CukeCataloger::FileHelper.create_directory
 
       text = "Feature:
 
@@ -106,12 +106,10 @@ describe 'UniqueTestCaseTagger, Integration' do
                 Scenario:
                   * a step"
 
-      input_file.write(text)
-      input_file.close
-      temp_directory = input_file.path.match(/(.*)\/foo.*\.feature/)[1]
+      CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => text)
 
 
-      result = @tagger.determine_known_ids(temp_directory, '@test_case_', 'foobar')
+      result = @tagger.determine_known_ids(test_directory, '@test_case_', 'foobar')
 
 
       expect(result).to_not include('2-1', '2-2', '2-3')

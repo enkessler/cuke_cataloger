@@ -4,24 +4,20 @@ unless RUBY_VERSION.to_s < '1.9.0'
 end
 
 here = File.dirname(__FILE__)
-
+require "#{here}/../../file_helper"
 
 require 'cuke_cataloger'
 
-require 'tempfile'
 
 RSpec.configure do |config|
   config.before(:all) do
-    @default_file_directory = "#{here}/temp_files"
-    @default_test_file_directory = "#{here}/test_files"
     @lib_directory = "#{here}/../../../lib"
   end
 
-  config.before(:each) do
-    FileUtils.mkpath(@default_file_directory)
+  config.after(:all) do
+    CukeCataloger::FileHelper.created_directories.each do |dir_path|
+      FileUtils.remove_entry(dir_path, true)
+    end
   end
 
-  config.after(:each) do
-    FileUtils.remove_dir(@default_file_directory, true)
-  end
 end

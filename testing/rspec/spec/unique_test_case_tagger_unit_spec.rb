@@ -29,7 +29,9 @@ describe 'UniqueTestCaseTagger, Unit' do
     end
 
     it 'returns validation results' do
-      expect(@tagger.validate_test_ids(@default_file_directory, '')).to be_a_kind_of(Array)
+      results = Dir.mktmpdir { |path| @tagger.validate_test_ids(path, '') }
+
+      expect(results).to be_a_kind_of(Array)
     end
   end
 
@@ -43,7 +45,9 @@ describe 'UniqueTestCaseTagger, Unit' do
     end
 
     it 'returns scanning results' do
-      expect(@tagger.scan_for_tagged_tests(@default_file_directory, '')).to be_a_kind_of(Array)
+      results = Dir.mktmpdir { |path| @tagger.scan_for_tagged_tests(path, '') }
+
+      expect(results).to be_a_kind_of(Array)
     end
   end
 

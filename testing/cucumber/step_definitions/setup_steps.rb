@@ -1,13 +1,13 @@
 Given /^the following feature file(?: "([^"]*)")?:$/ do |file_name, file_text|
-  @test_directory = @default_file_directory
+  @test_directory = @root_test_directory
   @files_created ||= 0
   @feature_files ||= []
 
-  file_name ||= "#{@default_feature_file_name}_#{@files_created + 1}.feature"
-  file_path = "#{@test_directory}/#{file_name}"
-  @feature_files << file_path
+  file_name ||= "test_feature_#{@files_created + 1}"
+  file_name = File.basename(file_name, '.feature')
 
-  File.open(file_path, 'w') { |file| file.write file_text }
+  file_path = CukeCataloger::FileHelper.create_feature_file(:directory => @test_directory, :name => file_name, :text => file_text)
+  @feature_files << file_path
 
   @files_created += 1
 end
@@ -27,15 +27,17 @@ And(/^a start index of "([^"]*)" for testcase "([^"]*)"$/) do |sub_index, parent
 end
 
 Given(/^a feature file$/) do
-  @test_directory = @default_file_directory
+  @test_directory = @root_test_directory
   @files_created ||= 0
   @feature_files ||= []
 
-  file_name ||= "#{@default_feature_file_name}_#{@files_created + 1}.feature"
-  file_path = "#{@test_directory}/#{file_name}"
-  @feature_files << file_path
+  file_name = "test_feature_#{@files_created + 1}.feature"
+  file_name = File.basename(file_name, '.feature')
 
-  File.open(file_path, 'w') { |file| file.write "Feature:\nScenario Outline:\n* a step\nExamples:\n| param 1 |\n| value 1 |" }
+  file_text = "Feature:\nScenario Outline:\n* a step\nExamples:\n| param 1 |\n| value 1 |"
+
+  file_path = CukeCataloger::FileHelper.create_feature_file(:directory => @test_directory, :name => file_name, :text => file_text)
+  @feature_files << file_path
 
   @files_created += 1
 end
@@ -66,4 +68,9 @@ And(/^there are test cases in the "([^"]*)" directory that have not been catalog
 
   # Making sure that there is work to be done, thus avoiding false positives
   expect(@test_results.select { |test_result| test_result[:problem] == :missing_tag }).to_not be_empty
+end
+
+Given(/^the Rake tasks provided by the gem have been loaded$/) do
+  File.open("#{FIXTURE_DIRECTORY}/Rakefile", 'a') { |file| file.puts 'CukeCataloger.create_tasks' }
+  CukeCataloger.create_tasks
 end

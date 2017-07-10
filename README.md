@@ -1,15 +1,66 @@
-# CukeCataloger
-
-
-[![Gem Version](https://badge.fury.io/rb/cuke_cataloger.svg)](http://badge.fury.io/rb/cuke_cataloger)
+[![Gem Version](https://badge.fury.io/rb/cuke_cataloger.svg)](https://rubygems.org/gems/cuke_cataloger)
+[![Dependency Status](https://gemnasium.com/enkessler/cuke_cataloger.svg)](https://gemnasium.com/enkessler/cuke_cataloger)
 [![Build Status](https://travis-ci.org/enkessler/cuke_cataloger.svg?branch=dev)](https://travis-ci.org/enkessler/cuke_cataloger)
 [![Build status](https://ci.appveyor.com/api/projects/status/9a7gw3r5ddfugtf0/branch/dev?svg=true)](https://ci.appveyor.com/project/enkessler/cuke-cataloger/branch/dev)
-[![Coverage Status](https://coveralls.io/repos/enkessler/cuke_cataloger/badge.svg?branch=dev&service=github)](https://coveralls.io/github/enkessler/cuke_cataloger?branch=dev)
+[![Coverage Status](https://coveralls.io/repos/github/enkessler/cuke_cataloger/badge.svg?branch=dev)](https://coveralls.io/github/enkessler/cuke_cataloger?branch=dev)
 [![Code Climate](https://codeclimate.com/github/enkessler/cuke_cataloger/badges/gpa.svg)](https://codeclimate.com/github/enkessler/cuke_cataloger)
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/gems/cuke_cataloger)
+[![Inline docs](http://inch-ci.org/github/enkessler/cuke_cataloger.svg?branch=dev)](https://inch-ci.org/github/enkessler/cuke_cataloger?branch=dev)
 [![Project License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/enkessler/cuke_cataloger/blob/master/LICENSE.txt)
 
 
+# CukeCataloger
+
+
 The cuke_cataloger gem is a convenient way to provide a unique id to every test case in your Cucumber test suite.
+
+Turn your features from this
+
+````
+Feature:
+
+  Scenario:
+    * a step
+    
+  Scenario Outline:
+    * a step
+  Examples:
+    | param 1 |
+    | value 1 |
+  Examples: 
+    | param 1 |
+    | value 1 |
+    | value 2 |
+
+  Scenario:
+    * a step
+````
+
+into this!
+
+````
+Feature:
+
+  @test_case_1
+  Scenario:
+    * a step
+    
+  @test_case_2
+  Scenario Outline:
+    * a step
+  Examples:
+    | param 1 | test_case_id |
+    | value 1 | 2-1          |
+  Examples: 
+    | param 1 | test_case_id |
+    | value 1 | 2-2          |
+    | value 2 | 2-3          |
+
+  @test_case_3
+  Scenario:
+    * a step
+````
+
 
 ## Installation
 
