@@ -1,5 +1,10 @@
 # Release history
 
+### Version 1.4.1 / 2017-07-09
+
+- Improved documentation
+
+
 ### Version 1.4.0 / 2017-04-18
 
 - Both cataloging and validation can now be used without including outline rows, if desired.
