@@ -20,7 +20,8 @@ describe 'UniqueTestCaseTagger, Integration' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
       @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
 
-      Dir.mktmpdir { |path| @tagger.tag_tests(path, '') }
+      path = CukeCataloger::FileHelper.create_directory
+      @tagger.tag_tests(path, '')
 
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(0)
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(1)
@@ -39,7 +40,8 @@ describe 'UniqueTestCaseTagger, Integration' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
       @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
 
-      Dir.mktmpdir { |path| @tagger.validate_test_ids(path, '') }
+      path = CukeCataloger::FileHelper.create_directory
+      @tagger.validate_test_ids(path, '')
 
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(0)
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(1)
@@ -58,7 +60,8 @@ describe 'UniqueTestCaseTagger, Integration' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
       @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
 
-      Dir.mktmpdir { |path| @tagger.scan_for_tagged_tests(path, '') }
+      path = CukeCataloger::FileHelper.create_directory
+      @tagger.scan_for_tagged_tests(path, '')
 
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(0)
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(1)
@@ -76,7 +79,8 @@ describe 'UniqueTestCaseTagger, Integration' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
       @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
 
-      Dir.mktmpdir { |path| @tagger.determine_known_ids(path, '') }
+      path = CukeCataloger::FileHelper.create_directory
+      @tagger.determine_known_ids(path, '')
 
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(0)
       expect(@tagger.instance_variable_get(:@known_id_tags)).to_not include(1)

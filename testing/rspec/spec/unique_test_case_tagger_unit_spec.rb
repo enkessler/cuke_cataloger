@@ -29,7 +29,8 @@ describe 'UniqueTestCaseTagger, Unit' do
     end
 
     it 'returns validation results' do
-      results = Dir.mktmpdir { |path| @tagger.validate_test_ids(path, '') }
+      path = CukeCataloger::FileHelper.create_directory
+      results = @tagger.validate_test_ids(path, '')
 
       expect(results).to be_a_kind_of(Array)
     end
@@ -45,7 +46,8 @@ describe 'UniqueTestCaseTagger, Unit' do
     end
 
     it 'returns scanning results' do
-      results = Dir.mktmpdir { |path| @tagger.scan_for_tagged_tests(path, '') }
+      path = CukeCataloger::FileHelper.create_directory
+      results = @tagger.scan_for_tagged_tests(path, '')
 
       expect(results).to be_a_kind_of(Array)
     end
