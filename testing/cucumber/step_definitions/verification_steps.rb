@@ -139,7 +139,7 @@ Then(/^the resulting first file is:$/) do |expected_text|
   begin
     expect(actual_text).to eq(expected_text)
   rescue RSpec::Expectations::ExpectationNotMetError => e
-    if RUBY_PLATFORM =~ /linux/
+    if RUBY_PLATFORM =~ /(?:linux|java)/
       expected_text.sub!('test_case_1', 'test_case_2')
       expect(actual_text).to eq(expected_text)
       @switched = true
