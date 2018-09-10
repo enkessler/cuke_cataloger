@@ -1,5 +1,10 @@
 # Release history
 
+### Version 1.5.0 / 2017-09-09
+
+- The default cataloging prefix used by the Rake tasks is now also the default prefix used by the various object based methods.
+
+
 ### Version 1.4.1 / 2017-07-09
 
 - Improved documentation
