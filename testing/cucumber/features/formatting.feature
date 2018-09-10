@@ -4,9 +4,6 @@ Feature: Tagging formatting
   source code as well as possible.
 
 
-  Background:
-    And a tag prefix of "@test_case_"
-
   Scenario: Test level tags have the same indentation as the test itself
     Given the following feature file:
     """

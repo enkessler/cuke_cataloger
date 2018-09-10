@@ -16,7 +16,7 @@ Before do
   begin
     @root_test_directory = CukeCataloger::FileHelper.create_directory
   rescue => e
-    puts "Error caught in before hook!"
+    puts "Error caught in Before hook!"
     puts "Type: #{e.class}"
     puts "Message: #{e.message}"
   end
@@ -26,7 +26,7 @@ After do
   begin
     `git checkout HEAD -- #{FIXTURE_DIRECTORY}`
   rescue => e
-    puts "Error caught in before hook!"
+    puts "Error caught in After hook!"
     puts "Type: #{e.class}"
     puts "Message: #{e.message}"
   end

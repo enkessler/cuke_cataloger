@@ -1,5 +1,6 @@
 When(/^the files? (?:is|are) processed$/) do
   @start_index ||= {}
+  @tag_prefix ||= '@test_case_'
   @directory = CukeModeler::Directory.new(@test_directory)
 
   tagger = CukeCataloger::UniqueTestCaseTagger.new
@@ -11,7 +12,10 @@ end
 When(/^the ids in the test suite are validated$/) do
   @directory = CukeModeler::Directory.new(@test_directory)
 
-  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(@directory.path, @tag_prefix)
+  args = [@directory.path]
+  args << @tag_prefix if @tag_prefix
+
+  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(*args)
 end
 
 When(/^the files are scanned$/) do
@@ -24,7 +28,9 @@ end
 When(/^the existing ids are determined$/) do
   @directory = CukeModeler::Directory.new(@test_directory)
 
-  @ids_found = CukeCataloger::UniqueTestCaseTagger.new.determine_known_ids(@directory.path, @tag_prefix)
+  args = [@directory.path]
+  args << @tag_prefix if @tag_prefix
+  @ids_found = CukeCataloger::UniqueTestCaseTagger.new.determine_known_ids(*args)
 end
 
 When(/^the following command is executed:$/) do |command|

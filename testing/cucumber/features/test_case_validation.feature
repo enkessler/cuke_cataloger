@@ -5,6 +5,9 @@ Feature: Checking existing tags for correctness
   Therefore, the tool provides such a means.
 
 
+  *Note*: When validating, a tag prefix of '@test_case_' and a column id of 'test_case_id' will be used unless different
+  values are specified
+
   Scenario: Detection of missing test ids when not present
     Given the following feature file "has_untagged_tests.feature":
     """
@@ -13,7 +16,6 @@ Feature: Checking existing tags for correctness
       Scenario:
         * a step
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following tests are found to be missing ids:
       | path/to/has_untagged_tests.feature:3 |
@@ -27,7 +29,6 @@ Feature: Checking existing tags for correctness
       Scenario:
         * a step
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no tests are found to be missing ids
 
@@ -44,7 +45,6 @@ Feature: Checking existing tags for correctness
         |              | 123   |
         |  bad_id      | 456   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following tests rows are found to be missing sub ids:
       | path/to/has_untagged_rows.feature:8 |
@@ -62,7 +62,6 @@ Feature: Checking existing tags for correctness
         | 4-1          | 123   |
         | 4-2          | 456   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no tests rows are found to be missing sub ids
 
@@ -78,7 +77,6 @@ Feature: Checking existing tags for correctness
         | param |
         | 123   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following tests examples are found to be missing a parameter for sub ids:
       | path/to/has_missing_id_param.feature:6 |
@@ -95,7 +93,6 @@ Feature: Checking existing tags for correctness
         | test_case_id | param |
         | 4-1          | 123   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no test examples are found to be missing id parameters
 
@@ -112,7 +109,6 @@ Feature: Checking existing tags for correctness
       Scenario:
         * a step
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following tests are found to have a duplicated id:
       | path/to/has_duplicated_tag.feature:4 |
@@ -131,7 +127,6 @@ Feature: Checking existing tags for correctness
       Scenario:
         * a step
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no tests are found to have duplicated ids
 
@@ -152,7 +147,6 @@ Feature: Checking existing tags for correctness
         | 2-1          | 123   |
         | 2-1          | 123   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following tests example rows are found to have duplicated sub ids:
       | path/to/has_duplicated_id.feature:8  |
@@ -176,7 +170,6 @@ Feature: Checking existing tags for correctness
         | 2-3          | 123   |
         | 2-4          | 123   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no test example rows are found to have duplicated sub ids
 
@@ -213,7 +206,6 @@ Feature: Checking existing tags for correctness
         | test_case_id | param |
         |              | 123   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following tests example rows are found to have mismatched sub ids:
       | path/to/has_mismatched_id.feature:8  |
@@ -231,7 +223,6 @@ Feature: Checking existing tags for correctness
         | test_case_id | param |
         | 4-1          | 123   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no test example rows are found to have mismatched ids
 
@@ -245,7 +236,6 @@ Feature: Checking existing tags for correctness
       Scenario:
         * a step
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following tests are found to have multiple test ids:
       | path/to/has_multiple_test_ids.feature:5 |
@@ -259,7 +249,6 @@ Feature: Checking existing tags for correctness
       Scenario:
         * a step
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no tests are found to have multiple test ids
 
@@ -277,7 +266,6 @@ Feature: Checking existing tags for correctness
         |              |       |
         | trash        | 123   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following tests example rows are found to have malformed sub ids:
       | path/to/has_mismatched_id.feature:8  |
@@ -295,7 +283,6 @@ Feature: Checking existing tags for correctness
         | test_case_id | param |
         | 4-1          | 123   |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no test example rows are found to have malformed sub ids
 
@@ -313,7 +300,6 @@ Feature: Checking existing tags for correctness
       Scenario:
         * a step
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following feature is found to have a test case tag:
       | path/to/has_a_feature_level_test_tag.feature:2 |
@@ -327,7 +313,6 @@ Feature: Checking existing tags for correctness
       Scenario:
         * a step
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no feature is found to have a test case tag
 
@@ -340,7 +325,6 @@ Feature: Checking existing tags for correctness
       Scenario:
         * a step
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then no tests are found to be missing ids
 
@@ -361,7 +345,6 @@ Feature: Checking existing tags for correctness
       Examples:
         | param |
     """
-    And a tag prefix of "@test_case_"
     When the ids in the test suite are validated
     Then the following tests are found to be missing ids:
       | path/to/has_untagged_tests.feature:3           |

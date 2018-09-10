@@ -8,9 +8,9 @@ Feature: Tag indexing
 
   An analogous principle is used for outlines.
 
+  *Note*: When indexing, a tag prefix of '@test_case_' and a column id of 'test_case_id' will be used unless different
+  values are specified
 
-  Background:
-    * a tag prefix of "@test_case_"
 
   Scenario: Used indexes can be determined
     Given the following feature file "file1.feature":
@@ -40,7 +40,7 @@ Feature: Tag indexing
         | param 1 |
         | value 1 |
 
-      #Missing the parent tag but the sub-tags still count
+      # Missing the parent tag but the sub-tags still count
       Scenario Outline:
         * a step
       Examples: with rows
