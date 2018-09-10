@@ -3,8 +3,8 @@ Feature: Tagging test cases for uniqueness
   Tests are tagged based on a simple <prefix><unique_id> pattern. Every test gets a tag at the test level and, in the case outlines, a sub-id for each of its example rows. Any test which has already been given an id tag or other id information will not have that information modified by the tagging process.
 
 
-  Background:
-    * a tag prefix of "@test_case_"
+  *Note*: When tagging, a tag prefix of '@test_case_' and a column id of 'test_case_id' will be used unless different
+  values are specified
 
 
   Scenario: Tagging tests that don't have id tags

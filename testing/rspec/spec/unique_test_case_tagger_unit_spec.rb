@@ -14,8 +14,8 @@ describe 'UniqueTestCaseTagger, Unit' do
       expect(@tagger).to respond_to(:tag_tests)
     end
 
-    it 'takes a directory, tag prefix, and an optional start index' do
-      expect(@tagger.method(:tag_tests).arity).to eq(-3)
+    it 'takes a directory, optional tag prefix, and an optional start index' do
+      expect(@tagger.method(:tag_tests).arity).to eq(-2)
     end
   end
 
@@ -24,12 +24,13 @@ describe 'UniqueTestCaseTagger, Unit' do
       expect(@tagger).to respond_to(:validate_test_ids)
     end
 
-    it 'validates based on a directory, tag prefix, and optional row tagging flag' do
-      expect(@tagger.method(:validate_test_ids).arity).to eq(-3)
+    it 'validates based on a directory, optional tag prefix, and optional row tagging flag' do
+      expect(@tagger.method(:validate_test_ids).arity).to eq(-2)
     end
 
     it 'returns validation results' do
-      results = Dir.mktmpdir { |path| @tagger.validate_test_ids(path, '') }
+      path = CukeCataloger::FileHelper.create_directory
+      results = @tagger.validate_test_ids(path, '')
 
       expect(results).to be_a_kind_of(Array)
     end
@@ -40,12 +41,13 @@ describe 'UniqueTestCaseTagger, Unit' do
       expect(@tagger).to respond_to(:scan_for_tagged_tests)
     end
 
-    it 'validates based on a directory, tag prefix, and optional column name' do
-      expect(@tagger.method(:scan_for_tagged_tests).arity).to eq(-3)
+    it 'validates based on a directory, optional tag prefix, and optional column name' do
+      expect(@tagger.method(:scan_for_tagged_tests).arity).to eq(-2)
     end
 
     it 'returns scanning results' do
-      results = Dir.mktmpdir { |path| @tagger.scan_for_tagged_tests(path, '') }
+      path = CukeCataloger::FileHelper.create_directory
+      results = @tagger.scan_for_tagged_tests(path, '')
 
       expect(results).to be_a_kind_of(Array)
     end
@@ -56,8 +58,8 @@ describe 'UniqueTestCaseTagger, Unit' do
       expect(@tagger).to respond_to(:determine_known_ids)
     end
 
-    it 'determines used indexes based on a directory, tag prefix, and optional column name' do
-      expect(@tagger.method(:determine_known_ids).arity).to eq(-3)
+    it 'determines used indexes based on a directory, optional tag prefix, and optional column name' do
+      expect(@tagger.method(:determine_known_ids).arity).to eq(-2)
     end
   end
 

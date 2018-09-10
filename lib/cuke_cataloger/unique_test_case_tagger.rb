@@ -21,7 +21,7 @@ module CukeCataloger
     end
 
     # Adds id tags based on *tag_prefix* to the tests found in *feature_directory*
-    def tag_tests(feature_directory, tag_prefix, explicit_indexes = {}, tag_rows = true, id_column_name = 'test_case_id')
+    def tag_tests(feature_directory, tag_prefix = '@test_case_', explicit_indexes = {}, tag_rows = true, id_column_name = 'test_case_id')
       warn("This script will potentially rewrite all of your feature files. Please be patient and remember to tip your source control system.")
 
       @known_id_tags = {}
@@ -46,7 +46,7 @@ module CukeCataloger
     end
 
     # Finds existing id tags and their associated tests in *feature_directory* based on *tag_prefix*
-    def scan_for_tagged_tests(feature_directory, tag_prefix, id_column_name = 'test_case_id')
+    def scan_for_tagged_tests(feature_directory, tag_prefix = '@test_case_', id_column_name = 'test_case_id')
       @results = []
       @known_id_tags = {}
 
@@ -71,7 +71,7 @@ module CukeCataloger
     end
 
     # Checks for cataloging problems in *feature_directory* based on *tag_prefix*
-    def validate_test_ids(feature_directory, tag_prefix, tag_rows = true, id_column_name = 'test_case_id')
+    def validate_test_ids(feature_directory, tag_prefix = '@test_case_', tag_rows = true, id_column_name = 'test_case_id')
       @results = []
       @known_id_tags = {}
 
@@ -85,7 +85,7 @@ module CukeCataloger
     end
 
     # Finds existing id tags in *feature_directory* based on *tag_prefix*
-    def determine_known_ids(feature_directory, tag_prefix, id_column_name = 'test_case_id')
+    def determine_known_ids(feature_directory, tag_prefix = '@test_case_', id_column_name = 'test_case_id')
       known_ids = []
 
       found_tagged_objects = scan_for_tagged_tests(feature_directory, tag_prefix, id_column_name).collect { |result| result[:object] }
