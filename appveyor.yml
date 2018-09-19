@@ -44,7 +44,6 @@ environment:
 
 
 install:
-  - set SSL_CERT_FILE=testing\certs\cacert.pem
   - set PATH=C:\Ruby%RUBY_VERSION%\bin;%PATH%
   - bundle install
 
