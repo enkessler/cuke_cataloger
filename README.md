@@ -1,5 +1,4 @@
 [![Gem Version](https://badge.fury.io/rb/cuke_cataloger.svg)](https://rubygems.org/gems/cuke_cataloger)
-[![Dependency Status](https://gemnasium.com/enkessler/cuke_cataloger.svg)](https://gemnasium.com/enkessler/cuke_cataloger)
 [![Build Status](https://travis-ci.org/enkessler/cuke_cataloger.svg?branch=dev)](https://travis-ci.org/enkessler/cuke_cataloger)
 [![Build status](https://ci.appveyor.com/api/projects/status/9a7gw3r5ddfugtf0/branch/dev?svg=true)](https://ci.appveyor.com/project/enkessler/cuke-cataloger/branch/dev)
 [![Coverage Status](https://coveralls.io/repos/github/enkessler/cuke_cataloger/badge.svg?branch=dev)](https://coveralls.io/github/enkessler/cuke_cataloger?branch=dev)
