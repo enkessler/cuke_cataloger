@@ -18,12 +18,12 @@ end
 
 And(/^a start index of "([^"]*)"$/) do |index|
   @start_index ||= {:sub => {}}
-  @start_index[:primary] = index
+  @start_index[:primary] = index.to_i
 end
 
 And(/^a start index of "([^"]*)" for testcase "([^"]*)"$/) do |sub_index, parent_index|
   @start_index ||= {:sub => {}}
-  @start_index[:sub][parent_index.to_s] = sub_index
+  @start_index[:sub][parent_index.to_s] = sub_index.to_i
 end
 
 Given(/^a feature file$/) do
