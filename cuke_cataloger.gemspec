@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rake', '< 13.0'
   spec.add_runtime_dependency 'thor', '~> 0.0'
 
-  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "bundler", '< 3'
   spec.add_development_dependency 'cucumber', '< 4.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'racatt', '~> 1.0'
