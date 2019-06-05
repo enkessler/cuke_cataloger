@@ -1,11 +1,21 @@
+Basic stuff:
 [![Gem Version](https://badge.fury.io/rb/cuke_cataloger.svg)](https://rubygems.org/gems/cuke_cataloger)
-[![Build Status](https://travis-ci.org/enkessler/cuke_cataloger.svg?branch=dev)](https://travis-ci.org/enkessler/cuke_cataloger)
+[![Project License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php)
+[![Downloads](https://img.shields.io/gem/dt/cuke_cataloger.svg)](https://rubygems.org/gems/cuke_cataloger)
+
+User stuff:
+[![Cucumber Docs](http://img.shields.io/badge/Documentation-Features-green.svg)](https://jam.cucumber.io/p/98c11df9-4a7b-4b86-9700-7833ac93aa3e/cuke_cataloger/documents/branch/master/)
+[![Yard Docs](http://img.shields.io/badge/Documentation-API-blue.svg)](https://www.rubydoc.info/gems/cuke_cataloger)
+
+Developer stuff:
+[![Build Status](https://travis-ci.org/enkessler/cuke_cataloger.svg?branch=dev)](https://travis-ci.org/enkessler/cuke_cataloger/branches)
 [![Build status](https://ci.appveyor.com/api/projects/status/9a7gw3r5ddfugtf0/branch/dev?svg=true)](https://ci.appveyor.com/project/enkessler/cuke-cataloger/branch/dev)
 [![Coverage Status](https://coveralls.io/repos/github/enkessler/cuke_cataloger/badge.svg?branch=dev)](https://coveralls.io/github/enkessler/cuke_cataloger?branch=dev)
-[![Code Climate](https://codeclimate.com/github/enkessler/cuke_cataloger/badges/gpa.svg)](https://codeclimate.com/github/enkessler/cuke_cataloger)
-[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/gems/cuke_cataloger)
+[![Maintainability](https://api.codeclimate.com/v1/badges/662f0e7aa69bf9725515/maintainability)](https://codeclimate.com/github/enkessler/cuke_cataloger/maintainability)
 [![Inline docs](http://inch-ci.org/github/enkessler/cuke_cataloger.svg?branch=dev)](https://inch-ci.org/github/enkessler/cuke_cataloger?branch=dev)
-[![Project License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/enkessler/cuke_cataloger/blob/master/LICENSE.txt)
+
+
+---
 
 
 # CukeCataloger
