@@ -8,11 +8,11 @@ User stuff:
 [![Yard Docs](http://img.shields.io/badge/Documentation-API-blue.svg)](https://www.rubydoc.info/gems/cuke_cataloger)
 
 Developer stuff:
-[![Build Status](https://travis-ci.org/enkessler/cuke_cataloger.svg?branch=dev)](https://travis-ci.org/enkessler/cuke_cataloger/branches)
-[![Build status](https://ci.appveyor.com/api/projects/status/9a7gw3r5ddfugtf0/branch/dev?svg=true)](https://ci.appveyor.com/project/enkessler/cuke-cataloger/branch/dev)
-[![Coverage Status](https://coveralls.io/repos/github/enkessler/cuke_cataloger/badge.svg?branch=dev)](https://coveralls.io/github/enkessler/cuke_cataloger?branch=dev)
+[![Build Status](https://travis-ci.org/enkessler/cuke_cataloger.svg)](https://travis-ci.org/enkessler/cuke_cataloger)
+[![Build status](https://ci.appveyor.com/api/projects/status/9a7gw3r5ddfugtf0?svg=true)](https://ci.appveyor.com/project/enkessler/cuke-cataloger)
+[![Coverage Status](https://coveralls.io/repos/github/enkessler/cuke_cataloger/badge.svg)](https://coveralls.io/github/enkessler/cuke_cataloger)
 [![Maintainability](https://api.codeclimate.com/v1/badges/662f0e7aa69bf9725515/maintainability)](https://codeclimate.com/github/enkessler/cuke_cataloger/maintainability)
-[![Inline docs](http://inch-ci.org/github/enkessler/cuke_cataloger.svg?branch=dev)](https://inch-ci.org/github/enkessler/cuke_cataloger?branch=dev)
+[![Inline docs](http://inch-ci.org/github/enkessler/cuke_cataloger.svg)](https://inch-ci.org/github/enkessler/cuke_cataloger)
 
 
 ---
@@ -168,7 +168,7 @@ By default, the cataloging and validation process uses `test_case_id` as the col
 ## Contributing
 
 1. Fork it `http://github.com/<my-github-username>/cuke_cataloger/fork`
-2. Create your feature branch (off of the development branch) `git checkout -b my-new-feature`
+2. Create your feature branch `git checkout -b my-new-feature`
 3. Commit your changes `git commit -am 'Add some feature'`
 4. Push to the branch `git push origin my-new-feature`
 5. Create new Pull Request
