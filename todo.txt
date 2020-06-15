@@ -1,3 +1,4 @@
+# TODO - Include fewer files in the gem (i.e. dont include the tests). See other projects for examples.
 # todo - point build/code quality/coverage tags at the dev branch
 # todo - Add better test coverage (rake tasks, cli, etc.)
 # todo - Use features as documentation
