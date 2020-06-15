@@ -14,7 +14,7 @@ module CukeCataloger
     # Where the id tag should be placed, relative to the other tags on the test
     attr_accessor :tag_location
 
-
+    # Creates a new UniqueTestCaseTagger object
     def initialize
       @file_line_increases = Hash.new(0)
       @tag_location = :adjacent

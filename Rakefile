@@ -1,5 +1,6 @@
 require 'racatt'
 require 'coveralls/rake/task'
+require 'rainbow'
 
 
 namespace 'cuke_cataloger' do
@@ -29,6 +30,17 @@ namespace 'cuke_cataloger' do
   # The task that CI will use
   Coveralls::RakeTask.new
   task :ci_build => [:smart_test, 'coveralls:push']
+
+  desc 'Check documentation with RDoc'
+  task :check_documentation do
+    output = `rdoc lib -C`
+    puts output
+
+    raise Rainbow('Parts of the gem are undocumented').red unless output =~ /100.00% documented/
+
+    puts Rainbow('All code documented').green
+  end
+
 end
 
 
