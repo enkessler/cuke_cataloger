@@ -1,49 +1,66 @@
-# Release history
+# Changelog
+All notable changes to this project will be documented in this file.
 
-### Version 1.5.0 / 2017-09-09
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-- The default cataloging prefix used by the Rake tasks is now also the default prefix used by the various object based methods.
+## [Unreleased]
 
+Nothing yet...
 
-### Version 1.4.1 / 2017-07-09
+## [1.5.0] - 2017-09-09
 
+### Added
+  - The default cataloging prefix used by the Rake tasks is now also the default prefix used by the various object based methods.
+
+## [1.4.1] - 2017-07-09
+
+### Changed
 - Improved documentation
 
+## [1.4.0] -  2017-04-18
 
-### Version 1.4.0 / 2017-04-18
+### Added
+  - Both cataloging and validation can now be used without including outline rows, if desired.
+  - The column header used for outline row ids is now configurable.
 
-- Both cataloging and validation can now be used without including outline rows, if desired.
+## [1.3.1] - 2017-01-11
 
-- The column header used for outline row ids is now configurable.
+### Fixed
+  - Added missing shebang line to the gem's executable file.
 
+## [1.3.0] - 2017-01-09
 
-### Version 1.3.1 / 2017-01-11
+### Added
+  - Added an executable file for the gem so that it can be used without having to use Rake tasks.
+  - A basic cataloging location and prefix is used by default so that specifying these values will not be necessary in many cases.
 
-- Bug fix: Added missing shebang line to the gem's executable file.
+### Fixed
+  - Replaced non-Ruby 1.8.x compatible code so that the gem now correctly works with older versions of Ruby.
 
+## [1.2.0] - 2016-10-02
 
-### Version 1.3.0 / 2017-01-09
+### Added
+  - The gem now declares version limits on all of its dependencies.
+  - Added support for the 1.x series of the 'cuke_modeler' gem.
 
-- Bug fix: Replaced non-Ruby 1.8.x compatible code so that the gem now correctly works with older versions of Ruby.
+## [1.1.0] - 2016-02-21
 
-- Added an executable file for the gem so that it can be used without having to use Rake tasks.
+### Added
+  - Upgraded to a more recent version of the 'cuke_modeler' gem and removed monkey patches that were
+    previously providing functionality that is now present in the newer version of 'cuke_modeler'
 
-- A basic cataloging location and prefix is used by default so that specifying these values will not be necessary in many cases.
-
-
-### Version 1.2.0 / 2016-10-02
-
-- The gem now declares version limits on all of its dependencies.
-  
-- Added support for the 1.x series of the 'cuke_modeler' gem.
-
-
-### Version 1.1.0 / 2016-02-21
-
-- Upgraded to a more recent version of the 'cuke_modeler' gem and removed monkey patches that were
-  previously providing functionality that is now present in the newer version of 'cuke_modeler'
-
-
-### Version 1.0.0 / 2015-10-05
+## [1.0.0] - 2015-10-05
 
 - Initial release
+
+
+[Unreleased]: https://github.com/enkessler/cuke_cataloger/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.4.1...v1.5.0
+[1.4.1]: https://github.com/enkessler/cuke_cataloger/compare/v1.4.0...v1.4.1
+[1.4.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.3.1...v1.4.0
+[1.3.1]: https://github.com/enkessler/cuke_cataloger/compare/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/enkessler/cuke_cataloger/compare/e2084caddc80886a3b6b8ff000f220e56ca92a05...v1.0.0
