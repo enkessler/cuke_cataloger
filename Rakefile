@@ -31,6 +31,16 @@ namespace 'cuke_cataloger' do
   Coveralls::RakeTask.new
   task :ci_build => [:smart_test, 'coveralls:push']
 
+  desc 'Check for outdated dependencies'
+  task :check_dependencies do
+    output = `bundle outdated  cuke_modeler cql rake thor --filter-major`
+    puts output
+
+    raise Rainbow('Some dependencies are out of date').yellow unless $?.success?
+
+    puts Rainbow('All dependencies up to date').green
+  end
+
   desc 'Check documentation with RDoc'
   task :check_documentation do
     output = `rdoc lib -C`
