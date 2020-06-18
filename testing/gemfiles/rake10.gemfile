@@ -19,6 +19,7 @@ if RUBY_VERSION =~ /^1\.8/
 elsif RUBY_VERSION =~ /^1\./
   gem 'cucumber', '< 2.0.0'
   gem 'mime-types', '< 3.0.0' # The 'mime-types' gem requires Ruby 2.x on/after this version
+  gem 'rainbow', '< 3.0' # The 'rainbow' gem requires Ruby 2.x on/after this version
 end
 
 if RUBY_VERSION =~ /^1\./
