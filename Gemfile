@@ -18,6 +18,7 @@ elsif RUBY_VERSION =~ /^1\./
   gem 'mime-types', '< 3.0.0' # The 'mime-types' gem requires Ruby 2.x on/after this version
   gem 'rainbow', '< 3.0' # The 'rainbow' gem requires Ruby 2.x on/after this version
   gem 'rake', '< 12.3.0' # The 'rake' gem requires Ruby 2.x on/after this version
+  gem 'rest-client', '< 2.0' # The 'rainbow' gem requires Ruby 2.x on/after this version
 end
 
 if RUBY_VERSION =~ /^1\./
