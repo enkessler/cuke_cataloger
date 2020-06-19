@@ -9,6 +9,14 @@ environment:
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
     - RUBY_VERSION: 23-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
+    - RUBY_VERSION: 24
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
+    - RUBY_VERSION: 24-x64
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
+    - RUBY_VERSION: 25
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
+    - RUBY_VERSION: 25-x64
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
 
     - RUBY_VERSION: 193
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
@@ -17,6 +25,14 @@ environment:
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
     - RUBY_VERSION: 23-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
+    - RUBY_VERSION: 24
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
+    - RUBY_VERSION: 24-x64
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
+    - RUBY_VERSION: 25
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
+    - RUBY_VERSION: 25-x64
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
 
     - RUBY_VERSION: 193
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
@@ -24,6 +40,14 @@ environment:
     - RUBY_VERSION: 23
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
     - RUBY_VERSION: 23-x64
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
+    - RUBY_VERSION: 24
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
+    - RUBY_VERSION: 24-x64
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
+    - RUBY_VERSION: 25
+      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
+    - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
 
     - RUBY_VERSION: 23
@@ -46,6 +70,14 @@ environment:
       BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
     - RUBY_VERSION: 23-x64
       BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
+    - RUBY_VERSION: 24
+      BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
+    - RUBY_VERSION: 24-x64
+      BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
+    - RUBY_VERSION: 25
+      BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
+    - RUBY_VERSION: 25-x64
+      BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
 
     - RUBY_VERSION: 193
       BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
@@ -54,6 +86,14 @@ environment:
       BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
     - RUBY_VERSION: 23-x64
       BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
+    - RUBY_VERSION: 24
+      BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
+    - RUBY_VERSION: 24-x64
+      BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
+    - RUBY_VERSION: 25
+      BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
+    - RUBY_VERSION: 25-x64
+      BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
 
     - RUBY_VERSION: 193
       BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
@@ -61,6 +101,14 @@ environment:
     - RUBY_VERSION: 23
       BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
     - RUBY_VERSION: 23-x64
+      BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
+    - RUBY_VERSION: 24
+      BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
+    - RUBY_VERSION: 24-x64
+      BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
+    - RUBY_VERSION: 25
+      BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
+    - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
 
 
