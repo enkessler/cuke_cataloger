@@ -29,4 +29,7 @@ if RUBY_VERSION =~ /^1\./
   gem 'term-ansicolor', '< 1.4' # The 'term-ansicolor' gem requires Ruby 2.x on/after this version
 end
 
-gem 'cuke_modeler', '< 3.0'
+# TODO: Upgrade to a Cucumber 4.x once it works completely
+gem 'cucumber', '2.2.0'
+
+gem 'cuke_modeler', '< 4.0'

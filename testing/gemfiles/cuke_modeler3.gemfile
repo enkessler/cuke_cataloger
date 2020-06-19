@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+gemspec :path => "../../"
+
+# TODO: Go back to using the newer releases once they work on JRuby
+gem 'cucumber', '2.2.0'
+
+# The version of CukeModeler being tested
+gem 'cuke_modeler', '~> 3.0'
