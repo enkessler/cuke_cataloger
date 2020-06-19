@@ -157,7 +157,7 @@ module CukeCataloger
           from features, scenarios, outlines, examples
         end.collect { |result| result['tags'] }.flatten
 
-        @existing_tags.collect! { |tag| tag.name } if Gem.loaded_specs['cuke_modeler'].version.version[/^1/]
+        @existing_tags.collect! { |tag| tag.name } unless cuke_modeler?(0)
       end
 
       test_id_tag = static_id_tag_for(test)
@@ -170,7 +170,7 @@ module CukeCataloger
     def check_for_multiple_test_id_tags(test)
       tags = test.tags
 
-      tags = tags.collect { |tag| tag.name } if Gem.loaded_specs['cuke_modeler'].version.version[/^1/]
+      tags = tags.collect { |tag| tag.name } unless cuke_modeler?(0)
 
       id_tags_found = tags.select { |tag| tag =~ @tag_pattern }
 
@@ -258,7 +258,7 @@ module CukeCataloger
 
       if id_index
         cell_value = row.cells[id_index]
-        cell_value = cell_value.value if Gem.loaded_specs['cuke_modeler'].version.version[/^1/]
+        cell_value = cell_value.value unless cuke_modeler?(0)
 
         cell_value != '' ? cell_value : nil
       end
@@ -343,7 +343,7 @@ module CukeCataloger
       File.open(file_path, 'w') { |file| file.print file_lines.join }
       @file_line_increases[file_path] += 1
 
-      if Gem.loaded_specs['cuke_modeler'].version.version[/^0/]
+      if cuke_modeler?(0)
         test.tags << tag
       else
         new_tag = CukeModeler::Tag.new
@@ -356,7 +356,7 @@ module CukeCataloger
       feature_file = test.get_ancestor(:feature_file)
       file_path = feature_file.path
       index_adjustment = @file_line_increases[file_path]
-      method_for_rows = Gem.loaded_specs['cuke_modeler'].version.version[/^0/] ? :row_elements : :rows
+      method_for_rows = cuke_modeler?(0) ? :row_elements : :rows
 
       test.examples.each do |example|
         unless has_id_parameter?(example, id_column_name)
@@ -375,7 +375,7 @@ module CukeCataloger
       feature_file = test.get_ancestor(:feature_file)
       file_path = feature_file.path
       index_adjustment = @file_line_increases[file_path]
-      method_for_rows = Gem.loaded_specs['cuke_modeler'].version.version[/^0/] ? :row_elements : :rows
+      method_for_rows = cuke_modeler?(0) ? :row_elements : :rows
 
       tag_index = fast_id_tag_for(test)[/\d+/]
 
@@ -433,7 +433,7 @@ module CukeCataloger
     def id_tag_for(thing)
       tags = thing.tags
 
-      tags = tags.collect { |tag| tag.name } unless Gem.loaded_specs['cuke_modeler'].version.version[/^0/]
+      tags = tags.collect { |tag| tag.name } unless cuke_modeler?(0)
 
       tags.select { |tag| tag =~ @tag_pattern }.first
     end
@@ -494,7 +494,7 @@ module CukeCataloger
     end
 
     def example_rows_for(example)
-      method_for_rows = Gem.loaded_specs['cuke_modeler'].version.version[/^0/] ? :row_elements : :rows
+      method_for_rows = cuke_modeler?(0) ? :row_elements : :rows
 
       rows = example.send(method_for_rows).dup
       rows.shift
@@ -503,8 +503,8 @@ module CukeCataloger
     end
 
     def add_to_results(item, issue = nil)
-      result = {:test => "#{item.get_ancestor(:feature_file).path}:#{item.source_line}", :object => item}
-      result.merge!({:problem => issue}) if issue
+      result = { :test => "#{item.get_ancestor(:feature_file).path}:#{item.source_line}", :object => item }
+      result.merge!({ :problem => issue }) if issue
 
       @results << result
     end
@@ -514,8 +514,8 @@ module CukeCataloger
       sub_ids = known_ids.select { |id| id =~ /^\d+-\d+$/ }
 
       max_primary_id = primary_ids.collect { |id| id.to_i }.max || 0
-      default_indexes = {:primary => max_primary_id + 1,
-                         :sub => {}}
+      default_indexes = { :primary => max_primary_id + 1,
+                          :sub => {} }
 
       sub_primaries = sub_ids.collect { |sub_id| sub_id[/^\d+/] }
 
@@ -587,7 +587,7 @@ module CukeCataloger
     def determine_highest_tag_line(test)
       return adjacent_tag_line(test) if test.tags.empty?
 
-      method_for_tag_models = Gem.loaded_specs['cuke_modeler'].version.version[/^0/] ? :tag_elements : :tags
+      method_for_tag_models = cuke_modeler?(0) ? :tag_elements : :tags
 
       test.send(method_for_tag_models).collect { |tag_element| tag_element.source_line }.min - 1
     end
@@ -595,13 +595,21 @@ module CukeCataloger
     def determine_lowest_tag_line(test)
       return adjacent_tag_line(test) if test.tags.empty?
 
-      method_for_tag_models = Gem.loaded_specs['cuke_modeler'].version.version[/^0/] ? :tag_elements : :tags
+      method_for_tag_models = cuke_modeler?(0) ? :tag_elements : :tags
 
       test.send(method_for_tag_models).collect { |tag_element| tag_element.source_line }.max
     end
 
     def adjacent_tag_line(test)
       (test.source_line - 1)
+    end
+
+    def cuke_modeler?(*versions)
+      versions.include?(cuke_modeler_major_version)
+    end
+
+    def cuke_modeler_major_version
+      Gem.loaded_specs['cuke_modeler'].version.version.match(/^(\d+)\./)[1].to_i
     end
 
   end
