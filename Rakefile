@@ -51,6 +51,19 @@ namespace 'cuke_cataloger' do
     puts Rainbow('All code documented').green
   end
 
+  desc 'Check that things look good before trying to release'
+  task :prerelease_check do
+    begin
+      Rake::Task['cuke_cataloger:smart_test'].invoke
+      Rake::Task['cuke_cataloger:check_documentation'].invoke
+    rescue => e
+      puts Rainbow("-----------------------\nSomething isn't right!").red
+      raise e
+    end
+
+    puts Rainbow("-----------------------\nAll is well. :)").green
+  end
+
 end
 
 
