@@ -22,11 +22,14 @@ elsif RUBY_VERSION =~ /^1\./
   gem 'mime-types', '< 3.0.0' # The 'mime-types' gem requires Ruby 2.x on/after this version
   gem 'rainbow', '< 3.0' # The 'rainbow' gem requires Ruby 2.x on/after this version
   gem 'rake', '< 12.3.0' # The 'rake' gem requires Ruby 2.x on/after this version
+else
+  # Have to use this version of Cucumber in order to avoid namespace problems introduced by the `cucumber-gherkin` gem
+  gem 'cucumber', '2.2.0'
 end
 
 if RUBY_VERSION =~ /^1\./
-  gem 'cuke_modeler', '< 3.0'  # The 'cuke_modeler' gem requires Ruby 2.x on/after this version
-  gem 'ffi', '< 1.9.15'  # The 'ffi' gem requires Ruby 2.x on/after this version
+  gem 'cuke_modeler', '< 3.0' # The 'cuke_modeler' gem requires Ruby 2.x on/after this version
+  gem 'ffi', '< 1.9.15' # The 'ffi' gem requires Ruby 2.x on/after this version
   gem 'tins', '< 1.7' # The 'tins' gem requires Ruby 2.x on/after this version
   gem 'json', '< 2.0' # The 'json' gem drops pre-Ruby 2.x support on/after this version
   gem 'term-ansicolor', '< 1.4' # The 'term-ansicolor' gem requires Ruby 2.x on/after this version
