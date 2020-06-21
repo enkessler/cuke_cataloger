@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Nothing yet...
+
+## [1.6.0] - 2020-06-21
+
 ### Added
  - Support added for more versions of the `cuke_modeler` gem
    - 3.x
@@ -17,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Support added for more versions of the `thor` gem
    - 1.x
 
-## [1.5.0] - 2017-09-09
+## [1.5.0] - 2018-09-09
 
 ### Added
   - The default cataloging prefix used by the Rake tasks is now also the default prefix used by the various object based methods.
@@ -64,7 +68,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial release
 
 
-[Unreleased]: https://github.com/enkessler/cuke_cataloger/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/enkessler/cuke_cataloger/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/enkessler/cuke_cataloger/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.3.1...v1.4.0
