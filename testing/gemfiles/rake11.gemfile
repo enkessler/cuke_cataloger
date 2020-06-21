@@ -8,7 +8,7 @@ end
 gemspec :path => "../../"
 
 
-# Rake 11.x does not work with Ruby 1.8.x
+# The version of Rake being tested
 gem 'rake', '~> 11.0'
 
 if RUBY_VERSION =~ /^1\./
@@ -23,5 +23,3 @@ if RUBY_VERSION =~ /^1\./
   gem 'term-ansicolor', '< 1.4' # The 'term-ansicolor' gem requires Ruby 2.x on/after this version
   gem 'unf_ext', '< 0.0.7.3' # The 'unf_ext' gem requires Ruby 2.x on/after this version
 end
-
-gem 'cuke_modeler', '< 2.0'

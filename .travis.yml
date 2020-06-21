@@ -37,6 +37,11 @@ matrix:
     # Rake 12.x does not support Ruby 1.8.7
   - rvm: 1.8.7
     gemfile: testing/gemfiles/rake12.gemfile
+    # Rake 13.x requires Ruby 2.2 or higher
+  - rvm: 1.8.7
+    gemfile: testing/gemfiles/rake13.gemfile
+  - rvm: 1.9.3
+    gemfile: testing/gemfiles/rake13.gemfile
 
 gemfile:
   - testing/gemfiles/cuke_modeler0.gemfile
@@ -46,6 +51,7 @@ gemfile:
   - testing/gemfiles/rake10.gemfile
   - testing/gemfiles/rake11.gemfile
   - testing/gemfiles/rake12.gemfile
+  - testing/gemfiles/rake13.gemfile
 
 before_install:
   - gem install bundler -v '< 2'

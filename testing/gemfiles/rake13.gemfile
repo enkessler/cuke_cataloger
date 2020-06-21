@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+gemspec :path => "../../"
+
+# The version of Rake being tested
+gem 'rake', '~> 13.0'
