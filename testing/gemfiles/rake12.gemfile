@@ -11,6 +11,7 @@ gemspec :path => "../../"
 # Rake 12.x does not work with Ruby 1.8.x
 if RUBY_VERSION =~ /^1\./
   gem 'cucumber', '< 2.0.0'
+  gem 'cuke_modeler', '< 3.0'  # The 'cuke_modeler' gem requires Ruby 2.x on/after this version
   gem 'ffi', '< 1.9.15' # The 'ffi' gem requires Ruby 2.x on/after this version
   gem 'rainbow', '< 3.0' # The 'rainbow' gem requires Ruby 2.x on/after this version
   gem 'tins', '< 1.7' # The 'tins' gem requires Ruby 2.x on/after this version
