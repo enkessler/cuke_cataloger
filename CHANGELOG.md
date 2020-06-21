@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Support added for more versions of the `rake` gem
    - 13.x
 
+ - Support added for more versions of the `thor` gem
+   - 1.x
+
 ## [1.5.0] - 2017-09-09
 
 ### Added

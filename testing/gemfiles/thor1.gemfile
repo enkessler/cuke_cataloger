@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+gemspec :path => "../../"
+
+# The Coveralls gem can't handle more recent versions of the SimpleCov gem
+gem 'simplecov', '<= 0.16.1'
+
+# The version of Thor being tested
+gem 'thor', '~> 1.0'
