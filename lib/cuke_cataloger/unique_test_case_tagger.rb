@@ -560,7 +560,6 @@ module CukeCataloger
 
     # Adds an id to the given value row (which has a column for an id but no value for it)
     def fill_in_row(file_lines, line_index, row, row_id, id_column_name)
-      old_row = file_lines[line_index] # todo - Dead line of code?
       sections = file_lines[line_index].split('|', -1)
 
       replacement_index = determine_row_id_cell_index(row, id_column_name)
