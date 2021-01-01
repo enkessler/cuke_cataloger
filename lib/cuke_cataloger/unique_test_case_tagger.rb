@@ -429,9 +429,13 @@ module CukeCataloger
     def id_tag_for(thing)
       tags = thing.tags
 
-      return tags.detect { |tag| tag.name.start_with?(@tag_prefix) }&.name unless cuke_modeler?(0)
+      return tags.detect { |tag| tag.start_with?(@tag_prefix) } if cuke_modeler?(0)
 
-      tags.detect { |tag| tag.start_with?(@tag_prefix) }
+      tag = tags.detect { |tag| tag.name.start_with?(@tag_prefix) }
+
+      return unless tag
+
+      tag.name
     end
 
     def test_id_for(test)
