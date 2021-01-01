@@ -7,6 +7,7 @@ here = File.dirname(__FILE__)
 require "#{here}/../../file_helper"
 
 require 'cuke_cataloger'
+require 'pry'
 
 
 RSpec.configure do |config|

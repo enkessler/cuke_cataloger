@@ -5,6 +5,7 @@ end
 
 
 require 'cuke_cataloger'
+require 'pry'
 
 here = File.dirname(__FILE__)
 require "#{here}/../../file_helper"

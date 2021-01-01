@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov', '< 1.0'
   spec.add_development_dependency 'coveralls', '< 1.0'
   spec.add_development_dependency 'rainbow', '< 4.0.0'
+  spec.add_development_dependency 'pry', '~> 0.13.1'
 end

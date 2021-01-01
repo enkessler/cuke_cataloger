@@ -11,6 +11,7 @@ Feature: Scan results return useful information
       Scenario:
         * a step
     """
+    And a tag prefix of "@test_case_"
     When the files are scanned
     Then the payload is a model object
 
@@ -26,5 +27,6 @@ Feature: Scan results return useful information
         | test_case_id | param 1 |
         | 7-1          | value 1 |
     """
+    And a tag prefix of "@test_case_"
     When the files are scanned
     Then the payload has a test and a test row
