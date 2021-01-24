@@ -198,6 +198,35 @@ describe 'UniqueTestCaseTagger, Integration' do
                                                                 "#{test_file}:8"])
     end
 
+    it 'only considers tags that match the prefix+number pattern' do
+      test_directory = CukeCataloger::FileHelper.create_directory
+      gherkin_text = 'Feature:
+
+                        @test_case_1
+                        Scenario:
+                          * a step
+
+                        # Extra characters at the beginning
+                        @not_test_case_2
+                        Scenario:
+                          * a step
+
+                        # Extra characters at the end
+                        @test_case_2_but_not_really
+                        Scenario:
+                          * a step
+
+                        @test_case_2
+                        Scenario:
+                          * a step'
+      test_file = CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => gherkin_text)
+
+      results = @tagger.scan_for_tagged_tests(test_directory)
+
+      expect(results.collect { |result| result[:test] }).to match_array(["#{test_file}:4",
+                                                                         "#{test_file}:18"])
+    end
+
   end
 
   describe 'tag indexing' do
