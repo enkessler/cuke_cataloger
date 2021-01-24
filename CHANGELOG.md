@@ -6,7 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+ - Added support for Ruby 3.x
+
+### Removed
+
+ - Removed support for Ruby 1.x. This gem only supports Ruby 2.0 and higher.
+
 ### Fixed
+
  - Test case IDs are no longer erroneously detected if a tag only partially matches the ID pattern. For example, the 
    gem would incorrectly identify `@test_case_123_plus_more` as an ID tag even though it was not one.
 

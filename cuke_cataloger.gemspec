@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '>= 2.0', '< 4.0'
+
   spec.add_runtime_dependency 'cuke_modeler', '>= 0.2', '< 4.0'
   spec.add_runtime_dependency 'cql', '>= 1.0.1', '< 2.0'
   spec.add_runtime_dependency 'rake', '< 14.0'
