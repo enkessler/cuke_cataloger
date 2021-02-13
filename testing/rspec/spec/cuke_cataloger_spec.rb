@@ -1,8 +1,8 @@
-require "#{__dir__}/spec_helper"
+require_relative '../../../environments/rspec_env'
 require 'rubygems/mock_gem_ui'
 
 
-describe 'the gem' do
+RSpec.describe 'the gem' do
 
   before(:all) do
     # Doing this as a one time hook instead of using `let` in order to reduce I/O time during testing.

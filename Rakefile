@@ -1,70 +1,17 @@
-require 'racatt'
-require 'coveralls/rake/task'
+require 'bundler/gem_tasks'
+require 'rake'
 require 'rainbow'
 
+Rainbow.enabled = true
 
-namespace 'cuke_cataloger' do
-
-  task :clear_coverage do
-    # Remove previous coverage results so that they don't get merged into the new results
-    code_coverage_directory = File.join(File.dirname(__FILE__), 'coverage')
-    FileUtils.remove_dir(code_coverage_directory, true) if File.exists?(code_coverage_directory)
-  end
-
-
-  Racatt.create_tasks
-
-  # Redefining the task from 'racatt' in order to clear the code coverage results
-  task :test_everything => :clear_coverage
+require_relative 'cuke_cataloger_project_settings'
+require_relative 'cuke_cataloger_helper'
+require_relative 'rakefiles/ci_tasks'
+require_relative 'rakefiles/documentation_tasks'
+require_relative 'rakefiles/other_tasks'
+require_relative 'rakefiles/release_tasks'
+require_relative 'rakefiles/reporting_tasks'
+require_relative 'rakefiles/testing_tasks'
 
 
-  desc 'Test the project'
-  task :smart_test do |t, args|
-    rspec_args = '--tag ~@wip --pattern testing/rspec/spec/**/*_spec.rb'
-    cucumber_args = 'testing/cucumber/features -r testing/cucumber/support -r testing/cucumber/step_definitions -f progress -t ~@wip'
-
-    Rake::Task['cuke_cataloger:test_everything'].invoke(rspec_args, cucumber_args)
-  end
-
-
-  # The task that CI will use
-  Coveralls::RakeTask.new
-  task :ci_build => [:smart_test, 'coveralls:push']
-
-  desc 'Check for outdated dependencies'
-  task :check_dependencies do
-    output = `bundle outdated  cuke_modeler cql rake thor --filter-major`
-    puts output
-
-    raise Rainbow('Some dependencies are out of date').yellow unless $?.success?
-
-    puts Rainbow('All dependencies up to date').green
-  end
-
-  desc 'Check documentation with RDoc'
-  task :check_documentation do
-    output = `rdoc lib -C`
-    puts output
-
-    raise Rainbow('Parts of the gem are undocumented').red unless output =~ /100.00% documented/
-
-    puts Rainbow('All code documented').green
-  end
-
-  desc 'Check that things look good before trying to release'
-  task :prerelease_check do
-    begin
-      Rake::Task['cuke_cataloger:smart_test'].invoke
-      Rake::Task['cuke_cataloger:check_documentation'].invoke
-    rescue => e
-      puts Rainbow("-----------------------\nSomething isn't right!").red
-      raise e
-    end
-
-    puts Rainbow("-----------------------\nAll is well. :)").green
-  end
-
-end
-
-
-task :default => 'cuke_cataloger:smart_test'
+task :default => 'cuke_cataloger:test_everything' # rubocop:disable Style/HashSyntax

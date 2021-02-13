@@ -1,14 +1,15 @@
+ENV['CUKE_CATALOGER_SIMPLECOV_COMMAND_NAME'] = 'cucumber_tests'
+
 require 'simplecov'
-SimpleCov.command_name('cuke_cataloger-cucumber')
+require_relative 'common_env'
 
+PROJECT_ROOT = "#{__dir__}/.."
+FIXTURE_DIRECTORY = "#{__dir__}/../testing/fixtures"
 
-require 'cuke_cataloger'
+require_relative '../testing/cucumber/step_definitions/action_steps'
+require_relative '../testing/cucumber/step_definitions/setup_steps'
+require_relative '../testing/cucumber/step_definitions/verification_steps'
 
-here = File.dirname(__FILE__)
-require "#{here}/../../file_helper"
-
-PROJECT_ROOT = "#{here}/../../.."
-FIXTURE_DIRECTORY = "#{here}/../../fixtures"
 
 Before do
   begin

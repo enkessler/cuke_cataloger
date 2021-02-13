@@ -25,11 +25,14 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rake', '< 14.0'
   spec.add_runtime_dependency 'thor', '< 2.0'
 
+  spec.add_development_dependency 'childprocess', '< 5.0'
+  spec.add_development_dependency 'ffi', '< 2.0' # This is an invisible dependency for the `childprocess` gem on Windows
   spec.add_development_dependency "bundler", '< 3'
   spec.add_development_dependency 'cucumber', '< 4.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'racatt', '~> 1.0'
   spec.add_development_dependency 'simplecov', '< 1.0'
   spec.add_development_dependency 'coveralls', '< 1.0'
   spec.add_development_dependency 'rainbow', '< 4.0.0'
+  spec.add_development_dependency 'rubocop', '<= 0.50.0' # RuboCop can not lint against Ruby 2.0 after this version
+  spec.add_development_dependency 'yard', '< 1.0'
 end

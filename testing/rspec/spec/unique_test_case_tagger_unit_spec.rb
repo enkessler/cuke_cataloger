@@ -1,7 +1,7 @@
-require "#{File.dirname(__FILE__)}/spec_helper"
+require_relative '../../../environments/rspec_env'
 
 
-describe 'UniqueTestCaseTagger, Unit' do
+RSpec.describe 'UniqueTestCaseTagger, Unit' do
 
   clazz = CukeCataloger::UniqueTestCaseTagger
 
