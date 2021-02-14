@@ -151,6 +151,14 @@ RSpec.describe 'the gem' do
       expect(@gemspec.files).to include(*lib_files)
     end
 
+    it 'includes all of the executable files' do
+      exe_files = Dir.chdir(@root_dir) do
+        Dir.glob('exe/**/*').reject { |file| File.directory?(file) }
+      end
+
+      expect(@gemspec.files).to include(*exe_files)
+    end
+
     it 'includes all of the documentation files' do
       feature_files = Dir.chdir(@root_dir) do
         Dir.glob('testing/cucumber/features/**/*').reject { |file| File.directory?(file) }

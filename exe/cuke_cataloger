@@ -4,7 +4,7 @@
 require 'thor'
 require 'cuke_cataloger'
 
-
+# The Command Line Interface for the gem
 class CLI < Thor
 
   desc 'catalog_test_cases', 'Catalog the test cases in LOCATION with an id based on PREFIX'
