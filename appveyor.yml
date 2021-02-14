@@ -105,6 +105,11 @@ environment:
       BUNDLE_GEMFILE: testing/gemfiles/thor1.gemfile
 
 
+# Allow Windows builds to use CRLF as expected by linting tools, etc.
+init:
+  - git config --global core.autocrlf true
+
+
 install:
   - set PATH=C:\Ruby%RUBY_VERSION%\bin;%PATH%
   - bundle install
@@ -117,4 +122,4 @@ before_test:
   - bundle -v
 
 test_script:
-  - bundle exec rake
+  - bundle exec rake cql:ci_build
