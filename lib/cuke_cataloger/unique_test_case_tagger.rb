@@ -396,10 +396,17 @@ module CukeCataloger
       end
     end
 
-
     # Slowest way to get the id tag. Will check the object every time.
     def current_id_tag_for(thing)
-      id_tag_for(thing)
+      tags = thing.tags
+
+      return tags.detect { |tag| tag =~ @tag_pattern } if cuke_modeler?(0)
+
+      tag = tags.detect { |tag| tag.name =~ @tag_pattern }
+
+      return unless tag
+
+      tag.name
     end
 
     # Faster way to get the id tag. Will skip checking the object if an id for it is already known.
@@ -427,14 +434,6 @@ module CukeCataloger
       @known_id_tags[id_key] = id
 
       id
-    end
-
-    def id_tag_for(thing)
-      tags = thing.tags
-
-      tags = tags.collect { |tag| tag.name } unless cuke_modeler?(0)
-
-      tags.select { |tag| tag =~ @tag_pattern }.first
     end
 
     def test_id_for(test)
