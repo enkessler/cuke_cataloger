@@ -3,13 +3,6 @@ version: '1.0.{build}'
 environment:
   matrix:
 
-    - RUBY_VERSION: 193
-      BUNDLE_GEMFILE: testing/gemfiles/cql1.gemfile
-      # AppVeyor does not have a 64-bit Ruby 1.9.3
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/cql1.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/cql1.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/cql1.gemfile
     - RUBY_VERSION: 24-x64
@@ -19,13 +12,6 @@ environment:
     - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/cql1.gemfile
 
-    - RUBY_VERSION: 193
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
-      # AppVeyor does not have a 64-bit Ruby 1.9.3
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
     - RUBY_VERSION: 24-x64
@@ -35,13 +21,6 @@ environment:
     - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler0.gemfile
 
-    - RUBY_VERSION: 193
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
-      # AppVeyor does not have a 64-bit Ruby 1.9.3
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
     - RUBY_VERSION: 24-x64
@@ -51,13 +30,6 @@ environment:
     - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler1.gemfile
 
-    - RUBY_VERSION: 193
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
-      # AppVeyor does not have a 64-bit Ruby 1.9.3
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
     - RUBY_VERSION: 24-x64
@@ -67,10 +39,6 @@ environment:
     - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler2.gemfile
 
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler3.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler3.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler3.gemfile
     - RUBY_VERSION: 24-x64
@@ -80,13 +48,6 @@ environment:
     - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/cuke_modeler3.gemfile
 
-    - RUBY_VERSION: 193
-      BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
-      # AppVeyor does not have a 64-bit Ruby 1.9.3
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
     - RUBY_VERSION: 24-x64
@@ -96,13 +57,6 @@ environment:
     - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/rake10.gemfile
 
-    - RUBY_VERSION: 193
-      BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
-      # AppVeyor does not have a 64-bit Ruby 1.9.3
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
     - RUBY_VERSION: 24-x64
@@ -112,13 +66,6 @@ environment:
     - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/rake11.gemfile
 
-    - RUBY_VERSION: 193
-      BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
-      # AppVeyor does not have a 64-bit Ruby 1.9.3
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
     - RUBY_VERSION: 24-x64
@@ -129,10 +76,6 @@ environment:
       BUNDLE_GEMFILE: testing/gemfiles/rake12.gemfile
 
     # Rake 13.x requires Ruby 2.2 or higher
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/rake13.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/rake13.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/rake13.gemfile
     - RUBY_VERSION: 24-x64
@@ -142,13 +85,6 @@ environment:
     - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/rake13.gemfile
 
-    - RUBY_VERSION: 193
-      BUNDLE_GEMFILE: testing/gemfiles/thor0.gemfile
-      # AppVeyor does not have a 64-bit Ruby 1.9.3
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/thor0.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/thor0.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/thor0.gemfile
     - RUBY_VERSION: 24-x64
@@ -159,10 +95,6 @@ environment:
       BUNDLE_GEMFILE: testing/gemfiles/thor0.gemfile
 
     # Thor 1.x requires Ruby 2.0 or higher
-    - RUBY_VERSION: 23
-      BUNDLE_GEMFILE: testing/gemfiles/thor1.gemfile
-    - RUBY_VERSION: 23-x64
-      BUNDLE_GEMFILE: testing/gemfiles/thor1.gemfile
     - RUBY_VERSION: 24
       BUNDLE_GEMFILE: testing/gemfiles/thor1.gemfile
     - RUBY_VERSION: 24-x64
@@ -171,6 +103,11 @@ environment:
       BUNDLE_GEMFILE: testing/gemfiles/thor1.gemfile
     - RUBY_VERSION: 25-x64
       BUNDLE_GEMFILE: testing/gemfiles/thor1.gemfile
+
+
+# Allow Windows builds to use CRLF as expected by linting tools, etc.
+init:
+  - git config --global core.autocrlf true
 
 
 install:
@@ -185,4 +122,4 @@ before_test:
   - bundle -v
 
 test_script:
-  - bundle exec rake
+  - bundle exec rake cuke_cataloger:ci_build

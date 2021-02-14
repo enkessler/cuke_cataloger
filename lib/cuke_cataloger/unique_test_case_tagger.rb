@@ -107,10 +107,9 @@ module CukeCataloger
 
 
     def set_id_tag(tag_prefix)
-      # todo - should include the '@' in this or anchor the pattern to the beginning of the tag
       @tag_prefix = tag_prefix
       #todo -should probably escape these characters
-      @tag_pattern = Regexp.new("#{@tag_prefix}\\d+")
+      @tag_pattern = Regexp.new("^#{@tag_prefix}\\d+$")
     end
 
     def set_test_suite_model(feature_directory)

@@ -1,5 +1,4 @@
-# TODO - Include fewer files in the gem (i.e. dont include the tests). See other projects for examples.
-# todo - Add better test coverage (rake tasks, cli, etc.)
-# todo - Use features as documentation
-# todo - Use the cuketagger gem for tagging
-# todo - document functionality/add functionality for changing added tag location/column location
+# TODO: Add better test coverage (rake tasks, cli, etc.)
+# TODO: Use features as documentation
+# TODO: Use the cuketagger gem for tagging
+# TODO: document functionality/add functionality for changing added tag location/column location

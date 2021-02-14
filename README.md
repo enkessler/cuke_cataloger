@@ -4,15 +4,15 @@ Basic stuff:
 [![Downloads](https://img.shields.io/gem/dt/cuke_cataloger.svg)](https://rubygems.org/gems/cuke_cataloger)
 
 User stuff:
-[![Cucumber Docs](http://img.shields.io/badge/Documentation-Features-green.svg)](https://jam.cucumber.io/p/98c11df9-4a7b-4b86-9700-7833ac93aa3e/cuke_cataloger/documents/branch/master/)
+[![Cucumber Docs](http://img.shields.io/badge/Documentation-Features-green.svg)](https://github.com/enkessler/cuke_cataloger/tree/master/testing/cucumber/features)
 [![Yard Docs](http://img.shields.io/badge/Documentation-API-blue.svg)](https://www.rubydoc.info/gems/cuke_cataloger)
 
 Developer stuff:
-[![Build Status](https://travis-ci.org/enkessler/cuke_cataloger.svg)](https://travis-ci.org/enkessler/cuke_cataloger)
-[![Build status](https://ci.appveyor.com/api/projects/status/9a7gw3r5ddfugtf0?svg=true)](https://ci.appveyor.com/project/enkessler/cuke-cataloger)
-[![Coverage Status](https://coveralls.io/repos/github/enkessler/cuke_cataloger/badge.svg)](https://coveralls.io/github/enkessler/cuke_cataloger)
+[![Build Status](https://travis-ci.org/enkessler/cuke_cataloger.svg?branch=master)](https://travis-ci.org/enkessler/cuke_cataloger)
+[![Build status](https://ci.appveyor.com/api/projects/status/9a7gw3r5ddfugtf0/branch/master?svg=true)](https://ci.appveyor.com/project/enkessler/cuke-cataloger)
+[![Coverage Status](https://coveralls.io/repos/github/enkessler/cuke_cataloger/badge.svg?branch=master)](https://coveralls.io/github/enkessler/cuke_cataloger?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/662f0e7aa69bf9725515/maintainability)](https://codeclimate.com/github/enkessler/cuke_cataloger/maintainability)
-[![Inline docs](http://inch-ci.org/github/enkessler/cuke_cataloger.svg)](https://inch-ci.org/github/enkessler/cuke_cataloger)
+[![Inline docs](http://inch-ci.org/github/enkessler/cuke_cataloger.svg?branch=master)](https://inch-ci.org/github/enkessler/cuke_cataloger)
 
 
 ---
@@ -164,11 +164,12 @@ By default, the cataloging and validation process uses `test_case_id` as the col
 
 `Rake::Task['validate_tests'].invoke('./features','@test_case_',nil, true, 'my_special_column_id')  # 5th argument is the id column name`
 
+For more information and usage examples, see the documentation [here](https://github.com/enkessler/cuke_cataloger/tree/master/testing/cucumber/features).
 
-## Contributing
+## Development and Contributing
 
-1. Fork it `http://github.com/<my-github-username>/cuke_cataloger/fork`
-2. Create your feature branch `git checkout -b my-new-feature`
-3. Commit your changes `git commit -am 'Add some feature'`
-4. Push to the branch `git push origin my-new-feature`
-5. Create new Pull Request
+See [CONTRIBUTING.md](https://github.com/enkessler/cuke_cataloger/blob/master/CONTRIBUTING.md)
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

@@ -1,0 +1,14 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.0
+
+
+# Cops that are being modified because whitespace helps with readability
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
+
+
+# More readability
+Naming/VariableNumber:
+  EnforcedStyle: snake_case

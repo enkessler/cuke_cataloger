@@ -58,7 +58,7 @@ And(/^the tag location is unspecified$/) do
 end
 
 Given(/^the cuke_cataloger executable is available$/) do
-  @executable_directory = "#{PROJECT_ROOT}/bin"
+  @executable_directory = "#{PROJECT_ROOT}/exe"
 end
 
 And(/^there are test cases in the "([^"]*)" directory that have not been cataloged with "([^"]*)"$/) do |target_directory, prefix|

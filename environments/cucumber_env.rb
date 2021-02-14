@@ -1,17 +1,15 @@
-unless RUBY_VERSION.to_s < '1.9.0'
-  require 'simplecov'
-  SimpleCov.command_name('cuke_cataloger-cucumber')
-end
+ENV['CUKE_CATALOGER_SIMPLECOV_COMMAND_NAME'] ||= 'cucumber_tests'
 
+require 'simplecov'
+require_relative 'common_env'
 
-require 'cuke_cataloger'
-require 'pry'
+PROJECT_ROOT = "#{__dir__}/.."
+FIXTURE_DIRECTORY = "#{__dir__}/../testing/fixtures"
 
-here = File.dirname(__FILE__)
-require "#{here}/../../file_helper"
+require_relative '../testing/cucumber/step_definitions/action_steps'
+require_relative '../testing/cucumber/step_definitions/setup_steps'
+require_relative '../testing/cucumber/step_definitions/verification_steps'
 
-PROJECT_ROOT = "#{here}/../../.."
-FIXTURE_DIRECTORY = "#{here}/../../fixtures"
 
 Before do
   begin

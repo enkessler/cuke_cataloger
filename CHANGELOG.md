@@ -6,7 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Nothing yet...
+### Added
+
+ - Added support for Ruby 3.x
+
+### Removed
+
+  - Removed support for some older versions of the gem's dependencies:
+    - Ruby 1.x
+    - Rake 0.x
+
+### Fixed
+
+ - Test case IDs are no longer erroneously detected if a tag only partially matches the ID pattern. For example, the 
+   gem would incorrectly identify `@test_case_123_plus_more` as an ID tag even though it was not one.
+
 
 ## [1.6.0] - 2020-06-21
 
@@ -24,7 +38,8 @@ Nothing yet...
 ## [1.5.0] - 2018-09-09
 
 ### Added
-  - The default cataloging prefix used by the Rake tasks is now also the default prefix used by the various object based methods.
+  - The default cataloging prefix used by the Rake tasks is now also the default prefix used by the various object 
+    based methods.
 
 ## [1.4.1] - 2017-07-09
 
@@ -46,7 +61,8 @@ Nothing yet...
 
 ### Added
   - Added an executable file for the gem so that it can be used without having to use Rake tasks.
-  - A basic cataloging location and prefix is used by default so that specifying these values will not be necessary in many cases.
+  - A basic cataloging location and prefix is used by default so that specifying these values will not be necessary in 
+    many cases.
 
 ### Fixed
   - Replaced non-Ruby 1.8.x compatible code so that the gem now correctly works with older versions of Ruby.

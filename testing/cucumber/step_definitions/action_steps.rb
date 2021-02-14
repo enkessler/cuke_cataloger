@@ -22,7 +22,10 @@ When(/^the files are scanned$/) do
   @directory = CukeModeler::Directory.new(@test_directory)
   @exception_raised = false
 
-  @test_results = CukeCataloger::UniqueTestCaseTagger.new.scan_for_tagged_tests(@directory.path, @tag_prefix)
+  # Getting rid of any parameter arguments that the test didn't bother to use
+  args = [@directory.path, @tag_prefix].compact
+
+  @test_results = CukeCataloger::UniqueTestCaseTagger.new.scan_for_tagged_tests(*args)
 end
 
 When(/^the existing ids are determined$/) do

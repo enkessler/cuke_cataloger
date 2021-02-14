@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-
 gemspec :path => "../../"
 
 # TODO: Go back to using the newer releases once they work on JRuby
