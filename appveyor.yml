@@ -122,4 +122,4 @@ before_test:
   - bundle -v
 
 test_script:
-  - bundle exec rake cql:ci_build
+  - bundle exec rake cuke_cataloger:ci_build
