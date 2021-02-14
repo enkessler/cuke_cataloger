@@ -1,4 +1,4 @@
-ENV['CUKE_CATALOGER_SIMPLECOV_COMMAND_NAME'] = 'cucumber_tests'
+ENV['CUKE_CATALOGER_SIMPLECOV_COMMAND_NAME'] ||= 'cucumber_tests'
 
 require 'simplecov'
 require_relative 'common_env'
