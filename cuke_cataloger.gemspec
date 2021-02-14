@@ -12,17 +12,30 @@ Gem::Specification.new do |spec|
   spec.description   = 'Scans existing Cucumber tests and updates them to include an id tag that is unique for the test suite.'
   spec.homepage      = 'https://github.com/enkessler/cuke_cataloger'
   spec.license       = 'MIT'
+  spec.metadata      = {
+    'bug_tracker_uri'   => 'https://github.com/enkessler/cuke_cataloger/issues',
+    'changelog_uri'     => 'https://github.com/enkessler/cuke_cataloger/blob/master/CHANGELOG.md',
+    'documentation_uri' => 'https://www.rubydoc.info/gems/cuke_cataloger',
+    'homepage_uri'      => 'https://github.com/enkessler/cuke_cataloger',
+    'source_code_uri'   => 'https://github.com/enkessler/cuke_cataloger'
+  }
 
-  spec.files         = `git ls-files -z`.split("\x0")
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  spec.files = Dir.chdir(File.expand_path('', __dir__)) do
+    source_controlled_files = `git ls-files -z`.split("\x0")
+    source_controlled_files.keep_if { |file| file =~ %r{^(lib|testing/cucumber/features|bin)} }
+    source_controlled_files + ['README.md', 'LICENSE.txt', 'CHANGELOG.md', 'cuke_cataloger.gemspec']
+  end
+
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = '>= 2.0', '< 4.0'
 
   spec.add_runtime_dependency 'cuke_modeler', '>= 0.2', '< 4.0'
   spec.add_runtime_dependency 'cql', '>= 1.0.1', '< 2.0'
-  spec.add_runtime_dependency 'rake', '< 14.0'
+  spec.add_runtime_dependency 'rake', '>=10.0', '< 14.0'
   spec.add_runtime_dependency 'thor', '< 2.0'
 
   spec.add_development_dependency 'childprocess', '< 5.0'

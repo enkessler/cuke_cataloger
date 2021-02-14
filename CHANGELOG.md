@@ -12,7 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
- - Removed support for Ruby 1.x. This gem only supports Ruby 2.0 and higher.
+  - Removed support for some older versions of the gem's dependencies:
+    - Ruby 1.x
+    - Rake 0.x
 
 ### Fixed
 

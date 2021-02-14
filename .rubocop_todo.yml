@@ -10,6 +10,9 @@
 Lint/UnneededDisable:
   Enabled: false
 
+Naming/VariableNumber:
+  Exclude:
+    - 'lib/**/*'
 
 # Offense count: 1
 # Cop supports --auto-correct.

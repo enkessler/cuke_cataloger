@@ -2,3 +2,10 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   TargetRubyVersion: 2.0
+
+
+
+
+# More readability
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
