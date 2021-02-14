@@ -31,7 +31,7 @@ matrix:
       gemfile: testing/gemfiles/cuke_modeler3.gemfile
       # Rake 13.x requires at least Ruby 2.2
     - rvm: 2.0
-      gemfile: testing/gemfiles/cuke_modeler3.gemfile
+      gemfile: testing/gemfiles/rake13.gemfile
 
 gemfile:
   - testing/gemfiles/cql1.gemfile
