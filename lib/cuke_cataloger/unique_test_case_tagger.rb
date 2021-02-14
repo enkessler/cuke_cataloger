@@ -428,9 +428,9 @@ module CukeCataloger
     def id_tag_for(thing)
       tags = thing.tags
 
-      return tags.detect { |tag| tag.start_with?(@tag_prefix) } if cuke_modeler?(0)
+      return tags.detect { |tag| tag =~ @tag_pattern } if cuke_modeler?(0)
 
-      tag = tags.detect { |tag| tag.name.start_with?(@tag_prefix) }
+      tag = tags.detect { |tag| tag.name =~ @tag_pattern }
 
       return unless tag
 
