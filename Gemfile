@@ -10,7 +10,7 @@ gem 'simplecov', '<= 0.16.1'
 gem 'cucumber', '2.2.0'
 
 # Generally, develop against the most recent supported version of stuff
-gem 'rake', '~> 13.0'
-gem 'thor', '~> 1.0'
 gem 'cql', '~> 1.0'
 gem 'cuke_modeler', '~> 3.0'
+gem 'rake', '~> 13.0'
+gem 'thor', '~> 1.0'

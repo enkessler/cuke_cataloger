@@ -1,15 +1,15 @@
-# coding: utf-8
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'cuke_cataloger/version'
 
-Gem::Specification.new do |spec|
+Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength - Gemspecs inherently have a lot of lines
   spec.name          = 'cuke_cataloger'
   spec.version       = CukeCataloger::VERSION
   spec.authors       = ['Eric Kessler']
   spec.email         = ['morrow748@gmail.com']
   spec.summary       = 'A tool to give every Cucumber test a unique id'
-  spec.description   = 'Scans existing Cucumber tests and updates them to include an id tag that is unique for the test suite.'
+  spec.description   = ['Scans existing Cucumber tests and updates them to include an id tag that is unique for the ',
+                        'test suite.'].join
   spec.homepage      = 'https://github.com/enkessler/cuke_cataloger'
   spec.license       = 'MIT'
   spec.metadata      = {
@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'childprocess', '< 5.0'
   spec.add_development_dependency 'ffi', '< 2.0' # This is an invisible dependency for the `childprocess` gem on Windows
-  spec.add_development_dependency "bundler", '< 3'
+  spec.add_development_dependency 'bundler', '< 3'
   spec.add_development_dependency 'cucumber', '< 4.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'simplecov', '< 1.0'

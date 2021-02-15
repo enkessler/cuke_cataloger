@@ -6,27 +6,14 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-
-Lint/UnneededDisable:
-  Enabled: false
+Style/HashSyntax:
+  Exclude:
+    - 'lib/**/*'
+    - 'exe/**/*'
 
 Naming/VariableNumber:
   Exclude:
     - 'lib/**/*'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: Include, TreatCommentsAsGroupSeparators.
-# Include: **/Gemfile, **/gems.rb
-Bundler/OrderedGems:
-  Exclude:
-    - 'Gemfile'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Layout/AlignArray:
-  Exclude:
-    - 'rakefiles/other_tasks.rb'
 
 # Offense count: 10
 # Cop supports --auto-correct.
@@ -38,35 +25,15 @@ Layout/CaseIndentation:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Layout/EmptyLineAfterMagicComment:
-  Exclude:
-    - 'cuke_cataloger.gemspec'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: AllowAdjacentOneLineDefs, NumberOfEmptyLines.
 Layout/EmptyLineBetweenDefs:
   Exclude:
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
 
-# Offense count: 42
-# Cop supports --auto-correct.
-Layout/EmptyLines:
-  Enabled: false
-
-# Offense count: 31
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: empty_lines, no_empty_lines
-Layout/EmptyLinesAroundBlockBody:
-  Exclude:
-    - 'environments/rspec_env.rb'
-    - 'rakefiles/ci_tasks.rb'
-    - 'rakefiles/documentation_tasks.rb'
-    - 'rakefiles/other_tasks.rb'
-    - 'rakefiles/release_tasks.rb'
-    - 'rakefiles/reporting_tasks.rb'
-    - 'rakefiles/testing_tasks.rb'
+## Offense count: 42
+## Cop supports --auto-correct.
+#Layout/EmptyLines:
+#  Enabled: false
 
 # Offense count: 8
 # Cop supports --auto-correct.
@@ -74,7 +41,6 @@ Layout/EmptyLinesAroundBlockBody:
 # SupportedStyles: empty_lines, empty_lines_except_namespace, empty_lines_special, no_empty_lines
 Layout/EmptyLinesAroundClassBody:
   Exclude:
-    - 'bin/cuke_cataloger'
     - 'lib/cuke_cataloger/formatters/text_report_formatter.rb'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
 
@@ -90,7 +56,6 @@ Layout/EmptyLinesAroundMethodBody:
 # SupportedStyles: empty_lines, empty_lines_except_namespace, empty_lines_special, no_empty_lines
 Layout/EmptyLinesAroundModuleBody:
   Exclude:
-    - 'cuke_cataloger_helper.rb'
     - 'lib/cuke_cataloger/formatters/text_report_formatter.rb'
     - 'lib/cuke_cataloger/rake_tasks.rb'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
@@ -107,11 +72,6 @@ Layout/ExtraSpacing:
 Layout/LeadingCommentSpace:
   Exclude:
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-
-# Offense count: 2
-Lint/RescueWithoutErrorClass:
-  Exclude:
-    - 'environments/cucumber_env.rb'
 
 # Offense count: 1
 Lint/ShadowingOuterLocalVariable:
@@ -138,36 +98,44 @@ Lint/UselessAssignment:
 
 # Offense count: 12
 Metrics/AbcSize:
-  Max: 37
+  Exclude:
+    - 'lib/**/*'
+    - 'exe/**/*'
 
-# Offense count: 8
-# Configuration parameters: CountComments, ExcludedMethods.
-Metrics/BlockLength:
-  Max: 187
+## Offense count: 8
+## Configuration parameters: CountComments, ExcludedMethods.
+#Metrics/BlockLength:
+#  Max: 187
 
 # Offense count: 1
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
-  Max: 435
+  Exclude:
+    - 'lib/**/*'
 
 # Offense count: 2
 Metrics/CyclomaticComplexity:
-  Max: 12
+  Exclude:
+    - 'lib/**/*'
 
 # Offense count: 148
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 153
+  Exclude:
+    - 'lib/**/*'
+    - 'exe/**/*'
 
 # Offense count: 10
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
-  Max: 28
+  Exclude:
+    - 'lib/**/*'
 
 # Offense count: 1
 Metrics/PerceivedComplexity:
-  Max: 13
+  Exclude:
+    - 'lib/**/*'
 
 # Offense count: 2
 Naming/AccessorMethodName:
@@ -206,7 +174,6 @@ Performance/RedundantMerge:
 # IgnoredMethods: lambda, proc, it
 Style/BlockDelimiters:
   Exclude:
-    - 'environments/cucumber_env.rb'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
 
 # Offense count: 5
@@ -228,7 +195,6 @@ Style/CommentAnnotation:
 # Offense count: 5
 Style/Documentation:
   Exclude:
-    - 'bin/cuke_cataloger'
     - 'lib/cuke_cataloger.rb'
     - 'lib/cuke_cataloger/rake_tasks.rb'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
@@ -243,14 +209,6 @@ Style/DoubleNegation:
 Style/EmptyCaseCondition:
   Exclude:
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, AutoCorrectEncodingComment.
-# SupportedStyles: when_needed, always, never
-Style/Encoding:
-  Exclude:
-    - 'cuke_cataloger.gemspec'
 
 # Offense count: 5
 # Configuration parameters: MinBodyLength.
@@ -272,7 +230,6 @@ Style/MultilineBlockChain:
 # Cop supports --auto-correct.
 Style/MutableConstant:
   Exclude:
-    - 'environments/cucumber_env.rb'
     - 'lib/cuke_cataloger/version.rb'
 
 # Offense count: 6
@@ -310,8 +267,6 @@ Style/RedundantSelf:
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
   Exclude:
-    - 'cuke_cataloger.gemspec'
-    - 'environments/cucumber_env.rb'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
 
 # Offense count: 6

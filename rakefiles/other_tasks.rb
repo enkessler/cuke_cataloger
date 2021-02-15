@@ -1,13 +1,13 @@
-namespace 'cuke_cataloger' do
+namespace 'cuke_cataloger' do # rubocop:disable Metrics/BlockLength - Namespaces inherently have a lot of lines
 
   desc 'Generate a Rubocop report for the project'
   task :rubocop do
     puts Rainbow('Checking for code style violations...').cyan
 
     completed_process = CukeCataloger::CukeCatalogerHelper.run_command(['bundle', 'exec', 'rubocop',
-                                                    '--format', 'fuubar',
-                                                    '--format', 'html', '--out', "#{ENV['CUKE_CATALOGER_REPORT_FOLDER']}/rubocop.html", # rubocop:disable Metrics/LineLength
-                                                    '-S', '-D'])
+                                                                        '--format', 'fuubar',
+                                                                        '--format', 'html', '--out', "#{ENV['CUKE_CATALOGER_REPORT_FOLDER']}/rubocop.html", # rubocop:disable Metrics/LineLength
+                                                                        '-S', '-D'])
 
     raise(Rainbow('RuboCop found violations').red) unless completed_process.exit_code.zero?
 
