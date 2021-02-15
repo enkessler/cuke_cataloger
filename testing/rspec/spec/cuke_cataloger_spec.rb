@@ -6,9 +6,7 @@ RSpec.describe 'the gem' do
 
   let(:lib_folder) { "#{@root_dir}/lib" }
   let(:features_folder) { "#{@root_dir}/testing/cucumber/features" }
-
-  # TODO: switch this to the 'exe' folder
-  let(:exe_folder) { "#{@root_dir}/bin" }
+  let(:exe_folder) { "#{@root_dir}/exe" }
 
   before(:all) do
     @root_dir = "#{__dir__}/../../.."
