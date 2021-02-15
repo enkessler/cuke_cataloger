@@ -156,7 +156,7 @@ module CukeCataloger
           from features, scenarios, outlines, examples
         end.collect { |result| result['tags'] }.flatten
 
-        @existing_tags.collect! { |tag| tag.name } unless cuke_modeler?(0)
+        @existing_tags.map!(&:name)
       end
 
       test_id_tag = static_id_tag_for(test)
@@ -167,9 +167,7 @@ module CukeCataloger
     end
 
     def check_for_multiple_test_id_tags(test)
-      tags = test.tags
-
-      tags = tags.collect { |tag| tag.name } unless cuke_modeler?(0)
+      tags = test.tags.map(&:name)
 
       id_tags_found = tags.select { |tag| tag =~ @tag_pattern }
 
@@ -256,8 +254,7 @@ module CukeCataloger
       id_index = determine_row_id_cell_index(row, id_column_name)
 
       if id_index
-        cell_value = row.cells[id_index]
-        cell_value = cell_value.value unless cuke_modeler?(0)
+        cell_value = row.cells[id_index].value
 
         cell_value != '' ? cell_value : nil
       end
@@ -342,24 +339,19 @@ module CukeCataloger
       File.open(file_path, 'w') { |file| file.print file_lines.join }
       @file_line_increases[file_path] += 1
 
-      if cuke_modeler?(0)
-        test.tags << tag
-      else
-        new_tag = CukeModeler::Tag.new
-        new_tag.name = tag
-        test.tags << new_tag
-      end
+      new_tag = CukeModeler::Tag.new
+      new_tag.name = tag
+      test.tags << new_tag
     end
 
     def update_parameters_if_needed(test, id_column_name)
       feature_file = test.get_ancestor(:feature_file)
       file_path = feature_file.path
       index_adjustment = @file_line_increases[file_path]
-      method_for_rows = cuke_modeler?(0) ? :row_elements : :rows
 
       test.examples.each do |example|
         unless has_id_parameter?(example, id_column_name)
-          parameter_line_index = (example.send(method_for_rows).first.source_line - 1) + index_adjustment
+          parameter_line_index = (example.rows.first.source_line - 1) + index_adjustment
 
           file_lines = File.readlines(file_path)
 
@@ -374,14 +366,13 @@ module CukeCataloger
       feature_file = test.get_ancestor(:feature_file)
       file_path = feature_file.path
       index_adjustment = @file_line_increases[file_path]
-      method_for_rows = cuke_modeler?(0) ? :row_elements : :rows
 
       tag_index = fast_id_tag_for(test)[/\d+/]
 
       file_lines = File.readlines(file_path)
 
       test.examples.each do |example|
-        example.send(method_for_rows)[1..(example.send(method_for_rows).count - 1)].each do |row|
+        example.rows[1..(example.rows.count - 1)].each do |row|
           unless has_row_id?(row, id_column_name)
             row_id = "#{tag_index}-#{sub_id}".ljust(parameter_spacing(example, id_column_name))
 
@@ -399,14 +390,11 @@ module CukeCataloger
     # Slowest way to get the id tag. Will check the object every time.
     def current_id_tag_for(thing)
       tags = thing.tags
+      id_tag = tags.detect { |tag| tag.name =~ @tag_pattern }
 
-      return tags.detect { |tag| tag =~ @tag_pattern } if cuke_modeler?(0)
+      return unless id_tag
 
-      tag = tags.detect { |tag| tag.name =~ @tag_pattern }
-
-      return unless tag
-
-      tag.name
+      id_tag.name
     end
 
     # Faster way to get the id tag. Will skip checking the object if an id for it is already known.
@@ -492,9 +480,7 @@ module CukeCataloger
     end
 
     def example_rows_for(example)
-      method_for_rows = cuke_modeler?(0) ? :row_elements : :rows
-
-      rows = example.send(method_for_rows).dup
+      rows = example.rows.dup
       rows.shift
 
       rows
@@ -584,17 +570,13 @@ module CukeCataloger
     def determine_highest_tag_line(test)
       return adjacent_tag_line(test) if test.tags.empty?
 
-      method_for_tag_models = cuke_modeler?(0) ? :tag_elements : :tags
-
-      test.send(method_for_tag_models).collect { |tag_element| tag_element.source_line }.min - 1
+      test.tags.map(&:source_line).min - 1
     end
 
     def determine_lowest_tag_line(test)
       return adjacent_tag_line(test) if test.tags.empty?
 
-      method_for_tag_models = cuke_modeler?(0) ? :tag_elements : :tags
-
-      test.send(method_for_tag_models).collect { |tag_element| tag_element.source_line }.max
+      test.tags.map(&:source_line).max
     end
 
     def adjacent_tag_line(test)

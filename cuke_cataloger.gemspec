@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.0', '< 4.0'
 
-  spec.add_runtime_dependency 'cuke_modeler', '>= 0.2', '< 4.0'
+  spec.add_runtime_dependency 'cuke_modeler', '>= 1.0', '< 4.0'
   spec.add_runtime_dependency 'cql', '>= 1.0.1', '< 2.0'
   spec.add_runtime_dependency 'rake', '>=10.0', '< 14.0'
   spec.add_runtime_dependency 'thor', '< 2.0'

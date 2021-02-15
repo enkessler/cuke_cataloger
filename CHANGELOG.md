@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Removed support for some older versions of the gem's dependencies:
     - Ruby 1.x
     - Rake 0.x
+    - CukeModeler 0.x
 
 ### Fixed
 

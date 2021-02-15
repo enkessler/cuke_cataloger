@@ -206,7 +206,7 @@ RSpec.describe 'the gem' do
       expect(ruby_version_limits).to match_array(['>=2.0', '<4.0'])
     end
 
-    it 'works with CukeModeler 0-3' do
+    it 'works with CukeModeler 1-3' do
       cuke_modeler_version_limits = @gemspec.dependencies
                                             .find do |dependency|
                                               (dependency.type == :runtime) &&
@@ -214,7 +214,7 @@ RSpec.describe 'the gem' do
                                             end
                                             .requirement.requirements.map(&:join)
 
-      expect(cuke_modeler_version_limits).to match_array(['>=0.2', '<4.0'])
+      expect(cuke_modeler_version_limits).to match_array(['>=1.0', '<4.0'])
     end
 
     it 'works with CQL 1' do
