@@ -2,6 +2,8 @@ require 'tmpdir'
 
 
 module CukeCataloger
+
+  # A helper module that generates files and directories for use in testing
   module FileHelper
 
     class << self
@@ -10,7 +12,10 @@ module CukeCataloger
         options[:text] ||= 'Feature:'
         options[:name] ||= 'test_file'
 
-        create_file(:text => options[:text], :name => options[:name], :extension => '.feature', :directory => options[:directory])
+        create_file(text: options[:text],
+                    name: options[:name],
+                    extension: '.feature',
+                    directory: options[:directory])
       end
 
       def create_file(options = {})
@@ -30,7 +35,7 @@ module CukeCataloger
       end
 
       def create_directory
-        new_dir = Dir::mktmpdir
+        new_dir = Dir.mktmpdir
         created_directories << new_dir
 
         new_dir

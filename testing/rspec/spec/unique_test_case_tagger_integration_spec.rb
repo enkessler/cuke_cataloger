@@ -18,7 +18,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
 
     it 'clears its known ids when it tags tests' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
-      @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
+      @tagger.instance_variable_set(:@known_id_tags, 0 => '123', 2 => '456')
 
       path = CukeCataloger::FileHelper.create_directory
       @tagger.tag_tests(path, '')
@@ -35,7 +35,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                          Scenario:
                            * a step'
 
-      test_file = CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => starting_text)
+      test_file = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: starting_text)
 
 
       @tagger.tag_tests(test_directory)
@@ -63,7 +63,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                            | param |
                            | value |'
 
-      test_file = CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => starting_text)
+      test_file = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: starting_text)
 
 
       @tagger.tag_tests(test_directory)
@@ -94,7 +94,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
 
     it 'clears its known ids when it validates test ids' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
-      @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
+      @tagger.instance_variable_set(:@known_id_tags, 0 => '123', 2 => '456')
 
       path = CukeCataloger::FileHelper.create_directory
       @tagger.validate_test_ids(path, '')
@@ -112,7 +112,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                         Scenario:
                           * a step'
 
-      CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => gherkin_text)
+      CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: gherkin_text)
 
 
       results = @tagger.validate_test_ids(test_directory)
@@ -132,7 +132,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                           | param   | test_case_id |
                           | value 1 |  1-1         |'
 
-      CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => gherkin_text)
+      CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: gherkin_text)
 
 
       results = @tagger.validate_test_ids(test_directory)
@@ -150,7 +150,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
 
     it 'clears its known ids when it scans for tagged tests' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
-      @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
+      @tagger.instance_variable_set(:@known_id_tags, 0 => '123', 2 => '456')
 
       path = CukeCataloger::FileHelper.create_directory
       @tagger.scan_for_tagged_tests(path, '')
@@ -168,7 +168,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                         Scenario:
                           * a step'
 
-      test_file = CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => gherkin_text)
+      test_file = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: gherkin_text)
 
 
       results = @tagger.scan_for_tagged_tests(test_directory)
@@ -189,7 +189,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                           | param   | test_case_id |
                           | value 1 |  1-1         |'
 
-      test_file = CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => gherkin_text)
+      test_file = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: gherkin_text)
 
 
       results = @tagger.scan_for_tagged_tests(test_directory)
@@ -219,7 +219,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                         @test_case_2
                         Scenario:
                           * a step'
-      test_file = CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => gherkin_text)
+      test_file = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: gherkin_text)
 
       results = @tagger.scan_for_tagged_tests(test_directory)
 
@@ -238,7 +238,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
 
     it 'clears its known ids when it determines known test ids' do
       # Using ids that are not used for memory allocation by Ruby since they are used for predefined constants.
-      @tagger.instance_variable_set(:@known_id_tags, {0 => '123', 2 => '456'})
+      @tagger.instance_variable_set(:@known_id_tags, 0 => '123', 2 => '456')
 
       path = CukeCataloger::FileHelper.create_directory
       @tagger.determine_known_ids(path, '')
@@ -271,7 +271,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                 Scenario:
                   * a step"
 
-      CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => text)
+      CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: text)
 
 
       result = @tagger.determine_known_ids(test_directory, '@test_case_', 'foobar')
@@ -289,7 +289,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                 Scenario:
                   * a step'
 
-      CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => text)
+      CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: text)
 
 
       result = @tagger.determine_known_ids(test_directory)
@@ -310,7 +310,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                   | param | test_case_id |
                   | value | 1-1          |'
 
-      CukeCataloger::FileHelper.create_feature_file(:directory => test_directory, :text => text)
+      CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: text)
 
 
       result = @tagger.determine_known_ids(test_directory)

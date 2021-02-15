@@ -37,7 +37,7 @@ RSpec.describe 'UniqueTestCaseTagger, Unit' do
   end
 
   describe 'test scanning' do
-    it "can scan for tagged tests" do
+    it 'can scan for tagged tests' do
       expect(@tagger).to respond_to(:scan_for_tagged_tests)
     end
 
@@ -54,7 +54,7 @@ RSpec.describe 'UniqueTestCaseTagger, Unit' do
   end
 
   describe 'tag indexing' do
-    it "can determine used test case indexes" do
+    it 'can determine used test case indexes' do
       expect(@tagger).to respond_to(:determine_known_ids)
     end
 

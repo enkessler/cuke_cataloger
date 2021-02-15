@@ -12,7 +12,7 @@ RSpec.describe 'the gem' do
     @root_dir = "#{__dir__}/../../.."
 
     # Doing this as a one time hook instead of using `let` in order to reduce I/O time during testing.
-    @gemspec = eval(File.read "#{@root_dir}/cuke_cataloger.gemspec")
+    @gemspec = eval(File.read("#{@root_dir}/cuke_cataloger.gemspec"))
   end
 
 

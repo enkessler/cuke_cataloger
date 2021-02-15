@@ -38,8 +38,8 @@ end
 
 When(/^the following command is executed:$/) do |command|
   if command =~ /--file /
-    output_file_name = command.match(/--file <path_to>\/(.*)\.txt/)[1]
-    command.sub!(/--file <path_to>\/(.*)\.txt/, "--file #{@root_test_directory}/#{output_file_name}.txt")
+    output_file_name = command.match(%r{--file <path_to>/(.*).txt})[1]
+    command.sub!(%r{--file <path_to>/(.*).txt}, "--file #{@root_test_directory}/#{output_file_name}.txt")
   end
 
   command.sub!('<path_to>', FIXTURE_DIRECTORY)

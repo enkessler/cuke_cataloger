@@ -35,7 +35,6 @@ Layout/AlignArray:
 Layout/CaseIndentation:
   Exclude:
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-    - 'testing/cucumber/step_definitions/setup_steps.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -68,11 +67,6 @@ Layout/EmptyLinesAroundBlockBody:
     - 'rakefiles/release_tasks.rb'
     - 'rakefiles/reporting_tasks.rb'
     - 'rakefiles/testing_tasks.rb'
-    - 'testing/cucumber/step_definitions/verification_steps.rb'
-    - 'testing/rspec/spec/cuke_cataloger_spec.rb'
-    - 'testing/rspec/spec/spec_helper.rb'
-    - 'testing/rspec/spec/unique_test_case_tagger_integration_spec.rb'
-    - 'testing/rspec/spec/unique_test_case_tagger_unit_spec.rb'
 
 # Offense count: 8
 # Cop supports --auto-correct.
@@ -83,7 +77,6 @@ Layout/EmptyLinesAroundClassBody:
     - 'bin/cuke_cataloger'
     - 'lib/cuke_cataloger/formatters/text_report_formatter.rb'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-    - 'testing/file_helper.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -101,7 +94,6 @@ Layout/EmptyLinesAroundModuleBody:
     - 'lib/cuke_cataloger/formatters/text_report_formatter.rb'
     - 'lib/cuke_cataloger/rake_tasks.rb'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-    - 'testing/file_helper.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -115,27 +107,6 @@ Layout/ExtraSpacing:
 Layout/LeadingCommentSpace:
   Exclude:
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-
-# Offense count: 12
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SupportedStylesForEmptyBraces.
-# SupportedStyles: space, no_space, compact
-# SupportedStylesForEmptyBraces: space, no_space
-Layout/SpaceInsideHashLiteralBraces:
-  Exclude:
-    - 'testing/cucumber/step_definitions/setup_steps.rb'
-    - 'testing/rspec/spec/unique_test_case_tagger_integration_spec.rb'
-
-# Offense count: 1
-Lint/AmbiguousRegexpLiteral:
-  Exclude:
-    - 'testing/cucumber/step_definitions/setup_steps.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/DeprecatedClassMethods:
-  Exclude:
-    - 'testing/cucumber/step_definitions/verification_steps.rb'
 
 # Offense count: 2
 Lint/RescueWithoutErrorClass:
@@ -210,7 +181,6 @@ Naming/AccessorMethodName:
 # NameWhitelist: is_a?
 Naming/PredicateName:
   Exclude:
-    - 'spec/**/*'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
 
 # Offense count: 2
@@ -226,12 +196,6 @@ Performance/HashEachMethods:
 Performance/RedundantMerge:
   Exclude:
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-
-# Offense count: 2
-Security/Eval:
-  Exclude:
-    - 'testing/cucumber/step_definitions/action_steps.rb'
-    - 'testing/rspec/spec/cuke_cataloger_spec.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -252,13 +216,6 @@ Style/BlockDelimiters:
 Style/BracesAroundHashParameters:
   Exclude:
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-    - 'testing/rspec/spec/unique_test_case_tagger_integration_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/ColonMethodCall:
-  Exclude:
-    - 'testing/file_helper.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
@@ -271,13 +228,10 @@ Style/CommentAnnotation:
 # Offense count: 5
 Style/Documentation:
   Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
     - 'bin/cuke_cataloger'
     - 'lib/cuke_cataloger.rb'
     - 'lib/cuke_cataloger/rake_tasks.rb'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-    - 'testing/file_helper.rb'
 
 # Offense count: 3
 Style/DoubleNegation:
@@ -303,14 +257,6 @@ Style/Encoding:
 Style/GuardClause:
   Exclude:
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-    - 'testing/cucumber/step_definitions/verification_steps.rb'
-
-# Offense count: 47
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles, UseHashRocketsWithSymbolValues, PreferHashRocketsForNonAlnumEndingSymbols.
-# SupportedStyles: ruby19, hash_rockets, no_mixed_keys, ruby19_no_mixed_keys
-Style/HashSyntax:
-  EnforcedStyle: hash_rockets
 
 # Offense count: 1
 Style/IfInsideElse:
@@ -328,14 +274,6 @@ Style/MutableConstant:
   Exclude:
     - 'environments/cucumber_env.rb'
     - 'lib/cuke_cataloger/version.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: Whitelist.
-# Whitelist: be, be_a, be_an, be_between, be_falsey, be_kind_of, be_instance_of, be_truthy, be_within, eq, eql, end_with, include, match, raise_error, respond_to, start_with
-Style/NestedParenthesizedCalls:
-  Exclude:
-    - 'testing/rspec/spec/cuke_cataloger_spec.rb'
 
 # Offense count: 6
 # Cop supports --auto-correct.
@@ -366,14 +304,6 @@ Style/RedundantSelf:
   Exclude:
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
-# SupportedStyles: slashes, percent_r, mixed
-Style/RegexpLiteral:
-  Exclude:
-    - 'testing/cucumber/step_definitions/action_steps.rb'
-
 # Offense count: 8
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.
@@ -383,8 +313,6 @@ Style/StringLiterals:
     - 'cuke_cataloger.gemspec'
     - 'environments/cucumber_env.rb'
     - 'lib/cuke_cataloger/unique_test_case_tagger.rb'
-    - 'testing/cucumber/step_definitions/verification_steps.rb'
-    - 'testing/rspec/spec/unique_test_case_tagger_unit_spec.rb'
 
 # Offense count: 6
 # Cop supports --auto-correct.

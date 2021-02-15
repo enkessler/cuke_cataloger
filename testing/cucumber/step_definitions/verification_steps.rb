@@ -133,19 +133,17 @@ Then(/^the resulting first file is:$/) do |expected_text|
 
   actual_text = File.read(file_name)
 
-  # The order in which Ruby returns files various across version and operating system. This, in turn, will
+  # The order in which Ruby returns files varies across version and operating system. This, in turn, will
   # affect the order in which files are tagged. Either order is acceptable as long as the tagging is
   # consistent for any given ordering.
   begin
     expect(actual_text).to eq(expected_text)
   rescue RSpec::Expectations::ExpectationNotMetError => e
-    if RUBY_PLATFORM =~ /(?:linux|java)/
-      expected_text.sub!('test_case_1', 'test_case_2')
-      expect(actual_text).to eq(expected_text)
-      @switched = true
-    else
-      raise e
-    end
+    raise e unless RUBY_PLATFORM =~ /(?:linux|java)/
+
+    expected_text.sub!('test_case_1', 'test_case_2')
+    expect(actual_text).to eq(expected_text)
+    @switched = true
   end
 
 end
@@ -167,7 +165,7 @@ And(/^the resulting second file is:$/) do |expected_text|
   expect(actual_text).to eq(expected_text)
 end
 
-Then(/^all of the test cases in the "([^"]*)" directory will be cataloged with "([^"]*)"$/) do |target_directory, prefix|
+Then(/^all of the test cases in the "([^"]*)" directory will be cataloged with "([^"]*)"$/) do |target_directory, prefix| # rubocop:disable Metrics/LineLength
   target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
 
   @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, prefix)
@@ -175,12 +173,12 @@ Then(/^all of the test cases in the "([^"]*)" directory will be cataloged with "
   verify_no_results
 end
 
-Then(/^all of the scenarios and outlines in the "([^"]*)" directory will be cataloged with "([^"]*)"$/) do |target_directory, prefix|
+Then(/^all of the scenarios and outlines in the "([^"]*)" directory will be cataloged with "([^"]*)"$/) do |target_directory, prefix| # rubocop:disable Metrics/LineLength
   target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
   @expected_prefix = prefix
   tag_rows = false
 
-  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, @expected_prefix, tag_rows)
+  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, @expected_prefix, tag_rows) # rubocop:disable Metrics/LineLength
 
   verify_no_results
 end
@@ -189,23 +187,23 @@ But(/^outline rows in the "([^"]*)" directory are not cataloged$/) do |target_di
   target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
   tag_rows = true
 
-  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, @expected_prefix, tag_rows)
+  @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, @expected_prefix, tag_rows) # rubocop:disable Metrics/LineLength
 
   expect(@test_results.collect { |result| result[:problem] }).to include(:missing_id_column)
 end
 
-Then(/^a validation report for the "([^"]*)" directory with prefix "([^"]*)" is output to the console$/) do |target_directory, prefix|
+Then(/^a validation report for the "([^"]*)" directory with prefix "([^"]*)" is output to the console$/) do |target_directory, prefix| # rubocop:disable Metrics/LineLength
   expect(@output).to include("Validating tests in '#{target_directory}' with tag '#{prefix}'")
-  expect(@output).to include("Validation Results")
+  expect(@output).to include('Validation Results')
 end
 
-Then(/^a validation report for the "([^"]*)" directory with prefix "([^"]*)" is output to "([^"]*)"$/) do |target_directory, prefix, filename|
+Then(/^a validation report for the "([^"]*)" directory with prefix "([^"]*)" is output to "([^"]*)"$/) do |target_directory, prefix, filename| # rubocop:disable Metrics/LineLength
   target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
   filename = "#{@root_test_directory}/#{filename}"
 
   expect(@output).to include("Validating tests in '#{target_directory}' with tag '#{prefix}'")
-  expect(@output).to include("Problems found:")
+  expect(@output).to include('Problems found:')
 
-  expect(File.exists?(filename)).to be true
+  expect(File.exist?(filename)).to be true
   expect(File.read(filename)).to include('Validation Results')
 end

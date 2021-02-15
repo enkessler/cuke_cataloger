@@ -1,4 +1,4 @@
-Given /^the following feature file(?: "([^"]*)")?:$/ do |file_name, file_text|
+Given(/^the following feature file(?: "([^"]*)")?:$/) do |file_name, file_text|
   @test_directory = @root_test_directory
   @files_created ||= 0
   @feature_files ||= []
@@ -6,7 +6,9 @@ Given /^the following feature file(?: "([^"]*)")?:$/ do |file_name, file_text|
   file_name ||= "test_feature_#{@files_created + 1}"
   file_name = File.basename(file_name, '.feature')
 
-  file_path = CukeCataloger::FileHelper.create_feature_file(:directory => @test_directory, :name => file_name, :text => file_text)
+  file_path = CukeCataloger::FileHelper.create_feature_file(directory: @test_directory,
+                                                            name: file_name,
+                                                            text: file_text)
   @feature_files << file_path
 
   @files_created += 1
@@ -17,12 +19,12 @@ When(/^a tag prefix of "([^"]*)"$/) do |prefix|
 end
 
 And(/^a start index of "([^"]*)"$/) do |index|
-  @start_index ||= {:sub => {}}
+  @start_index ||= { sub: {} }
   @start_index[:primary] = index.to_i
 end
 
 And(/^a start index of "([^"]*)" for testcase "([^"]*)"$/) do |sub_index, parent_index|
-  @start_index ||= {:sub => {}}
+  @start_index ||= { sub: {} }
   @start_index[:sub][parent_index.to_s] = sub_index.to_i
 end
 
@@ -36,7 +38,9 @@ Given(/^a feature file$/) do
 
   file_text = "Feature:\nScenario Outline:\n* a step\nExamples:\n| param 1 |\n| value 1 |"
 
-  file_path = CukeCataloger::FileHelper.create_feature_file(:directory => @test_directory, :name => file_name, :text => file_text)
+  file_path = CukeCataloger::FileHelper.create_feature_file(directory: @test_directory,
+                                                            name: file_name,
+                                                            text: file_text)
   @feature_files << file_path
 
   @files_created += 1
@@ -61,7 +65,7 @@ Given(/^the cuke_cataloger executable is available$/) do
   @executable_directory = "#{PROJECT_ROOT}/exe"
 end
 
-And(/^there are test cases in the "([^"]*)" directory that have not been cataloged with "([^"]*)"$/) do |target_directory, prefix|
+And(/^there are test cases in the "([^"]*)" directory that have not been cataloged with "([^"]*)"$/) do |target_directory, prefix| # rubocop:disable Metrics/LineLength
   target_directory = "#{FIXTURE_DIRECTORY}/#{target_directory}"
 
   @test_results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(target_directory, prefix)
