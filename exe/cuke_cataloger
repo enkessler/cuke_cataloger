@@ -1,19 +1,19 @@
 #!/usr/bin/env ruby
 
-
 require 'thor'
 require 'cuke_cataloger'
 
 # The Command Line Interface for the gem
 class CLI < Thor
 
-  desc 'catalog_test_cases', 'Catalog the test cases in LOCATION with an id based on PREFIX'
-  option :location, :default => '.'
-  option :prefix, :default => '@test_case_'
-  option :row_id, :type => :boolean, :default => true
-  option :id_column_name, :default => 'test_case_id'
+  desc 'catalog_test_cases',
+       'Catalog the test cases in LOCATION with an id based on PREFIX'
+  option :location, default: '.'
+  option :prefix, default: '@test_case_'
+  option :row_id, type: :boolean, default: true
+  option :id_column_name, default: 'test_case_id'
 
-  def catalog_test_cases
+  def catalog_test_cases # rubocop:disable Metrics/AbcSize - Seems to be reporting high for some reason
     puts "Tagging tests in '#{options[:location]}' with tag '#{options[:prefix]}'\n"
     puts "Including outline rows\n" if options[:row_id]
 
@@ -21,18 +21,22 @@ class CLI < Thor
     tagger.tag_tests(options[:location], options[:prefix], {}, options[:row_id], options[:id_column_name])
   end
 
-  desc 'validate_test_cases', 'Validate the test cases in LOCATION with an id based on PREFIX. Will output the report to FILE, if provided.'
-  option :location, :default => '.'
-  option :prefix, :default => '@test_case_'
-  option :row_id, :type => :boolean, :default => true
-  option :id_column_name, :default => 'test_case_id'
+  desc 'validate_test_cases',
+       'Validate the test cases in LOCATION with an id based on PREFIX. Will output the report to FILE, if provided.'
+  option :location, default: '.'
+  option :prefix, default: '@test_case_'
+  option :row_id, type: :boolean, default: true
+  option :id_column_name, default: 'test_case_id'
   option :file
 
-  def validate_test_cases
+  def validate_test_cases # rubocop:disable Metrics/AbcSize - Seems to be reporting high for some reason
     puts "Validating tests in '#{options[:location]}' with tag '#{options[:prefix]}'\n"
     puts "Including outline rows\n" if options[:row_id]
 
-    results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(options[:location], options[:prefix], options[:row_id], options[:id_column_name])
+    results = CukeCataloger::UniqueTestCaseTagger.new.validate_test_ids(options[:location],
+                                                                        options[:prefix],
+                                                                        options[:row_id],
+                                                                        options[:id_column_name])
     report_text = CukeCataloger::TextReportFormatter.new.format_data(results)
 
     if options[:file]

@@ -4,7 +4,6 @@ require 'cql'
 
 
 # The top level namespace used by this gem
-
 module CukeCataloger
 end
 

@@ -1,3 +1,4 @@
+# TODO: Use named parameters instead of ordered parameters
 # TODO: Add better test coverage (rake tasks, cli, etc.)
 # TODO: Use features as documentation
 # TODO: Use the cuketagger gem for tagging

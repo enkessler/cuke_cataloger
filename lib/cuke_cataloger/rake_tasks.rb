@@ -1,3 +1,8 @@
+# TODO: have better testing so that this can be safely refactored
+# rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/LineLength, Metrics/MethodLength, Metrics/PerceivedComplexity - Not going to mess with this, given how little testing is present
+
+
+# The top level namespace used by this gem
 module CukeCataloger
 
   extend Rake::DSL
@@ -5,9 +10,8 @@ module CukeCataloger
 
   # Adds the gem's provided Rake tasks to the namespace from which the method is called
   def self.create_tasks
-
     desc 'Add unique id tags to tests in the given directory'
-    task 'tag_tests', [:directory, :prefix, :row_id, :id_column_name] do |t, args|
+    task 'tag_tests', [:directory, :prefix, :row_id, :id_column_name] do |_t, args|
       location = args[:directory] || '.'
       prefix = args[:prefix] || '@test_case_'
       tag_rows = args[:row_id].nil? ? true : args[:row_id]
@@ -21,7 +25,7 @@ module CukeCataloger
     end
 
     desc 'Scan tests in the given directory for id problems'
-    task 'validate_tests', [:directory, :prefix, :out_file, :row_id, :id_column_name] do |t, args|
+    task 'validate_tests', [:directory, :prefix, :out_file, :row_id, :id_column_name] do |_t, args|
       location = args[:directory] || '.'
       prefix = args[:prefix] || '@test_case_'
       tag_rows = args[:row_id].nil? ? true : args[:row_id]
@@ -40,7 +44,8 @@ module CukeCataloger
         puts report_text
       end
     end
-
   end
 
 end
+
+# rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/LineLength, Metrics/MethodLength, Metrics/PerceivedComplexity

@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   TargetRubyVersion: 2.0
 
@@ -20,6 +18,11 @@ Layout/EmptyLinesAroundBlockBody:
 Naming/VariableNumber:
   EnforcedStyle: snake_case
 
+# No, I like immediately knowing that something is a set of mutually exclusive
+# paths because it is a `case` statement rather than having to parse `if/else` logic
+Style/EmptyCaseCondition:
+  Enabled: false
+
 # Most people will be looking at the code in a text editor, not a terminal
 Metrics/LineLength:
   Max: 120
@@ -33,3 +36,7 @@ Metrics/BlockLength:
   Exclude:
     # RSpec suites are inherently a bunch of large, nested blocks
     - 'testing/rspec/spec/**/*'
+
+# Still within understanding as long as other complexity cops aren't triggering
+Metrics/MethodLength:
+  Max: 15
