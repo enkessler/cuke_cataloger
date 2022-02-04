@@ -3,6 +3,14 @@ gemspec :path => "../../"
 
 if RUBY_VERSION =~ /^2\.[0123]/
   gem 'simplecov', '< 0.18' # Requires Ruby 2.4 at this version
+
+  if RUBY_VERSION =~ /^2\.3/
+    gem 'childprocess', '< 4.0' # Requires Ruby 2.4 at this version
+  end
+
+  if RUBY_VERSION =~ /^2\.[012]/
+    gem 'childprocess', '< 2.0' # Requires Ruby 2.3 at this version
+  end
 end
 
 # The version of CukeModeler being tested
