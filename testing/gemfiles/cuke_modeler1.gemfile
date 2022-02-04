@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 gemspec :path => "../../"
 
+if RUBY_VERSION =~ /^2\.[0123]/
+  gem 'simplecov', '< 0.18' # Requires Ruby 2.4 at this version
+end
+
 # The version of CukeModeler being tested
 gem 'cuke_modeler', '~> 1.0'

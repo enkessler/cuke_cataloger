@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 gemspec :path => "../../"
 
+if RUBY_VERSION =~ /^2\.[0123]/
+  gem 'simplecov', '< 0.18' # Requires Ruby 2.4 at this version
+end
+
 # TODO: Go back to using the newer releases once they work on JRuby
 gem 'cucumber', '2.2.0'
 

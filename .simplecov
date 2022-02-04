@@ -9,8 +9,16 @@ SimpleCov::Formatter::LcovFormatter.config do |config|
 end
 
 # Also making a more friendly HTML file
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter,
-                                                                SimpleCov::Formatter::LcovFormatter])
+formatters = [SimpleCov::Formatter::HTMLFormatter]
+
+major, minor = Gem.loaded_specs['simplecov'].version.version.match(/^(\d+)\.(\d+)/)[1..2].map(&:to_i)
+
+# The Lcov formatter needs at least version 0.18 of SimpleCov but earlier versions may be in use due to CI needs
+unless (major == 0) && (minor < 18)
+  formatters << SimpleCov::Formatter::LcovFormatter
+end
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(formatters)
 
 SimpleCov.start do
   root __dir__
