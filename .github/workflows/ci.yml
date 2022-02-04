@@ -40,6 +40,9 @@ jobs:
             ruby-version: '2.1'
           - os: windows-latest
             ruby-version: '2.2'
+          # Mysterious Bundler/Rubygems related segfaults
+          - os: windows-latest
+            ruby-version: '2.3'
 
     runs-on: ${{ matrix.os }}
     env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
@@ -52,8 +55,6 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-      - name: Update RubyGems
-        run: gem update --system
       - name: Run test suites
         run: bundle exec rake cuke_cataloger:test_everything
       - name: Push code coverage to Coveralls (conditional)
