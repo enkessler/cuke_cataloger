@@ -52,7 +52,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-      - name: Run CI Rake task
+      - name: Run test suites
         run: bundle exec rake cuke_cataloger:test_everything
       - name: Push code coverage to Coveralls (conditional)
         uses: coverallsapp/github-action@master
