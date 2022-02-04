@@ -134,7 +134,7 @@ RSpec.describe 'the gem' do
     end
 
     it 'does not include just any source controlled file' do
-      some_files_not_to_include = ['.travis.yml', 'Gemfile', 'Rakefile']
+      some_files_not_to_include = ['.github/workflows/ci.yml', 'Gemfile', 'Rakefile']
 
       some_files_not_to_include.each do |file|
         expect(@gemspec.files).to_not include(file)
