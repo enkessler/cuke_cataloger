@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
  - Test case IDs are no longer erroneously detected if a tag only partially matches the ID pattern. For example, the 
    gem would incorrectly identify `@test_case_123_plus_more` as an ID tag even though it was not one.
+ - Cataloging tests now correctly handles tests that are nested in rules. Previously, the presence of a `Rule` 
+   keyword would cause new ID tags to be placed on the wrong lines in the cataloged file.  
 
 
 ## [1.6.0] - 2020-06-21

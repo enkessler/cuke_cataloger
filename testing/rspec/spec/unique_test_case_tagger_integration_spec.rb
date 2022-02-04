@@ -83,6 +83,174 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
       expect(tagged_text).to eq(expected_text)
     end
 
+    # The exact order that the underlying AST is walked through might change (like it did when rules were introduced
+    # and nested tests became a thing), resulting in the collection of gathered models not having tests from the same
+    # file adjacent to each other (due to undefined behavior for sorting models with equal source line numbers but from
+    # different files) or even tests within the same file in a different order than they appear in the file (due to the
+    # aforementioned nesting).
+    #
+    # TODO: Make it official that files will be processed alphabetically and from top to bottom?
+    it "doesn't assume that tests will be discovered 'in order' within a file" do
+      begin
+        CukeCataloger::HelperMethods.test_storage[:old_method] = CQL::Queriable.instance_method(:query)
+
+        # Monkey patch the query method so that we can ensure that the models are not 'in order'
+        module CQL
+          module Queriable
+            def query(&block)
+              # Perform the query as usual
+              result = CukeCataloger::HelperMethods.test_storage[:old_method].bind(self).call(&block)
+
+              # But then mess with the model order
+              result.shuffle!
+
+              result
+            end
+          end
+        end
+
+
+        test_directory = CukeCataloger::FileHelper.create_directory
+
+        starting_text = 'Feature:
+
+                         Scenario:
+                           * a step
+
+                         Scenario:
+                           * a step
+
+                         Scenario:
+                           * a step'
+
+        test_file = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: starting_text)
+
+
+        @tagger.tag_tests(test_directory)
+
+        expected_text = 'Feature:
+
+                         @test_case_1
+                         Scenario:
+                           * a step
+
+                         @test_case_2
+                         Scenario:
+                           * a step
+
+                         @test_case_3
+                         Scenario:
+                           * a step'
+
+        tagged_text = File.read(test_file)
+
+
+        expect(tagged_text).to eq(expected_text)
+      ensure
+        # Making sure that our changes don't escape a test and ruin the rest of the suite
+        module CQL
+          module Queriable
+            define_method(:query, CukeCataloger::HelperMethods.test_storage[:old_method])
+          end
+        end
+      end
+    end
+
+    # See comment for previous test
+    it 'tags an entire file before moving on to the next one' do
+      begin
+        CukeCataloger::HelperMethods.test_storage[:old_method] = CQL::Queriable.instance_method(:query)
+
+        # Monkey patch the query method so that we can ensure that the models are not 'in order'
+        module CQL
+          module Queriable
+            def query(&block)
+              # Perform the query as usual
+              result = CukeCataloger::HelperMethods.test_storage[:old_method].bind(self).call(&block)
+
+              # But then mess with the model order
+              result.shuffle!
+
+              result
+            end
+          end
+        end
+
+
+        starting_file_1_text = 'Feature:
+
+                                  Scenario:
+                                    * a step
+
+                                  Scenario:
+                                    * a step
+
+                                  Scenario:
+                                    * a step'
+
+        starting_file_2_text = 'Feature:
+
+                                  Scenario:
+                                    * a step
+
+                                  Scenario:
+                                    * a step
+
+                                  Scenario:
+                                    * a step'
+
+        test_directory = CukeCataloger::FileHelper.create_directory
+        test_file_1 = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: starting_file_1_text, name: 'file_1')
+        test_file_2 = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: starting_file_2_text, name: 'file_2')
+
+
+        @tagger.tag_tests(test_directory)
+
+        expected_text_1 = 'Feature:
+
+                             @test_case_1
+                             Scenario:
+                               * a step
+
+                             @test_case_2
+                             Scenario:
+                               * a step
+
+                             @test_case_3
+                             Scenario:
+                               * a step'
+
+        expected_text_2 = 'Feature:
+
+                             @test_case_4
+                             Scenario:
+                               * a step
+
+                             @test_case_5
+                             Scenario:
+                               * a step
+
+                             @test_case_6
+                             Scenario:
+                               * a step'
+
+        tagged_text_1 = File.read(test_file_1)
+        tagged_text_2 = File.read(test_file_2)
+
+
+        # Squeezing to avoid irrelevant whitespace differences due to indentation of test data
+        expect(tagged_text_1.squeeze).to eq(expected_text_1.squeeze)
+        expect(tagged_text_2.squeeze).to eq(expected_text_2.squeeze)
+      ensure
+        # Making sure that our changes don't escape a test and ruin the rest of the suite
+        module CQL
+          module Queriable
+            define_method(:query, CukeCataloger::HelperMethods.test_storage[:old_method])
+          end
+        end
+      end
+    end
+
   end
 
   describe 'data validation' do

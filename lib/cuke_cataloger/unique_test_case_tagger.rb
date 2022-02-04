@@ -126,6 +126,21 @@ module CukeCataloger
         from scenarios, outlines
       end.collect { |result| result[:self] } # rubocop:disable Style/MultilineBlockChain - Idiomatic CQL
 
+      # Sorting for consistency, regardless of how the model tree happened to be traversed
+      @tests.sort! do |a, b|
+        if a.get_ancestor(:feature_file).path < b.get_ancestor(:feature_file).path # Earlier file
+          -1
+        elsif a.get_ancestor(:feature_file).path > b.get_ancestor(:feature_file).path # Later file
+          1
+        elsif a.source_line < b.source_line # Same file, earlier line
+          -1
+        elsif a.source_line > b.source_line # Same file, later line
+          1
+        else # Same file, same line number (shouldn't ever happen)
+          0
+        end
+      end
+
       @features = @model_repo.query do
         select :self
         from features
