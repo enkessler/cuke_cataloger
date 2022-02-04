@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 gemspec :path => "../../"
 
-# The Coveralls gem can't handle more recent versions of the SimpleCov gem
-gem 'simplecov', '<= 0.16.1'
-
 # Have to use this version of Cucumber in order to avoid namespace problems introduced by the `cucumber-gherkin` gem
 gem 'cucumber', '2.2.0'
 

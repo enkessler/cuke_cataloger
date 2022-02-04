@@ -44,8 +44,8 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength - Gemspec
   spec.add_development_dependency 'bundler', '< 3'
   spec.add_development_dependency 'cucumber', '< 4.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'simplecov', '< 1.0'
-  spec.add_development_dependency 'coveralls', '< 1.0'
+  spec.add_development_dependency 'simplecov', '~> 0.18'
+  spec.add_development_dependency 'simplecov-lcov', '< 1.0'
   spec.add_development_dependency 'rainbow', '< 4.0.0'
   spec.add_development_dependency 'rubocop', '<= 0.50.0' # RuboCop can not lint against Ruby 2.0 after this version
   spec.add_development_dependency 'yard', '< 1.0'

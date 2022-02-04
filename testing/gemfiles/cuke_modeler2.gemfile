@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 gemspec :path => "../../"
 
-# The Coveralls gem can't handle more recent versions of the SimpleCov gem
-gem 'simplecov', '<= 0.16.1'
-
 # The version of CukeModeler being tested
 gem 'cuke_modeler', '~> 2.0'
