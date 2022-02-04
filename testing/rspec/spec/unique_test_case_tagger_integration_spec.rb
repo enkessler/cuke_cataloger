@@ -96,7 +96,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
 
         # Monkey patch the query method so that we can ensure that the models are not 'in order'
         module CQL
-          module Queriable
+          module Queriable # rubocop:disable Style/Documentation
             def query(&block)
               # Perform the query as usual
               result = CukeCataloger::HelperMethods.test_storage[:old_method].bind(self).call(&block)
@@ -149,7 +149,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
       ensure
         # Making sure that our changes don't escape a test and ruin the rest of the suite
         module CQL
-          module Queriable
+          module Queriable # rubocop:disable Style/Documentation
             define_method(:query, CukeCataloger::HelperMethods.test_storage[:old_method])
           end
         end
@@ -163,7 +163,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
 
         # Monkey patch the query method so that we can ensure that the models are not 'in order'
         module CQL
-          module Queriable
+          module Queriable # rubocop:disable Style/Documentation
             def query(&block)
               # Perform the query as usual
               result = CukeCataloger::HelperMethods.test_storage[:old_method].bind(self).call(&block)
@@ -200,8 +200,12 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
                                     * a step'
 
         test_directory = CukeCataloger::FileHelper.create_directory
-        test_file_1 = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: starting_file_1_text, name: 'file_1')
-        test_file_2 = CukeCataloger::FileHelper.create_feature_file(directory: test_directory, text: starting_file_2_text, name: 'file_2')
+        test_file_1 = CukeCataloger::FileHelper.create_feature_file(directory: test_directory,
+                                                                    text: starting_file_1_text,
+                                                                    name: 'file_1')
+        test_file_2 = CukeCataloger::FileHelper.create_feature_file(directory: test_directory,
+                                                                    text: starting_file_2_text,
+                                                                    name: 'file_2')
 
 
         @tagger.tag_tests(test_directory)
@@ -244,7 +248,7 @@ RSpec.describe 'UniqueTestCaseTagger, Integration' do
       ensure
         # Making sure that our changes don't escape a test and ruin the rest of the suite
         module CQL
-          module Queriable
+          module Queriable # rubocop:disable Style/Documentation
             define_method(:query, CukeCataloger::HelperMethods.test_storage[:old_method])
           end
         end
