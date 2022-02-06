@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Nothing yet...
+
+## [2.0.0] - 2022-02-05
+
 ### Added
 
  - Added support for Ruby 3.x
@@ -87,7 +91,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial release
 
 
-[Unreleased]: https://github.com/enkessler/cuke_cataloger/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/enkessler/cuke_cataloger/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.6.0...v2.0.0
 [1.6.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/enkessler/cuke_cataloger/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/enkessler/cuke_cataloger/compare/v1.4.0...v1.4.1
